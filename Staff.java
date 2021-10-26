@@ -3,62 +3,97 @@ public class Staff {
 	private String Name;
 	private String Gender;
 	private String EmployeeID;
-	private Double ContactNumber;
+	private int ContactNumber;
+	private int temp, length;
 
 	public String getName() {
-		// TODO - implement Staff.getName
-		throw new UnsupportedOperationException();
+
+		//throw new UnsupportedOperationException();
+		return this.Name;
 	}
 
 	/**
 	 * 
 	 * @param String
 	 */
-	protected void setName(Name String) {
-		// TODO - implement Staff.setName
-		throw new UnsupportedOperationException();
+	protected void setName(String Name) {
+		//throw new UnsupportedOperationException();
+		this.Name = Name; 
 	}
 
 	public String getGender() {
-		// TODO - implement Staff.getGender
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return this.Gender;
 	}
 
 	/**
 	 * 
 	 * @param String
 	 */
-	protected void setGender(Gender String) {
-		// TODO - implement Staff.setGender
-		throw new UnsupportedOperationException();
+	protected void setGender(String Gender) {
+		//throw new UnsupportedOperationException();
+		switch(Gender){
+			case "Female":
+			case "female":
+			case "F":
+			case "f":
+				this.Gender = "Female";
+				break;
+			case "Male":
+			case "male":
+			case "M" :
+			case "m":
+				this.Gender = "Male";
+				break;
+			default:
+				this.Gender = "Not Specified";
+				break;
+
+		}
+
 	}
 
 	public String getEmployeeID() {
-		// TODO - implement Staff.getEmployeeID
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+		return this.EmployeeID;
 	}
 
 	/**
 	 * 
 	 * @param String
 	 */
-	protected void setEmployeeID(EmployeeID String) {
-		// TODO - implement Staff.setEmployeeID
-		throw new UnsupportedOperationException();
+	protected void setEmployeeID( String EmployeeID) {
+		// throw new UnsupportedOperationException();
+		this.EmployeeID = EmployeeID;
+
+		
 	}
 
-	public Double getContactNumber() {
-		// TODO - implement Staff.getContactNumber
-		throw new UnsupportedOperationException();
+	public int getContactNumber() {
+		// throw new UnsupportedOperationException();
+		return this.ContactNumber;
 	}
 
 	/**
 	 * 
 	 * @param Double
 	 */
-	protected void setContactNumber(ContactNumber Double) {
-		// TODO - implement Staff.setContactNumber
-		throw new UnsupportedOperationException();
+	protected void setContactNumber(int ContactNumber) {
+		// throw new UnsupportedOperationException();
+		//check if the string length is 8 digits or not, and valid (in terms of singapore number)
+		temp = ContactNumber;
+		length = 0; //reinitialize this method may be called twice 
+		while (temp>0){
+			temp /= 10;
+			length++;
+		}
+		if (length == 8){
+			this.ContactNumber = ContactNumber;
+		}else{
+			System.out.println("Not valid contact number");
+			return;
+		}
+
 	}
 
 }
