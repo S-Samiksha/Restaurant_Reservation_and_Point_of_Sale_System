@@ -2,9 +2,9 @@
 CZ2002 Group Project Lab SS3
 
 ### Delegations 
-> Menuitems and Set package : Shreya
+> Menuitems + Set package : Shreya
 
-> Staff price : Samiksha 
+> Staff +  price : Samiksha 
 
 > Table + reservation: XK
 
