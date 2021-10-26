@@ -1,11 +1,12 @@
 public class Table {
 
 	private Int Capacity;
+	public static final int MAX_CAPACITY = 50;
 	private Int TableNumber;
 
 	protected Int getCapacity() {
 		// TODO - implement Table.getCapacity
-		throw new UnsupportedOperationException();
+		return this.Capacity;
 	}
 
 	/**
@@ -14,12 +15,16 @@ public class Table {
 	 */
 	protected void setCapacity(Capacity Int) {
 		// TODO - implement Table.setCapacity
-		throw new UnsupportedOperationException();
+		if (Capacity > MAX_CAPACITY) {
+			System.out.println("Table is full");
+		}else {
+			this.Capacity = this.Capacity + Capacity;
+		}
 	}
 
 	protected Int getTableNumber() {
 		// TODO - implement Table.getTableNumber
-		throw new UnsupportedOperationException();
+		return this.Capacity;
 	}
 
 	/**
@@ -28,7 +33,7 @@ public class Table {
 	 */
 	protected void setTableNumber(TableNumber Int) {
 		// TODO - implement Table.setTableNumber
-		throw new UnsupportedOperationException();
+		this.TableNum = TableNum;
 	}
 
 	/**
