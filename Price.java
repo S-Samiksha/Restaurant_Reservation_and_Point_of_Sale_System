@@ -2,8 +2,11 @@ public class Price {
 
 	private float totalPrice = 0;
 	private boolean member;
+	private MenuItems[] temp_order;
+	private int i=0;
 
 	public float getTotalPrice() {
+
 		return this.totalPrice;
 	}
 
@@ -11,13 +14,26 @@ public class Price {
 	 * 
 	 * @param Order
 	 */
-	public float calculatePrice(OrderedFood[] Order) {
-		// TODO - implement Price.calculatePrice
-		throw new UnsupportedOperationException();
+	public float calculatePrice(Order OrderedFood) {
+		// throw new UnsupportedOperationException();
+
+		temp_order = OrderedFood.getOrder();
+		i=0;
+		while(temp_order[i].getPrice() != 0){
+			totalPrice += temp_order[i].getPrice();
+			i++;
+		}
+		
+		
+		return totalPrice;
+
+
+
 	}
 
 	public boolean getMember() {
 		return this.member;
+
 	}
 
 	/**

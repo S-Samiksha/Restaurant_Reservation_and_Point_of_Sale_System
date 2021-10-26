@@ -3,16 +3,17 @@ import java.util.*;
 public class Order {
 
 	Collection<SetPackage> setPackages;
-	Collection<MenuItems> Alacarte;
+	Collection<MenuItems> Alacarte; //this is not private --> do we change?
 	Staff Staff;
 	Table Table;
-	private TotalPrice Double;
+	private Double TotalPrice;
 	private Order[] MenuItems;
 
 	public void getOrder() {
 		// TODO - implement Order.getOrder
 		throw new UnsupportedOperationException();
 	}
+	//how is getorder a void???
 
 	/**
 	 * 
