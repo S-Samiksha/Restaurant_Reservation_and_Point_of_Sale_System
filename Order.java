@@ -4,7 +4,7 @@ public class Order {
 
 	Collection<SetPackage> setPackages;
 	Collection<MenuItems> Alacarte; //this is not private --> do we change?
-	Staff Staff;
+	Staff Staff;   
 	Table Table;
 	private Double TotalPrice;
 	private Order[] MenuItems;
