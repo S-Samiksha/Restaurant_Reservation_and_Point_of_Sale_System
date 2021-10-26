@@ -1,5 +1,10 @@
 public class Reservation {
 
+	public static final int MAX_Time = 2200;
+	public static final int MIN_Time = 1000;
+	public static final int MAX_ContactNum = 99999999;
+	public static final int MAX_NumPeople = 10;
+	
 	private String CustomerName;
 	private String Date;
 	private Int Time;
@@ -8,7 +13,7 @@ public class Reservation {
 
 	public String getCustomerName() {
 		// TODO - implement Reservation.getCustomerName
-		throw new UnsupportedOperationException();
+		return this.CustomerName;
 	}
 
 	/**
@@ -17,12 +22,12 @@ public class Reservation {
 	 */
 	public void setCustomerName(String CustomerName) {
 		// TODO - implement Reservation.setCustomerName
-		throw new UnsupportedOperationException();
+		this.CustomerName = CustomerName;
 	}
 
 	public String getDate() {
 		// TODO - implement Reservation.getDate
-		throw new UnsupportedOperationException();
+		return this.Date;
 	}
 
 	/**
@@ -31,12 +36,12 @@ public class Reservation {
 	 */
 	public void setDate(String Date) {
 		// TODO - implement Reservation.setDate
-		throw new UnsupportedOperationException();
+		this.Date = Date;
 	}
 
 	public Int getTime() {
 		// TODO - implement Reservation.getTime
-		throw new UnsupportedOperationException();
+		return this.Time;
 	}
 
 	/**
@@ -45,12 +50,16 @@ public class Reservation {
 	 */
 	public void setTime(Int Time) {
 		// TODO - implement Reservation.setTime
-		throw new UnsupportedOperationException();
+		if (Time > MAX_Time && Time < MIN_Time) {
+			System.out.println("Please enter a valid time. ");
+		}else {
+			this.Time = Time ;
+		}
 	}
 
 	public Int getContactNumber() {
 		// TODO - implement Reservation.getContactNumber
-		throw new UnsupportedOperationException();
+		return this.ContactNum ;
 	}
 
 	/**
@@ -59,12 +68,16 @@ public class Reservation {
 	 */
 	public void setContactNumber(Int ContactNumber) {
 		// TODO - implement Reservation.setContactNumber
-		throw new UnsupportedOperationException();
+		if ( ContactNum > MAX_ContactNum) {
+			System.out.println("Please enter a valid contact number. ");
+		}else {
+			this.ContactNum = ContactNum ;
+		}
 	}
 
 	public Int getNumPeople() {
 		// TODO - implement Reservation.getNumPeople
-		throw new UnsupportedOperationException();
+		return this.NumPeople ;
 	}
 
 	/**
@@ -73,7 +86,11 @@ public class Reservation {
 	 */
 	public void setNumPeople(Int NumPeople) {
 		// TODO - implement Reservation.setNumPeople
-		throw new UnsupportedOperationException();
+		if ( NumPeople > MAX_NumPeople) {
+			System.out.println("Sorry, the max numble of people per table is " + MAX_NumPeople);
+		}else {
+			this.NumPeople = NumPeople;
+		}
 	}
 
 	public void getAttribute() {
