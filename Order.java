@@ -48,43 +48,75 @@ public class Order {
 	 * 
 	 * @param MenuItems
 	 */
-	public void removeFromOrder(Food MenuItems) {
+	public void removeFromOrder(String MenuItems) { //pass in the item to be removed
 		// TODO - implement Order.removeFromOrder
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		int i = 0;
+		int size;
+		size = MenuItems.length; //get size of array
+		for (i =0; i<size;i++) { //point at every item to find a match
+			if(Order[i] == MenuItems) {
+				//remove that item
+			}else {
+				System.out.println("Item cannot be removed.");
+			}
+		}
+		System.out.println("Order removed.");
+		
 	}
 
 	public void printOrder() {
 		// TODO - implement Order.printOrder
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		int i;
+		int size;
+		size = MenuItems.length;
+		for(i=0;i<size;i++) {
+			System.out.println("The order list is: "+ Order[i].MenuItems);
+		}
 	}
 
 	public void PrintMenu() {
 		// TODO - implement Order.PrintMenu
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		//to print the full menu--> the below collection 
+		//Collection<SetPackage> setPackages;
+		//Collection<MenuItems> Alacarte;
 	}
 
-	public boolean confirmOrder() {
+	public boolean confirmOrder(int i) {
 		// TODO - implement Order.confirmOrder
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		//require a scanner to ask for confirmation of order in main function
+		if(i == 1) {
+			System.out.println("Your order is confirmed");
+			return true;
+		}else {
+			System.out.println("Order is not confirmed.Please enter '1' to confirm.");
+			return false;
+		}
 	}
 
-	public void getTable() {
+	public int getTable() {
 		// TODO - implement Order.getTable
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		return this.TableNumber;
 	}
 
 	/**
 	 * 
 	 * @param Table
 	 */
-	public void setTable(table Table) {
+	public void setTable(int TableNumber) {
 		// TODO - implement Order.setTable
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		this.TableNumber = TableNumber;
 	}
 
 	public void printOrderInvoice() {
 		// TODO - implement Order.printOrderInvoice
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		System.out.println("Printing order invoice...");
 	}
 
 }
