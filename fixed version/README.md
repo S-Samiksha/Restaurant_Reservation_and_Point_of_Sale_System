@@ -9,6 +9,9 @@
 3. removal of price class, needing for system data time --> all for the total sales revenue. Total Sales revenue must be filtered based on date and time and total price needs to be available in attachment with the order. Basically i should be able to print by date, by order, by food items etc. 
 
 
+4. Use of ArrayList, collection frequency for quantity (no need quantity variable or 2D array), price class also dont need due to the arraylist, it can iterate and count the total price
+
+
 **How to discuss**
 1. go through the main class and check one by one 
 
