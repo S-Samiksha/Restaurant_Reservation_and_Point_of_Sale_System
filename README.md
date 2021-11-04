@@ -10,23 +10,6 @@ CZ2002 Group Project Lab SS3
 
 > Order: Melise and Arushi
 
-### Free Dates (if you arent free that day, put your name):
-**I thought we shld have this to decide when to fix deadlines and have meetings. So if you have exams or other stuff just put your names here**
-**put your name if you are not free**
-1 nov: Samiksha, <br>
-2 nov: <br>
-3 nov: Samiksha, <br>
-4 nov: <br>
-5 nov: <br>
-6 nov: <br>
-7 nov: <br>
-8 nov: <br>
-9 nov: <br>
-10 nov: <br>
-11 nov: Samiksha, <br>
-12 nov: Morning Samiksha, <br>
-13 nov:  <br>
-14 nov: PROJECT DUE<br>
 
 ### Stuff to discuss if we got errors while coding / issues while coding 
 
