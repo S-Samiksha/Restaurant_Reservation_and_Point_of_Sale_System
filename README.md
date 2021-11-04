@@ -10,9 +10,48 @@ CZ2002 Group Project Lab SS3
 
 > Order: Melise and Arushi
 
+### Free Dates (if you arent free that day, put your name):
+**I thought we shld have this to decide when to fix deadlines and have meetings. So if you have exams or other stuff just put your names here**
+**put your name if you are not free**
+1 nov: Samiksha, <br>
+2 nov: <br>
+3 nov: Samiksha, <br>
+4 nov: <br>
+5 nov: <br>
+6 nov: <br>
+7 nov: <br>
+8 nov: <br>
+9 nov: <br>
+10 nov: <br>
+11 nov: Samiksha, <br>
+12 nov: Morning Samiksha, <br>
+13 nov:  <br>
+14 nov: PROJECT DUE<br>
 
 ### Stuff to discuss if we got errors while coding / issues while coding 
-1. staff contact number changed to int. int is 4 bytes, 32 bits long. +- 2^32/2 ish long. Additionally contact number has to be positive. However, since java only allows signed data types, the closest is int. 
-2. All the class parameters are flipped so is the class diagram correct 
-3. public float calculatePrice(Order OrderedFood[]) changed to public float calculatePrice(Order OrderedFood) because orderedFood is one order. if you have an array of ordered food. i have an array of orders for the whole restaurant with an array of menuitem and an array of setpackage. 
-4. in order class whats the difference between menuitems and alacarte?
+
+1. staff contact number changed to int. int is 4 bytes, 32 bits long. +- 2^32/2 ish long. Additionally contact number has to be positive. However, since java only allows signed data types, the closest is int. If we are going to this detail, should we standardize everything?
+
+2. All the class parameters are flipped??? like when you declare the class the parameters instead of string name its name string. The class diagram does not match? So which is correct?
+
+3. public float calculatePrice(Order OrderedFood[]) so is order for one table or multiple tables?
+
+4. in the order class whats the difference between menuitems and alacarte? 
+
+5. How do we make a flat file? Are we supposed to make one? 
+
+6. What about page 1 point 4.l `Sale  revenue  report  will  detail  the  period,  individual  sale  items  (either  ala  carte  or  promotional items) and total revenue.` so what do we do about this? 
+
+7. `A write-up on your design considerations and use of OO concepts.` 
+        How do we make the invoice look like, is it considered under design? Where do we add the quantity? are we meant to have a mainapp.java class? Do we add to class diagram. then what happens if the staff name is the same what if i have two Toms or two Marys
+
+
+8. `A detailed UML  Sequence  Diagram  showing  the  flow  of  the “Check/Remove reservation booking” function.`  who do this?
+
+9. `Screen  captures  of  the  testings  done  (those  essential  test  cases  not  covered  in  your  demo).` How to do this? Is it Exception handling? Do we use some software? 
+
+10. `Your  group  is  to  produce  a  video  and audio  recording  to  demonstrate  the  working  of  the  application – presenting ALL the required functionalities of the application and the test cases. It  is  advised  that  you  planned  your  demonstration  in  a  story-boarding  flow  to  facilitate  understanding  of  your  application. Include  a  group  photo  of  your  group  members  and  introduce your members and group number at the start of video.` How to do this? When to do this?
+
+
+11. `All implementation codes and java documentation (javadoc).` what is a javadoc? how to make one?
+

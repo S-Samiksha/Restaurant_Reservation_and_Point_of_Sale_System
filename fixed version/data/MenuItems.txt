@@ -1,0 +1,13 @@
+itemID	Name	Type	Price	Description
+AC1	Fish Burger	Main	1.5	
+AC2	Chicken Burger	Main	1.5	
+AC3	Quorn Burger	Main	1.5	
+AC4	Sprite	Drinks	1.5	
+AC5	Coke	Drinks	1.5	
+AC6	Pepsi	Drinks	1.5	
+AC7	French Fries	Main	1.5	
+AC8	Onion Ring	Main	1.5	
+AC9	Chocolate Cake	Main	1.5	
+AC10				
+AC11				
+AC12				
