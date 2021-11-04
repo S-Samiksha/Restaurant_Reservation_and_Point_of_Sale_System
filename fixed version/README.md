@@ -1,5 +1,7 @@
 ### Problems and Fixes (I came up with this version due to the kazillion errors that poped up)
 
+### I took whatever was editted on the github page and fixed it. 
+
 **This is important so please take note**
 
 1. Why is a get function a void function....? A lot of this!! I got like 10 errors just from void our class diagram will confirm be wrong
