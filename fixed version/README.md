@@ -28,17 +28,17 @@ We go by switch cases, and you go into the class stated in the mainapp and edit 
 5. Functionality 1, 2, and 10 all are within manager access only --> this one technically dont need login and logout so not doing it but as design I really feel these things should be accessible to all.... 
 
 
-**Documentation + testing**
-person 2: Class diagram go fix it write up on design consideration and use of OO concepts --> take class diagram and write one page MAX (best just 3/4 page)
-person 1 and 4: UML sequence diagram for reservation too 
-person 3 and 5: testing using Junit (please help these people and finish coding early, testing takes time dont give them one day to do)
+**Documentation + testing** <br>
+person 2: Class diagram go fix it write up on design consideration and use of OO concepts --> take class diagram and write one page MAX (best just 3/4 page) <br>
+person 1 and 4: UML sequence diagram for reservation too <br>
+person 3 and 5: testing using Junit (please help these people and finish coding early, testing takes time dont give them one day to do)<br>
 
 
-**Video and Demonstration(one person 3min MAX)**
-person 1: Introduction, Design, OO concepts
-person 2: Class Diagram  + sequence diagram
-person 3: Live Demo part 1 (switch cases 1 to 4)
-person 4: Live Demo part 2 (switch cases 5 to 7)
-person 5: Testing using Junit 
+**Video and Demonstration(one person 3min MAX)** <br>
+person 1: Introduction, Design, OO concepts <br>
+person 2: Class Diagram  + sequence diagram<br>
+person 3: Live Demo part 1 (switch cases 1 to 4)<br>
+person 4: Live Demo part 2 (switch cases 5 to 7)<br>
+person 5: Testing using Junit <br>
 
 
