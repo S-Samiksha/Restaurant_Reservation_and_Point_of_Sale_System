@@ -14,6 +14,8 @@
 
 ## Delegations(5 pointers, split according to similarity)
 
+we discuss if this is okay then we proceed yeah
+
 We go by switch cases, and you go into the class stated in the mainapp and edit there. 
 
 1. Order creating (functionality 3) --> order class, the constructor, Check table availability, Allocating Table, Allocating the staff, Date and Time to be stored (functionality 8 is included in here) 
