@@ -21,12 +21,11 @@ CZ2002 Group Project Lab SS3
 
 4. in the order class whats the difference between menuitems and alacarte? 
 
-5. How do we make a flat file? Are we supposed to make one? 
 
-6. What about page 1 point 4.l `Sale  revenue  report  will  detail  the  period,  individual  sale  items  (either  ala  carte  or  promotional items) and total revenue.` so what do we do about this? 
+6. What about page 1 point 4.l `Sale  revenue  report  will  detail  the  period,  individual  sale  items  (either  ala  carte  or  promotional items) and total revenue.` so what do we do about this? editted in fixed version 
 
 7. `A write-up on your design considerations and use of OO concepts.` 
-        How do we make the invoice look like, is it considered under design? Where do we add the quantity? are we meant to have a mainapp.java class? Do we add to class diagram. then what happens if the staff name is the same what if i have two Toms or two Marys
+         then what happens if the staff name is the same what if i have two Toms or two Marys account this in the code. 
 
 
 8. `A detailed UML  Sequence  Diagram  showing  the  flow  of  the “Check/Remove reservation booking” function.`  who do this?
