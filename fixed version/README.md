@@ -41,4 +41,6 @@ person 3: Live Demo part 1 (switch cases 1 to 4)<br>
 person 4: Live Demo part 2 (switch cases 5 to 7)<br>
 person 5: Testing using Junit <br>
 
+using animation, voice over, background music 
+
 
