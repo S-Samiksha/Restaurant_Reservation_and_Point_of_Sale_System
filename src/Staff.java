@@ -12,6 +12,14 @@ public class Staff {
 	private int temp, length;
 
 
+	public Staff(String Name, String Gender, int EmployeeID, int ContactNumber, String JobTitle){
+		this.Name = Name;
+		this.Gender = Gender;
+		this.EmployeeID = EmployeeID;
+		this.ContactNumber = ContactNumber;
+		this.JobTitle = JobTitle;
+	}
+
 	public String getName() {
 		//throw new UnsupportedOperationException();
 		return this.Name;

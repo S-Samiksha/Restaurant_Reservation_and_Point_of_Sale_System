@@ -1,39 +1,56 @@
-# Restaurant_Reservation_and_Point_of_Sale_System
-CZ2002 Group Project Lab SS3
+### Problems and Fixes (I came up with this version due to the kazillion errors that poped up)
 
-### Delegations 
-> Menuitems + Set package : Shreya
+**This is important so please take note**
 
-> Staff +  price : Samiksha 
+1. Why is a get function a void function....? A lot of this!! I got like 10 errors just from void our class diagram will confirm be wrong
 
-> Table + reservation: XK
+2. Int vs int --> class diagram 
 
-> Order: Melise and Arushi
+3. removal of price class, needing for system data time --> all for the total sales revenue. Total Sales revenue must be filtered based on date and time and total price needs to be available in attachment with the order. Basically i should be able to print by date, by order, by food items etc. 
 
+4. double to float for price: we dont need 8 bytes
 
-### Stuff to discuss if we got errors while coding / issues while coding 
+5. table size reduced to short (if i remember correctly)
 
-1. staff contact number changed to int. int is 4 bytes, 32 bits long. +- 2^32/2 ish long. Additionally contact number has to be positive. However, since java only allows signed data types, the closest is int. If we are going to this detail, should we standardize everything?
+6. in fact in java byte stores from -128 to 127 table can reduce further because maximum is 10. in fact, variables can be altered to reduce space usage. Like number of people, quantity etc 
 
-2. All the class parameters are flipped??? like when you declare the class the parameters instead of string name its name string. The class diagram does not match? So which is correct?
+7. usage of arraylist --> i think is a super efficient way of reducing for loops and counting frequency or even finding things. 
 
-3. public float calculatePrice(Order OrderedFood[]) so is order for one table or multiple tables?
-
-4. in the order class whats the difference between menuitems and alacarte? 
+8. flat file --> use to construct etc. --> need a separate java file --> DataAdapter library I already made partial flat file not a proper one to test how it works, we can have the "split" as in the seperator / deliminator  as | or , or space or tab etc. safe is we use a symbol. 
 
 
-6. What about page 1 point 4.l `Sale  revenue  report  will  detail  the  period,  individual  sale  items  (either  ala  carte  or  promotional items) and total revenue.` so what do we do about this? editted in fixed version 
+**How to discuss**
+1. go through the main class and check one by one (functionality, if there are any mistakes, class diagram issues bound to have)
+2. make flat file tgt would be faster (we need staff, table, menu, set package, reservation also) + the coding in JAVA --> this is quite new so maybe we can do tgt? 
+3. decide a date to finish the coding by OR everyday from 4 pm to 7pm we do coding tgt on discord/zoom
 
-7. `A write-up on your design considerations and use of OO concepts.` 
-         then what happens if the staff name is the same what if i have two Toms or two Marys account this in the code. 
+## Delegations(5 pointers, split according to similarity)
+
+We go by switch cases, and you go into the class stated in the mainapp and edit there. 
+
+1. Order creating (functionality 3) --> order class, the constructor, Check table availability, Allocating Table, Allocating the staff, Date and Time to be stored (functionality 8 is included in here) 
+
+2. View Order(Functionality 4), print order invoice (functionality 9) gst is meant to be done outside the order class, service tax, membership etc. i mean we can have it inside no probs its just design anyway but gst, service member calculate at the end. also view order is not invoice although functionality wise its very similar
+
+3. MenuItems: create the flat file, parse it, create the constructor and switch case 2 (Functionality 5) and SetPackage: Similar to 2 (Functionality 5)
 
 
-8. `A detailed UML  Sequence  Diagram  showing  the  flow  of  the “Check/Remove reservation booking” function.`  who do this?
+4. Create Reservation (Functionality 6 and 7), allocate staff, allocate table, allocate date and time (functionality 8 is included in here), once they check in then it is added to orders etc. 
 
-9. `Screen  captures  of  the  testings  done  (those  essential  test  cases  not  covered  in  your  demo).` How to do this? Is it Exception handling? Do we use some software? 
-
-10. `Your  group  is  to  produce  a  video  and audio  recording  to  demonstrate  the  working  of  the  application – presenting ALL the required functionalities of the application and the test cases. It  is  advised  that  you  planned  your  demonstration  in  a  story-boarding  flow  to  facilitate  understanding  of  your  application. Include  a  group  photo  of  your  group  members  and  introduce your members and group number at the start of video.` How to do this? When to do this?
+5. Functionality 1, 2, and 10 all are within manager access only --> this one technically dont need login and logout so not doing it but as design I really feel these things should be accessible to all.... 
 
 
-11. `All implementation codes and java documentation (javadoc).` what is a javadoc? how to make one?
+**Documentation + testing**
+person 2: Class diagram go fix it write up on design consideration and use of OO concepts --> take class diagram and write one page MAX (best just 3/4 page)
+person 1 and 4: UML sequence diagram for reservation too 
+person 3 and 5: testing using Junit (please help these people and finish coding early, testing takes time dont give them one day to do)
+
+
+**Video and Demonstration(one person 3min MAX)**
+person 1: Introduction, Design, OO concepts
+person 2: Class Diagram  + sequence diagram
+person 3: Live Demo part 1 (switch cases 1 to 4)
+person 4: Live Demo part 2 (switch cases 5 to 7)
+person 5: Testing using Junit 
+
 
