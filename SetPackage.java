@@ -1,19 +1,33 @@
 public class SetPackage extends MenuItems {
 
 	private boolean Promo;
-
-	protected void calculatePrice() {
-		// TODO - implement SetPackage.calculatePrice
-		throw new UnsupportedOperationException();
+	
+	public SetPackage(MenuItems[] SetList, String Name, String Description, boolean promo) {
+		super(Name,"Set Item",Description, (double)0);
+		this.setPromo(promo);
+		super.setPrice(calculatePrice(SetList));
 	}
 
-	/**
-	 * 
-	 * @param MenuItems
-	 */
-	public SetPackage(MenuItems[] MenuItems) {
-		// TODO - implement SetPackage.SetPackage
-		throw new UnsupportedOperationException();
+	protected Double calculatePrice(MenuItems[] SetList) {
+		Double price = (double) 0;
+		int i;
+		for (i =0; i < SetList.length; i++) {
+			price += SetList[i].getPrice();
+		}
+		
+		if (getPromo()) {
+			price = price * 0.8;
+		}
+		return price;
+		
+	}
+
+	public boolean getPromo() {
+		return this.Promo;
+	}
+
+	public void setPromo(boolean promo) {
+		this.Promo = promo;
 	}
 
 }
