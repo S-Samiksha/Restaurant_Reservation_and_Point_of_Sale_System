@@ -6,64 +6,41 @@ public class MenuItems {
 	private Double Price;
 
 	public String getName() {
-		// TODO - implement MenuItems.getName
-		throw new UnsupportedOperationException();
+		return this.Name;
 	}
 
-	/**
-	 * 
-	 * @param Name
-	 */
 	public void setName(String Name) {
-		// TODO - implement MenuItems.setName
-		throw new UnsupportedOperationException();
+		this.Name = Name;
 	}
 
 	public String getType() {
-		// TODO - implement MenuItems.getType
-		throw new UnsupportedOperationException();
+        return this.Type;
 	}
 
-	/**
-	 * 
-	 * @param Type
-	 */
 	public void setType(String Type) {
-		// TODO - implement MenuItems.setType
-		throw new UnsupportedOperationException();
+        this.Type = Type;
 	}
 
 	public String getDescription() {
-		// TODO - implement MenuItems.getDescription
-		throw new UnsupportedOperationException();
+        return this.Description;
 	}
 
-	/**
-	 * 
-	 * @param Description
-	 */
 	public void setDescription(String Description) {
-		// TODO - implement MenuItems.setDescription
-		throw new UnsupportedOperationException();
+        this.Description = Description;
 	}
 
 	public Double getPrice() {
-		// TODO - implement MenuItems.getPrice
-		throw new UnsupportedOperationException();
+        return this.Price;
 	}
 
-	/**
-	 * 
-	 * @param Price
-	 */
 	public void setPrice(Double Price) {
-		// TODO - implement MenuItems.setPrice
-		throw new UnsupportedOperationException();
+        this.Price = Price;
 	}
 
-	public MenuItems() {
-		// TODO - implement MenuItems.MenuItems
-		throw new UnsupportedOperationException();
+	public MenuItems(String Name,String Type, String Description, Double Price) {
+        this.Name = Name;
+        this.Type = Type;
+        this.Description = Description;
+        this.Price = Price;
 	}
-
 }
