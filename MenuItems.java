@@ -38,9 +38,9 @@ public class MenuItems {
 	}
 
 	public MenuItems(String Name,String Type, String Description, Double Price) {
-        this.Name = Name;
-        this.Type = Type;
-        this.Description = Description;
-        this.Price = Price;
+        	this.Name = Name;
+        	this.Type = Type;
+        	this.Description = Description;
+        	this.Price = Price;
 	}
 }
