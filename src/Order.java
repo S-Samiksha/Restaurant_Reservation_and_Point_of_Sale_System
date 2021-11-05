@@ -43,6 +43,7 @@ public class Order {
 
 
 	}
+
 	public float getPrice(){
 		return this.totalPrice;
 	}
