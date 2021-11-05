@@ -14,27 +14,27 @@ public class MenuItems {
 	}
 
 	public String getType() {
-        return this.Type;
+        	return this.Type;
 	}
 
 	public void setType(String Type) {
-        this.Type = Type;
+        	this.Type = Type;
 	}
 
 	public String getDescription() {
-        return this.Description;
+        	return this.Description;
 	}
 
 	public void setDescription(String Description) {
-        this.Description = Description;
+        	this.Description = Description;
 	}
 
 	public Double getPrice() {
-        return this.Price;
+        	return this.Price;
 	}
 
 	public void setPrice(Double Price) {
-        this.Price = Price;
+        	this.Price = Price;
 	}
 
 	public MenuItems(String Name,String Type, String Description, Double Price) {
