@@ -18,19 +18,20 @@ public class mainapp {
         //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Date date = new Date();
         System.out.println("-----------" + new Timestamp(date.getTime()) + "---------------------------");
-        System.out.println("------------------------------------------------------------------");
-        System.out.println("| (1) Create An Order                                             |");
-        System.out.println("| (2) Place An Alacarte Order                                     |");
-        System.out.println("| (3) Place A Set Package                                         |");
-        System.out.println("| (4) View an Order                                               |");
-        System.out.println("| (5) Reservation (Make, Remove, Check)                           |");
-        System.out.println("| (6) Print Order Invoice                                         |");
-        System.out.println("| (7) Manager Access Only (Menu Item, Promotion, Sales Revenue)   |");
-        System.out.println("-------------------------------------------------------------------");
-        int c = sc.nextInt();
+        int c = 0;
         
 
         while (c >= 0){
+            System.out.println("------------------------------------------------------------------");
+            System.out.println("| (1) Create An Order                                             |");
+            System.out.println("| (2) Place An Alacarte Order                                     |");
+            System.out.println("| (3) Place A Set Package                                         |");
+            System.out.println("| (4) View an Order                                               |");
+            System.out.println("| (5) Reservation (Make, Remove, Check)                           |");
+            System.out.println("| (6) Print Order Invoice                                         |");
+            System.out.println("| (7) Manager Access Only (Menu Item, Promotion, Sales Revenue)   |");
+            System.out.println("-------------------------------------------------------------------");
+            c = sc.nextInt();
         switch(c){
             case 1:
                 System.out.println("Enter Staff ID: ");
