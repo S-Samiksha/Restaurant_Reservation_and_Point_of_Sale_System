@@ -2,7 +2,7 @@
 
 **This is important so please take note**
 
-1. Why is a get function a void function....? A lot of this!! I got like 10 errors just from void our class diagram will confirm be wrong
+1. Why is a get function a void function....? Our class diagram will confirm be wrong
 
 2. Int vs int --> class diagram 
 
@@ -24,11 +24,14 @@
 
 11. Exception handling 
 
+12. Lunch dinner, drinks split (remember manual says main course, drinks, and desert is a must) --> it is add another variable or just change the itemID, cuz when we display menu must account for the time (KIV)
+
 
 **How to discuss**
 1. go through the main class and check one by one (functionality, if there are any mistakes, class diagram issues bound to have) + check against manual 
 2. make flat file tgt would be faster (we need staff, table, menu, set package, reservation also exactly 5 do tgt can finish very fast, order is during run time) + the coding in JAVA --> this is quite new so maybe we can do tgt? 
 3. decide a date to finish the coding by OR everyday from 4 pm to 7pm we do coding tgt on discord/zoom
+
 
 ## Delegations(5 pointers, split according to similarity)
 
@@ -60,3 +63,12 @@ person 4: Live Demo part 2 (switch cases 5 to 7)
 person 5: Testing using Junit 
 
 
+**Things to note**
+
+1. boundary: Restuarant App(MainApp Class)  --> NOT IN CLASS DIAGRAM --> email 
+2. Entity: Class of objects + getter setter (eg. getTableCapacity())
+3. Control: using the getter + setter for functions (eg. reservetable())
+
+
+**To email**
+Is it boundary cannot be in class diagram?

@@ -14,25 +14,26 @@ public class Reservation {
 
 	public static final int MAX_ContactNum = 99999999; 
 	public static final int MAX_NumPeople = 10; 
+	public static final int MAX_Table= 10;
 	//there is a minimum number of 2 people --> account for this 
 	
 
 	//Also, when I think about it the following things needs to be added
 	/*
 	1. reservation of table --> in other words find a table to reserve
-	2. One hour before the reservation time the table has to go reserved aka unavailable
+	2. two hour before the reservation time the table has to go reserved aka unavailable
 	3. addition of two hours to reservation time, the table has to become available again 
 	4. it has to be based on system time as in mainapp.java
 
 	line of logic 
 	1. when a person enters a data and time you need to convert into date date type and store it as ONE variable known as DateTime
-	2. then if DateTime of System == DateTime of Reservation - 1 --> table becomes unavailable (in other words find a table that is available, but also account for what happens if there is no table at all)
+	2. then if DateTime of System == DateTime of Reservation - 2 --> table becomes unavailable (in other words find a table that is available, but also account for what happens if there is no table at all)
 	3. if not table is booked the whole day which does make sense 
-	4. if DateTime of System == DateTime of Reservation + 1 --> if the person has not checked in --> table become available
-	5. if person is still at table after 2 hours, let it be 
+	4. if DateTime of System == DateTime of Reservation + 15 min --> if the person has not checked in --> table become available
+	5. if person is still at table after 2 hours, let it be --> this part book till end
 
 
-
+	cap to 3 tables a day 
 	*/
 
 	private String CustomerName;

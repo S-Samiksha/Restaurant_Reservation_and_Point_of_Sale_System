@@ -30,13 +30,16 @@ public class mainapp {
             System.out.println("| (5) Reservation (Make, Remove, Check)                           |");
             System.out.println("| (6) Print Order Invoice                                         |");
             System.out.println("| (7) Manager Access Only (Menu Item, Promotion, Sales Revenue)   |");
+            System.out.println("| (8) Close Shop                                                  |");
             System.out.println("-------------------------------------------------------------------");
             c = sc.nextInt();
         switch(c){
             case 1:
                 System.out.println("Enter Staff ID: ");
-                System.out.println("Enter number of people to be seated in the table");
+                System.out.println("Enter number of people to be seated in the table"); 
                 TotalOrders.add(new Order()); //create the orders 
+
+                System.out.println("Print order");
                 //Object attributes of the order to be filled here --> table, staff
                 //Date and time to be updated this is NEEDED for case 6 please do not miss it out 
                 //initialize total price to 0 for every new order made 
@@ -45,7 +48,7 @@ public class mainapp {
             case 2:
                 //remember that user cannot do 2 and 3 and 5 without order creation! --> account for exception handling 
                 //allowed to access order and menuitems 
-                System.out.println("Printing Menuitems....");
+                //System.out.println("Printing Menuitems....");
                 //create function to print all menuitems 
                 //initialize menu items here or at the front or wherever --> parsing in flat file etc.
                 System.out.println("Enter in Order Number: ");
@@ -54,7 +57,6 @@ public class mainapp {
                 break;
             case 3:
                 //allowed to access order and menuitems 
-                System.out.println("Print Set Packages");
                 //initialize setpackage items here or at the fron or wherever --> parsing in flat file etc.
                 System.out.println("Enter in Order Number: ");
                 System.out.println("What is your Set Package Order...?");

@@ -12,7 +12,7 @@ public class Staff {
 	private int temp, length;
 
 
-	public Staff(String Name, String Gender, int EmployeeID, int ContactNumber, String JobTitle){
+	public Staff(int EmployeeID, String Name, String Gender, int ContactNumber, String JobTitle){
 		this.Name = Name;
 		this.Gender = Gender;
 		this.EmployeeID = EmployeeID;

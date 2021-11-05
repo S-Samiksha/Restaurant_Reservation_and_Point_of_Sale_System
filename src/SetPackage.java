@@ -26,12 +26,11 @@ public class SetPackage extends MenuItems {
 		for (i =0; i < SetList.length; i++) {
 			price += SetList[i].getPrice();
 		}
-		
+		price = price * (float)0.9;
 		if (getPromo()) {
-			price = price * (float)0.8;
+			price = price * (float)0.85;
 		}
 		return price;
-		
 	}
 
 	public boolean getPromo() {

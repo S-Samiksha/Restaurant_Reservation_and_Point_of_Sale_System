@@ -1,0 +1,4 @@
+SP1|1,4,9,14|Package A|false|Fish Burger served with fried french fries with healthy orange juice with freshly made apple pie|
+SP2|2,6,10,13|Package B|false|Chicken burger served with hash brown fresh orange juice and fudgy brownies
+SP3|3,5,10|Vegetarian option|false|Quorn Burger served with onion ring and apple juice
+SP4|2,6,10,13|Package B|true|Chicken burger served with hash brown fresh orange juice and fudgy brownies
