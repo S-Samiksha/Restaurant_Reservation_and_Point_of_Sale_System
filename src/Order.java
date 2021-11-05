@@ -17,9 +17,10 @@ public class Order {
 	Scanner sc = new Scanner(System.in);
 	//use the timestamp and date class in java.utils and java.sql it commented out 
 	//private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-	private Staff staff; 
-	private Table table;
+	private String staffID; 
+	private int tableNumber;
 	private float totalPrice;
+	//date time 
 	ArrayList<String> ItemList = new ArrayList<String>(); //put in the itemID everytime an item is added, you automatically add to the total price --> privately 
 	//private Date date; 
 	//private int i=0;
