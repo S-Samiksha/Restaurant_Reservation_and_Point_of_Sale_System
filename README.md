@@ -47,7 +47,6 @@ We go by switch cases, and you go into the class stated in the mainapp and edit 
 
 3. MenuItems: create the flat file, parse it, create the constructor and switch case 2 (Functionality 5) and SetPackage: Similar to 2 (Functionality 5) **(ARUSHI)**
 
-
 4. Create Reservation (Functionality 6 and 7), allocate staff, allocate table, allocate date and time (functionality 8 is included in here), once they check in then it is added to orders etc. --> including parsing file **(XK)**
 
 5. Functionality 1, 2, and 10 all are within manager access only --> this one technically dont need login and logout so not doing it but as design I really feel these things should be accessible to all.... **(SAMIKSHA)**
