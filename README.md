@@ -18,10 +18,16 @@
 
 8. flat file --> use to construct etc. --> need a separate java file --> DataAdapter library I already made partial flat file not a proper one to test how it works, we can have the "split" as in the seperator / deliminator  as | or , or space or tab etc. safe is we use a symbol. 
 
+9. Stereotypes are needed in assignment although I am not sure how to show / add
+
+10. Is set package price +++ menu items or like a lower value that we set in flat file? if promo then must additionally reduce price...? 
+
+11. Exception handling 
+
 
 **How to discuss**
-1. go through the main class and check one by one (functionality, if there are any mistakes, class diagram issues bound to have)
-2. make flat file tgt would be faster (we need staff, table, menu, set package, reservation also) + the coding in JAVA --> this is quite new so maybe we can do tgt? 
+1. go through the main class and check one by one (functionality, if there are any mistakes, class diagram issues bound to have) + check against manual 
+2. make flat file tgt would be faster (we need staff, table, menu, set package, reservation also exactly 5 do tgt can finish very fast, order is during run time) + the coding in JAVA --> this is quite new so maybe we can do tgt? 
 3. decide a date to finish the coding by OR everyday from 4 pm to 7pm we do coding tgt on discord/zoom
 
 ## Delegations(5 pointers, split according to similarity)

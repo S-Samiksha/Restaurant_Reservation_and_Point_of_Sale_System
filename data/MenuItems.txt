@@ -1,5 +1,4 @@
-itemID	Name	Type	Price	Description
-AC1	Fish Burger	Main	1.5	
+AC1|Fish Burger|Main|1.5	
 AC2	Chicken Burger	Main	1.5	
 AC3	Quorn Burger	Main	1.5	
 AC4	Sprite	Drinks	1.5	
