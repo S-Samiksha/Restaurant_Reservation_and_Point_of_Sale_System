@@ -21,7 +21,10 @@ public class Table {
 	hence, we can only have get methods to mainclass
 
 	*/
-
+	
+	public void setisAvailable(boolean available) {
+		this.isAvailable = available;
+	}
 
 	public boolean isAvailble(){
 		return this.isAvailable;
