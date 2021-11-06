@@ -3,6 +3,7 @@ package src;
 
 import java.io.*;
 //import java.util.Scanner;
+import java.util.Arrays;
 
 //for conversion of flat file into objects 
 public class FileToObject {
@@ -56,13 +57,8 @@ public class FileToObject {
 				"E1|Samiksha|Female|87658987|Waiter" --> this is a string
 				["E1", "Samiksha", "Female" , "87658987", "Waiter"] --> this is an array of string split by |
  				*/
-				mainapp.SPList.add(new SetPackage(setPackageObject[0], setPackageObject[1], setPackageObject[2],Boolean.parseBoolean(setPackageObject[3]),setPackageObject[4]);
-				/*Giving you more functions if the objects require 
-				Integer.parseInt --> convert string to int like that of contact number
-				Double.parseDouble --> convert string to double 
-				Float.parseFloat --> convert float to double 
-				string to date time --> https://www.javatpoint.com/java-string-to-date 
-				*/
+				mainapp.SPList.add(new SetPackage(setPackageObject[0], setPackageObject[1], setPackageObject[2],Boolean.parseBoolean(setPackageObject[3]),setPackageObject[4]));
+				/*How to parse the array MenuItems[]?*/
 				line = file.readLine();
             }
 
@@ -89,7 +85,7 @@ public class FileToObject {
 				"E1|Samiksha|Female|87658987|Waiter" --> this is a string
 				["E1", "Samiksha", "Female" , "87658987", "Waiter"] --> this is an array of string split by |
  				*/
-				mainapp.MenuList.add(new MenuItems(MenuItemsObject[0], MenuItemsObject[1], MenuItemsObject[2],Float.parseFloat(MenuItemsObject[3]),MenuItemsObject[4]);
+				mainapp.MenuList.add(new MenuItems(MenuItemsObject[0], MenuItemsObject[1], MenuItemsObject[2],Float.parseFloat(MenuItemsObject[3]),MenuItemsObject[4]));
 				/*Giving you more functions if the objects require 
 				Integer.parseInt --> convert string to int like that of contact number
 				Double.parseDouble --> convert string to double 
