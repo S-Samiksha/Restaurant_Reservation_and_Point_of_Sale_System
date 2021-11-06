@@ -78,7 +78,7 @@ public class FileToObject {
 	public static void MenuItems(){
 		System.out.println("Loading Menu Items Data......");
 		try {
-            FileReader setPackage = new FileReader("data/MenuItems.txt"); //change this to the path file to read the file 
+            FileReader MenuItems = new FileReader("data/MenuItems.txt"); //change this to the path file to read the file 
 			BufferedReader file = new BufferedReader(MenuItems); //this is like a scanner but only for text files 
 			String line; //create a string called line which will read each line, for staff one line can be "E1|Samiksha|Female|87658987|Waiter"
 			String[] MenuItemsObject; //then we need to split "E1|Samiksha|Female|87658987|Waiter" based on the |
@@ -89,7 +89,7 @@ public class FileToObject {
 				"E1|Samiksha|Female|87658987|Waiter" --> this is a string
 				["E1", "Samiksha", "Female" , "87658987", "Waiter"] --> this is an array of string split by |
  				*/
-				mainapp.SPList.add(new MenuItems(MenuItemsObject[0], MenuItemsObject[1], MenuItemsObject[2],Integer.parseInt(MenuItemsObject[3]),MenuItemsObject[4]);
+				mainapp.MenuList.add(new MenuItems(MenuItemsObject[0], MenuItemsObject[1], MenuItemsObject[2],Float.parseFloat(MenuItemsObject[3]),MenuItemsObject[4]);
 				/*Giving you more functions if the objects require 
 				Integer.parseInt --> convert string to int like that of contact number
 				Double.parseDouble --> convert string to double 

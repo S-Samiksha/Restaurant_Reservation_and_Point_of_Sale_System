@@ -24,7 +24,9 @@ public class mainapp {
         System.out.println("Cleaning up and Setting up Restaurant.....");
         System.out.println("Staff taking attendance.......");
         FileToObject.staff();
+        FileToObject.MenuItems();
         ReservationFTO.table();
+        FileToObject.setPackage();
         
         List<Reservation> ReservationList = new ArrayList<>(10000);
         Scanner sc = new Scanner(System.in);
