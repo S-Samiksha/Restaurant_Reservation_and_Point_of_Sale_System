@@ -1,4 +1,6 @@
 package src;
+import java.util.*;
+import java.io.*;
 /**
  * Reservation has a table relationship (reservation cannot live without table in other words its a composition update it in the class diagram)
  * this one missing STAFF 
@@ -117,24 +119,81 @@ public class Reservation {
 	public int getTableNumber(){
 		return this.table;
 	}
+	/// To sort reservations by starttime -> used in order to find table 
+	public static Comparator<Reservation> bystartdate = new Comparator<Reservation>() {
 
+		public int compare(Reservation s1, Reservation s2) {
+
+				
+			int startdate1 = s1.getDate();
+			int startdate2 = s2.getDate();
+
+				return startdate1-startdate2;
+
+		}
+	};
+	public static Comparator<Reservation> bystarttime = new Comparator<Reservation>() {
+
+		public int compare(Reservation s1, Reservation s2) {
+
+			
+			int starttime1 = s1.getTime();
+			int starttime2 = s2.getTime();
+
+				return starttime1-starttime2;
+
+			}
+	};
+	protected static List<Table> TableList = new ArrayList<>(30);
+	
 	//the reason why i labelled this find is to make things clearer that we are in fact finding a table 
-	public void findTable(){
+	/*public void findTable(){
 		/*
 		Line of logic 
 		1. Find a table available at that table -1 to +2 hours of booking time 
 		2. If there are no available tables, suggest that they reduce number of people coming 
-		*/
+		
+		
 
+	 	public static void main(String args[]){
+		
+			System.out.println("Loading Reservation Data......"); 
+        	try {
+            	FileReader Table = new FileReader("data/table.txt"); 
+				BufferedReader file = new BufferedReader(Table); 
+				String line;
+				String[] tableObject; 
+				line = file.readLine();
+            	while(line!= null) { 
+                	tableObject = line.split("[|]"); 
+					mainapp.TableList.add(new Table(Integer.parseInt(tableObject[0]), Integer.parseInt(tableObject[1]), Boolean.parseBoolean(tableObject[2])));
+					/*Giving you more functions if the objects require 
+					Integer.parseInt --> convert string to int like that of contact number
+					Double.parseDouble --> convert string to double 
+					Float.parseFloat --> convert float to double 
+					string to date time --> https://www.javatpoint.com/java-string-to-date 
+					
+					line = file.readLine();
+            	}
+
+				file.close();
+			
+
+			
+			} catch (IOException e) {
+			e.printStackTrace();
+			}
+
+
+		
 	}
-
-
-
-
-	//there was a weird getattribute function definitely visual paradigm got issue 
-
-
-
+	 	{
+	 	for (int i=0; i<TableList.size(); i++){
+            System.out.printf("%d %d %b", TableList.get(i).gettableCapacity(), TableList.get(i).gettableCapacity(), TableList.get(i).getisAvailable());
+            System.out.println();
+        }
+	    }*/
+	 	
 
 
 }

@@ -7,29 +7,36 @@ package src;
 import java.util.*;
 //import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
+import java.io.Console;
+
 public class mainapp {
     //LOOK HERE AND MAKE SURE YOU USE THE CORRECT VARIABLE NAME
 
     protected static List<MenuItems> MenuList = new ArrayList<>(30);
-    protected static List<SetPackage> SPList = new ArrayList<>(30);
+    protected static List<SetPackage> SPList = new ArrayList<>(30); 
     protected static List<Staff> StaffList = new ArrayList<>(30);
     protected static List<Table> TableList = new ArrayList<>(30);
+    protected static List<Order> TotalOrders = new ArrayList<>(10000);
 
     //everytime you declare the order increment the order number and add it into the list; 
     
-    public static void main(String[] args) {
-        FileToObject.main(args);
-        List<Order> TotalOrders = new ArrayList<>(10000);
-        List<Reservation> TotalReservation = new ArrayList<>(10000);
+    public static void main(String[] args){
+        System.out.println("Cleaning up and Setting up Restaurant.....");
+        System.out.println("Staff taking attendance.......");
+        FileToObject.staff();
+        ReservationFTO.table();
+        
+        List<Reservation> ReservationList = new ArrayList<>(10000);
         Scanner sc = new Scanner(System.in);
         //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Date date = new Date();
         System.out.println("-----------" + new Timestamp(date.getTime()) + "---------------------------");
         int c = 0;
-        
+        System.out.println("Opening Sally's Burger Town Restaurant!");
+        System.out.println("~~~~~~~~~~~~~~~~Welcome!~~~~~~~~~~~~~~~");
 
         while (c >= 0){
-            System.out.println("------------------------------------------------------------------");
+            System.out.println("----------------------------STAFF ACCESS---------------------------");
             System.out.println("| (1) Create An Order                                             |");
             System.out.println("| (2) Place An Alacarte Order                                     |");
             System.out.println("| (3) Place A Set Package                                         |");
@@ -86,9 +93,9 @@ public class mainapp {
                 //if there is no table available at that date and time, tell the customer 
                 //in the reservation object, enter data and time by date and time DATA TYPE!
                 System.out.println("Enter Contact Number: ");
-                TotalReservation.add(new Reservation());
+                ReservationList.add(new Reservation());
                 break;
-            case 6:
+            case 6: //to print invoice
                 //get order number 
                 //clear table
                 //ask if member 
@@ -96,13 +103,26 @@ public class mainapp {
                 //get raw price from order class
                 //get 7% GST 
                 //get 5% Service tax 
+                double totalPrice = 0.0;
+                double MemberDiscount= 0.0;
+                double GSTamount = 0.0;
+                double Taxamount = 0.0;
+                double PayablePrice = 0.0;
+                System.out.println("Enter in Order Number: ");
+                //retrive price based on orderID
+                totalPrice = Order.getPrice(); //error here also
                 System.out.println("Are you a member?");
                 boolean isMember = sc.nextBoolean();
                 if (isMember){
                     System.out.println("You are a Member! You will get a 10% Discount");
+                    MemberDiscount = totalPrice*0.1;
                     //minus 10% member discount 
                 }
-                
+                GSTamount = totalPrice*0.07;
+                Taxamount = totalPrice*0.10;
+                PayablePrice = totalPrice - MemberDiscount + GSTamount + Taxamount;
+
+                //this are just placeholders you must print like an actual receipt
                 System.out.println("Here is your final invoice");
                 System.out.println("-----------" + new Timestamp(date.getTime()) + "------------");
                 System.out.println("-------------------------------------------------------------");
@@ -111,11 +131,11 @@ public class mainapp {
                 System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
                 System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
                 System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
-                System.out.println("|  Total Price :                                            |");
-                System.out.println("|  Total GST   :                                            |");
-                System.out.println("|  Total Service Tax :                                      |");
-                System.out.println("|  Total Member's Discount :                                |");
-                System.out.println("|  Total Payable Amount:                                    |");
+                System.out.println("|  Total Price : "+totalPrice+"                             |");
+                System.out.println("|  Total GST   : "+GSTamount+"                              |");
+                System.out.println("|  Total Service Tax : "+Taxamount+"                        |");
+                System.out.println("|  Total Member's Discount : "+MemberDiscount+"             |");
+                System.out.println("|  Total Payable Amount: "+PayablePrice+"                   |");
                 System.out.println("|---------------- Thank you for Visiting! ------------------|");
                 System.out.println("|----------------- Please do come again! ------------------ |");
                 System.out.println("-------------------------------------------------------------");
@@ -126,35 +146,94 @@ public class mainapp {
                 break;
             case 7:
                 int count = 0;
-                int tryAgain = 1; 
-                String securityKey, temp;
+                int tryAgain = 1, choice=0;
+                String temp;
                 Scanner sc2 = new Scanner(System.in);
+                Console cs = System.console();
+
 
                 while (count < 3 && tryAgain == 1){
-                    System.out.println("Enter Security key: ");
-                    securityKey = sc2.nextLine();
-                    if(securityKey.equals("OOP")){
-                        SecurityAccess newSession = new SecurityAccess();
+                    System.out.println("Enter EmployeeID: ");
+                    temp = sc2.nextLine();
+                    //add in ismanager later
 
+                        System.out.println("Enter Security key: ");
 
-                    }else{
-                        securityKey = "";
-                        System.out.println("You are not allowed access! To Try again press 1:");
-                        temp = sc2.nextLine();
-                        tryAgain = Integer.parseInt(temp);
-                        count++;
-                    }
-                }
+                        char[] securityKey = cs.readPassword();
+                        
+                            if(securityKey.toString().equals("OOP")){
+                                SecurityAccess newSession = new SecurityAccess();
+                                do{
+                                    newSession.showOptions();
+                                    choice = Integer.parseInt(sc2.nextLine());
+                                    switch(choice){
+                                        case 1:
+                                            newSession.createMenu();
+                                            break;
+                                        case 2:
+                                            newSession.updateMenu();
+                                            break;
+                                        case 3:
+                                            newSession.createSet();
+                                            break;
+                                        case 4:
+                                            newSession.updateSet();
+                                            break;
+                                        case 5:
+                                            newSession.removeItem();
+                                            break;
+                                        case 6:
+                                            newSession.totalSales();
+                                            break;
+                                        case 7:
+                                            break;
+                                        default:
+                                            System.out.println("Wrong Choice!");
+                                            choice = 0;
+                                    }
+                                }while(choice !=7);
+                                break;
+                            }else{
+                                securityKey = null;
+                                System.out.println("You are not allowed access! To Try again press 1:");
+                                temp = sc2.nextLine();
+                                tryAgain = Integer.parseInt(temp);
+                                count++;
+                            }
+                        }
+                        if (tryAgain == 1 && count == 3){
+                            System.out.println("You tried too many times. You are a potential threat. Calling manager now....");
 
-                if (tryAgain == 1 && count == 3){
-                    System.out.println("You tried too many times. You are a potential threat. Calling manager now....");
+                        }
+                        
 
-                }
+                    
                 break;
             case 8:
-
+                c=-1;
                 break;
             default:
+                //to test if staff works 
+                
+                for (int i=0; i<StaffList.size(); i++){
+                    System.out.printf("%s %s %d %s", StaffList.get(i).getEmployeeID(), StaffList.get(i).getName(), StaffList.get(i).getContactNumber(), StaffList.get(i).getGender());
+                    System.out.println();
+                }
+                //to test if menu works
+                for (int i=0; i<MenuList.size(); i++){
+                    System.out.printf("%s %s %d %s %s", MenuList.get(i).getitemID(), MenuList.get(i).getName(), MenuList.get(i).getPrice(), MenuList.get(i).getType(), MenuList.get(i).getDescription());
+                    System.out.println();
+                }
+                //to test if SP works
+
+                //to test if reservation works
+                for (int i=0; i<TableList.size(); i++){
+                    System.out.printf("%d %d %b", TableList.get(i).gettableCapacity(), TableList.get(i).gettableCapacity(), TableList.get(i).isAvailable());
+                    System.out.println();
+                }
+                //to test if table works
+
+                //to test if order works
                 System.out.println("Wrong input! Try Again");
                 c = 0;
                 break;

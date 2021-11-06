@@ -21,11 +21,12 @@ public class MenuItems {
 
 	*/
 
-	public MenuItems(String Name,String Type, String Description, float Price) {
+	public MenuItems(String Name,String Type, String Description, float Price, String itemID) {
         this.Name = Name;
         this.Type = Type;
         this.Description = Description;
         this.Price = Price;
+		this.itemID = itemID;
 		//remember this needs to be parsed through flat file 
 	}
 
@@ -85,11 +86,5 @@ public class MenuItems {
 		this.Price = Price;
 	}
 
-	public void printMenuItems(){
-		System.out.println(this.Name);
-	}
-
-
-
-	
+	// print menu moved to order	
 }

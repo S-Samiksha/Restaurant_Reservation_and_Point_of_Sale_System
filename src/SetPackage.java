@@ -13,12 +13,20 @@ package src;
 public class SetPackage extends MenuItems {
 
 	private boolean Promo;
+	private MenuItems[] SetList;
 	
-	public SetPackage(MenuItems[] SetList, String Name, String Description, boolean promo) {
-		super(Name,"Set Item",Description, (float)0);
+	public void setSetList(MenuItems[] NewSetList){
+		this.SetList = NewSetList;
+		this.setPrice(calculatePrice(NewSetList));
+	}
+
+	public SetPackage(MenuItems[] SetList, String Name, String Description, boolean promo, String itemID) {
+		super(Name,"Set Item",Description, (float)0,itemID);
 		this.setPromo(promo);
+		this.SetList = SetList;
 		super.setPrice(calculatePrice(SetList));
 	}
+
 
 	protected float calculatePrice(MenuItems[] SetList) {
 		float price = (float) 0;

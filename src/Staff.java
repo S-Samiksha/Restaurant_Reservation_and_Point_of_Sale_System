@@ -9,15 +9,16 @@ public class Staff {
 	private String EmployeeID;
 	private int ContactNumber;
 	private String JobTitle;  //this is needed but not inside the class diagram 
-	private int temp, length;
+	private boolean isAvailable;
 
 
-	public Staff(String EmployeeID, String Name, String Gender, int ContactNumber, String JobTitle){
+	public Staff(String EmployeeID, String Name, String Gender, int ContactNumber, String JobTitle, boolean isAvailaible){
 		this.Name = Name;
 		this.Gender = Gender;
 		this.EmployeeID = EmployeeID;
 		this.ContactNumber = ContactNumber;
 		this.JobTitle = JobTitle;
+		this.isAvailable = isAvailaible;
 	}
 
 	public String getName() {
@@ -35,11 +36,14 @@ public class Staff {
 		return this.Gender;
 	}
 
+	public boolean getisAvailable(){
+		return this.isAvailable;
+	}
 	/**
 	 * 
 	 * @param String
 	 */
-	protected void setGender(String Gender) { //i dont think we need this 
+	/*protected void setGender(String Gender) { //i dont think we need this 
 		//checking the various type of inputs 
 		switch(Gender){
 			case "Female":
@@ -60,7 +64,7 @@ public class Staff {
 
 		}
 
-	}
+	}*/
 
 	public String getEmployeeID() {
 		// throw new UnsupportedOperationException();
@@ -77,7 +81,7 @@ public class Staff {
 	 * 
 	 * @param Double
 	 */
-	protected void setContactNumber(int ContactNumber) { //this one also dont need 
+	/*protected void setContactNumber(int ContactNumber) { //this one also dont need 
 		// throw new UnsupportedOperationException();
 		//check if the string length is 8 digits or not, and valid (in terms of singapore number)
 		temp = ContactNumber;
@@ -93,7 +97,7 @@ public class Staff {
 			return;
 		}
 
-	}
+	}*/
 
 
 	public boolean isManager(){
@@ -104,5 +108,8 @@ public class Staff {
 		}
 	}
 
+	public void setisAvailable(boolean available){
+		this.isAvailable = available;
+	}
 
 }
