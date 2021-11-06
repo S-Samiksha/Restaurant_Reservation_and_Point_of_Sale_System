@@ -51,9 +51,9 @@ public class Order {
 	//the other set staff get staff
 	//set table if available etc. 
 
-	public Staff getStaff() {
+	public String getStaff() {
 
-		return this.staff;
+		return this.staffID;
 	}
 
 
@@ -62,8 +62,8 @@ public class Order {
 		//this has to be based on whether table is available you cannot just put the table number there 
 	}
 
-	public Table getTable(){
-		return this.table;
+	public int getTable(){
+		return this.tableNumber;
 	}
 
 	public void removeFromOrder(String MenuItems) { //pass in the item to be removed

@@ -85,7 +85,9 @@ public class MenuItems {
 		this.Price = Price;
 	}
 
-
+	public void printMenuItems(){
+		System.out.println(this.Name);
+	}
 
 
 

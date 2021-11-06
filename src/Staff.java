@@ -6,13 +6,13 @@ package src;
 public class Staff {
 	private String Name;
 	private String Gender;
-	private int EmployeeID;
+	private String EmployeeID;
 	private int ContactNumber;
 	private String JobTitle;  //this is needed but not inside the class diagram 
 	private int temp, length;
 
 
-	public Staff(int EmployeeID, String Name, String Gender, int ContactNumber, String JobTitle){
+	public Staff(String EmployeeID, String Name, String Gender, int ContactNumber, String JobTitle){
 		this.Name = Name;
 		this.Gender = Gender;
 		this.EmployeeID = EmployeeID;
@@ -62,7 +62,7 @@ public class Staff {
 
 	}
 
-	public int getEmployeeID() {
+	public String getEmployeeID() {
 		// throw new UnsupportedOperationException();
 		return this.EmployeeID;
 	}

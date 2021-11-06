@@ -41,6 +41,14 @@ https://discord.gg/CUcEMQc4
 
 We go by switch cases, and you go into the class stated in the mainapp and edit there. 
 
+**Flat file parsing:**
+Staff: Samiksha
+order: Shreya
+MenuItems: Arushi
+SetPackage: Melise 
+Reservation: XK
+
+
 1. Order creating (functionality 3) --> order class, the constructor, Check table availability, Allocating Table, Allocating the staff, Date and Time to be stored (functionality 8 is included in here) **(SHREYA)**
 
 2. View Order(Functionality 4), print order invoice (functionality 9) gst is meant to be done outside the order class, service tax, membership etc. i mean we can have it inside no probs its just design anyway but gst, service member calculate at the end. also view order is not invoice although functionality wise its very similar **(MELISE)**
@@ -51,6 +59,7 @@ We go by switch cases, and you go into the class stated in the mainapp and edit 
 
 5. Functionality 1, 2, and 10 all are within manager access only --> this one technically dont need login and logout so not doing it but as design I really feel these things should be accessible to all.... **(SAMIKSHA)**
 
+6. Close Shop, add orders into text file --> can one non testing person do?
 
 **Documentation + testing** --> 9 NOV Tuesday 2359
 person 2: Class diagram go fix it write up on design consideration and use of OO concepts --> take class diagram and write one page MAX (best just 3/4 page)**(ARUSHI)**

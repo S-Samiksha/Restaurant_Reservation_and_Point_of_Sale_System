@@ -1,16 +1,13 @@
 AC1|Fish Burger|Main|6.55|Burger made with a fish patty.|
 AC2|Chicken Burger|Main|6.00|Deep fried chicken patty with lettuce, tomato, cheese with specially made sauce.|
 AC3|Quorn Burger|Main|7.55|Healthy vegetarian and delicious.| 
-	
 AC4|French Fries|Sides|3.40| Freshly fried potato with seasalt.| 
 AC5|Onion Ring|Sides|4.50|Freshly prepared onion rings fried with cajun spices.|
 AC6|Hashbrown|Sides|2.50|Freshly golden fried goodness.|
-
 AC7|Sprite|Drinks|1.25| A white frizzy drink to lighten your mood|
 AC8|Coke|Drinks|1.25| A fizzy drink to lighten your mind|
 AC9|Orange Juice|Drinks|2.05|Freshly juiced oranges served with ice|
 AC10|Apple Juice|Drinks|2.77|Freshly juiced apples served with ice|
-
 AC11|Chocolate Cake|Dessert|5.25|Triple layered chocolate truffle cake|
 AC12|IceCream|Dessert|4.50|Refreshing icecream served with chocolate sauce|			
 AC13|Brownie|Dessert|2.50|Hot fudgy brownies with walnuts| 

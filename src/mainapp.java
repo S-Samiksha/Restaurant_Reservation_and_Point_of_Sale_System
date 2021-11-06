@@ -8,10 +8,17 @@ import java.util.*;
 //import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
 public class mainapp {
+    //LOOK HERE AND MAKE SURE YOU USE THE CORRECT VARIABLE NAME
+
+    protected static List<MenuItems> MenuList = new ArrayList<>(30);
+    protected static List<SetPackage> SPList = new ArrayList<>(30);
+    protected static List<Staff> StaffList = new ArrayList<>(30);
+    protected static List<Table> TableList = new ArrayList<>(30);
 
     //everytime you declare the order increment the order number and add it into the list; 
     
     public static void main(String[] args) {
+        FileToObject.main(args);
         List<Order> TotalOrders = new ArrayList<>(10000);
         List<Reservation> TotalReservation = new ArrayList<>(10000);
         Scanner sc = new Scanner(System.in);
@@ -38,6 +45,7 @@ public class mainapp {
                 System.out.println("Enter Staff ID: ");
                 System.out.println("Enter number of people to be seated in the table"); 
                 TotalOrders.add(new Order()); //create the orders 
+                //print menu
 
                 System.out.println("Print order");
                 //Object attributes of the order to be filled here --> table, staff
@@ -119,32 +127,32 @@ public class mainapp {
             case 7:
                 int count = 0;
                 int tryAgain = 1; 
+                String securityKey, temp;
+                Scanner sc2 = new Scanner(System.in);
+
                 while (count < 3 && tryAgain == 1){
-                    System.out.println("Enter Staff ID: ");
-                    //if is manager, then only he can access ALLL the orders. 
-                    //now calculate the total price, total quantity for ALL order, based on the various date and time 
-                    //Additional security is needed you cannot anyhow be able to access the entire sales report
                     System.out.println("Enter Security key: ");
-                    String securityKey = sc.nextLine();
-                    //if security key is equal to OOP then you can proceed. (I just put OOP because its easy)
-                    if (securityKey == "OOP"){
-                        //call the respective functions 
-                        System.out.println("---------------------------------------------");
-                        System.out.println("| (1) Create/Update/Remove Menu Item         |");
-                        System.out.println("| (2) Create/Update/Remove Set Package item  |");
-                        System.out.println("| (3) See Sales Revenue Report               |");
-                        System.out.println("---------------------------------------------");
+                    securityKey = sc2.nextLine();
+                    if(securityKey.equals("OOP")){
+                        SecurityAccess newSession = new SecurityAccess();
+
 
                     }else{
-                        System.out.println("You are not allowed access! To Try again press 1.");
-                        tryAgain = sc.nextInt();
+                        securityKey = "";
+                        System.out.println("You are not allowed access! To Try again press 1:");
+                        temp = sc2.nextLine();
+                        tryAgain = Integer.parseInt(temp);
                         count++;
                     }
                 }
+
                 if (tryAgain == 1 && count == 3){
                     System.out.println("You tried too many times. You are a potential threat. Calling manager now....");
 
                 }
+                break;
+            case 8:
+
                 break;
             default:
                 System.out.println("Wrong input! Try Again");
