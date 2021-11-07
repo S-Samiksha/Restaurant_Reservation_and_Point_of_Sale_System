@@ -10,4 +10,4 @@ E9|Tom|Male|80658980|Waiter|true
 E10|Dick|Male|98785442|Waiter|true
 E11|Harry|Male|98765333|Waiter|true
 E12|Ron|Male|98768555|Waiter|true
-E13|Hermoine|Female|98769999|Manager|true                                                                                                                                                
+E13|Hermoine|Female|98769999|Manager|true                                                                                                                       

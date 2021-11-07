@@ -145,18 +145,17 @@ public class Order {
 	}
 
 	public void addOrder(String ItemID, ArrayList<MenuItems> customerOrder){
-		System.out.println("Select an item to order and enter the ID:");
-		String ID = sc.next();
 		System.out.println("Enter the quantity");
 		int quantity = sc.nextInt();
-		List<MenuItems> menuitems = mainapp.MenuList; //ERROR! here also cannot be resolved
+		List<MenuItems> menuitems = mainapp.MenuList;
 		List<SetPackage> setpackages = mainapp.SPList;
-		if (ID.substring(0,1) == "AC") {
+		if (ItemID.substring(0,1) == "AC") {
 			for (int i = 0 ; i < quantity; i++){
 				customerOrder.add(menuitems.get(i-1));
+				System.out.printf("%d\n",menuitems.get(i-1).getName());
 			}
 		}
-		if (ID.substring(0,1) == "SP") {
+		if (ItemID.substring(0,1) == "SP") {
 			for (int i = 0 ; i < quantity; i++){
 				customerOrder.add(setpackages.get(i-1));
 			}

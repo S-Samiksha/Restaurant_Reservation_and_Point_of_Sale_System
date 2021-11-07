@@ -11,4 +11,4 @@ AC10|Apple Juice|Drinks|2.77|Freshly juiced apples served with ice|
 AC11|Chocolate Cake|Dessert|5.25|Triple layered chocolate truffle cake|
 AC12|IceCream|Dessert|4.50|Refreshing icecream served with chocolate sauce|			
 AC13|Brownie|Dessert|2.50|Hot fudgy brownies with walnuts| 
-AC14|Apple Pie|Dessert|3.14|Grandma's recipe for the apple pie lovers!|		
+AC14|Apple Pie|Dessert|3.14|Grandma's recipe for the apple pie lovers!|

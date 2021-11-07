@@ -4,6 +4,8 @@ package src;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //for conversion of flat file into objects 
 public class FileToObject {
@@ -48,17 +50,16 @@ public class FileToObject {
 				String[] lista = SetPackageObject[1].split("[,]");
 				//add for loop to parse everything rom string to int
 				int i=0;
-				MenuItems[] newList = new MenuItems[10];
+				MenuItems[] newList = {};
 				for (String temp:lista){
 					for (int x=0; x<mainapp.MenuList.size(); x++){
                         if (temp.equals(mainapp.MenuList.get(x).getitemID())){
-                            newList[i] = new MenuItems(mainapp.MenuList.get(i).getName(), mainapp.MenuList.get(i).getType(), mainapp.MenuList.get(i).getDescription(), mainapp.MenuList.get(i).getPrice() , temp);
+							newList = Arrays.copyOf(newList, newList.length+1);
+							newList[newList.length-1] = new MenuItems(mainapp.MenuList.get(x).getName(), mainapp.MenuList.get(x).getType(), mainapp.MenuList.get(x).getDescription(), mainapp.MenuList.get(x).getPrice() , temp);
                         }
                     }	
 					i++;
 				}
-				
-
 
 				mainapp.SPList.add(new SetPackage(SetPackageObject[0], newList , SetPackageObject[2],Boolean.parseBoolean(SetPackageObject[3]),SetPackageObject[4]));
 				
@@ -108,8 +109,9 @@ public class FileToObject {
 			line = file.readLine();
             while(line!= null) { 
                 OrderObject = line.split("[|]");
-
 				String[] listb = OrderObject[5].split("[,]");
+				//AC1, AC2 
+				//[AC1, AC2]
 				//add for loop to parse everything rom string to int
 				int i=0;
 				ArrayList<MenuItems> newListb = new ArrayList<>(30);
@@ -124,7 +126,6 @@ public class FileToObject {
 
 
 				mainapp.TotalOrders.add(new Order(Integer.parseInt(OrderObject[0]),OrderObject[1],Integer.parseInt(OrderObject[2]),Timestamp.valueOf(OrderObject[3]),Float.parseFloat(OrderObject[4]), newListb));
-
 				line = file.readLine();
             }
 
@@ -233,17 +234,20 @@ public class FileToObject {
 
 	public static void OrderStore() throws IOException{
 		try{
-		FileWriter fw = new FileWriter("data/order.txt");
-		BufferedWriter bw = new BufferedWriter(fw);
-		for (int j=0; j<mainapp.TotalOrders.size() ; j++) {
-			Order item = mainapp.TotalOrders.get(j);
-			String stritem = String.valueOf(String.valueOf(item.getOrderID()) + "|" +  String.valueOf(item.getStaff()) + "|" + String.valueOf(item.getTable()) +"|" + (item.getDateTime()).toString() +  "|" + String.valueOf(item.getTotalprice())) + String.valueOf(item.getOrdersList());
-			bw.write(stritem);
-			bw.newLine();
+			FileWriter fw = new FileWriter("data/order.txt");
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (int j=0; j<mainapp.TotalOrders.size() ; j++) {
+				Order item = mainapp.TotalOrders.get(j);
+				String stritem = String.valueOf(String.valueOf(item.getOrderID()) + "|" +  String.valueOf(item.getStaff()) + "|" + String.valueOf(item.getTable()) +"|" + (item.getDateTime()).toString() +  "|" + String.valueOf(item.getTotalprice())) + String.valueOf(item.getOrdersList());
+				bw.write(stritem);
+				bw.newLine();
+			}
+			System.out.println("Write Menu Items Data successful....");
+			bw.close();
+		}catch(Exception e){
+			System.out.println("Exception thrown!");
 		}
-		}
-		System.out.println("Write Menu Items Data successful....");
-		bw.close();
+		
 	}
 
 

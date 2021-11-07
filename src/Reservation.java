@@ -131,22 +131,25 @@ public class Reservation {
 		}
 	}
 
-	public static int FindTable(List<Table> TableList, int customerPax) {
+	public int FindTable(int customerPax) {
 		int i = 0;
-        for(i=0; i<TableList.size();i++){
-			if(TableList.get(i).isAvailable() == true && TableList.get(i).gettableCapacity() >= customerPax){
-				TableList.get(i).setisAvailable(false); //change list
-				this.table = TableList.get(i).gettableNum(); //get table number
-				return TableList.get(i).gettableNum(); //return table number
+		List<Table> tableList = mainapp.TableList;
+        for(i=0; i<tableList.size();i++){
+			if(tableList.get(i).isAvailable() == true && tableList.get(i).gettableCapacity() >= customerPax){
+				tableList.get(i).setisAvailable(false); //change list
+				this.table= tableList.get(i).gettableNum(); //get table number
+				return tableList.get(i).gettableNum(); //return table number
 			}
 		}
-		return 0;
+		return -1;
 	}
 
-	public List ReservationMaker(String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
-		Reservation.get(tableNum).setStaffID(staffID);
-		this.reservation();
-	}
+	/*public void ReservationMaker(List<Reservation> ReservationList, int tableNum){
+		Scanner sc = new Scanner(System.in);
+		List<Reservation> reservationitem = mainapp.ReservationList;
+
+
+	}*/
 
 	public int getTableNumber(){
 		return this.table;

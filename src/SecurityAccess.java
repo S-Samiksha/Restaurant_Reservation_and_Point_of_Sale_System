@@ -212,14 +212,15 @@ public class SecurityAccess{
         System.out.println("Do you want to see revenue for a day or for a month?");
         System.out.println("(1) Day");
         System.out.println("(2) Month");
-        int choice = sc.nextInt();
+        int choice = Integer.parseInt(sc.nextLine());
         if (choice == 1){
             System.out.println("Enter month (e.g. 01, 02 ...12): ");
             String month = sc.nextLine();
             System.out.println("Enter day (e.g 00, 01, 02..., 21)");
             String day = sc.nextLine();
-            String start = "2021-"+month+"-"+day+"-00-00";
-            String end = "2021-"+month+"-"+day+"-23-59";
+            String start = "2021-"+month+"-"+day+" 00:00:00";
+            String end = "2021-"+month+"-"+day+" 23:59:00";
+            //System.out.println(start);
             //ask the user for time
             //end = "2021-"+month+"-"+day+"-" +temp[0]+ temp[1] +"-" +temp[2]+temp[3] 
             //1450 temp 
@@ -228,14 +229,16 @@ public class SecurityAccess{
             for(int i=0; i< mainapp.TotalOrders.size(); i++){
                 if (mainapp.TotalOrders.get(i).getDateTime().after(Timestamp.valueOf(start)) && mainapp.TotalOrders.get(i).getDateTime().before(Timestamp.valueOf(end))){
                     TotalItems.addAll(mainapp.TotalOrders.get(i).getOrdersList());
+                    System.out.println(mainapp.TotalOrders.get(i).getOrdersList());
+
                 }    
                 
              }
         }else if (choice == 2){
             System.out.println("Enter month (int): ");
             String month = sc.nextLine();
-            String start = "2021-"+month+"-01-00-00";
-            String end = "2021-"+month+"-31-23-59";
+            String start = "2021-"+month+"-01 00:00:00";
+            String end = "2021-"+month+"-31 23:59:59";
             for(int i=0; i< mainapp.TotalOrders.size(); i++){
                 //string to datetime 
                 if (mainapp.TotalOrders.get(i).getDateTime().after(Timestamp.valueOf(start)) && mainapp.TotalOrders.get(i).getDateTime().before(Timestamp.valueOf(end))){
@@ -244,6 +247,9 @@ public class SecurityAccess{
              }
         }
 
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("        Sales Revenue            ");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("ItemId  ItemName Qty  Total Price");
         for (int i=0; i<mainapp.MenuList.size();i++){
             temp = mainapp.MenuList.get(i).getitemID();
@@ -257,7 +263,7 @@ public class SecurityAccess{
             }
         }
 
-        for (int i=0; i<mainapp.MenuList.size();i++){
+        for (int i=0; i<mainapp.SPList.size();i++){
             temp = mainapp.SPList.get(i).getitemID();
             for (int j=0; j<TotalItems.size();j++){
                 if (TotalItems.get(i).getitemID().equals(temp)){
