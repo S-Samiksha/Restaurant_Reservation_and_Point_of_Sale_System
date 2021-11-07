@@ -30,6 +30,10 @@ public class MenuItems {
 		//remember this needs to be parsed through flat file 
 	}
 
+	public MenuItems getMenuItem(String ItemID){
+		return this;
+	}
+
 	public String getitemID(){
 		return this.itemID;
 	}

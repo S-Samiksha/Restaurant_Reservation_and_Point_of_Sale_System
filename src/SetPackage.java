@@ -15,12 +15,16 @@ public class SetPackage extends MenuItems {
 	private boolean Promo;
 	private MenuItems[] SetList;
 	
+	public MenuItems[] getSetList(){
+		return this.SetList;
+	}
+
 	public void setSetList(MenuItems[] NewSetList){
 		this.SetList = NewSetList;
 		this.setPrice(calculatePrice(NewSetList));
 	}
 
-	public SetPackage(MenuItems[] SetList, String Name, String Description, boolean promo, String itemID) {
+	public SetPackage(String itemID,MenuItems[] SetList,String Name,boolean promo,String Description) {
 		super(Name,"Set Item",Description, (float)0,itemID);
 		this.setPromo(promo);
 		this.SetList = SetList;

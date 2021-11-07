@@ -5,156 +5,197 @@ package src;
  * mainapp also relies on menuitems and setpackage because you want to show it to customers right!
  */
 import java.util.*;
-//import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
 import java.io.Console;
 
 public class mainapp {
-    //LOOK HERE AND MAKE SURE YOU USE THE CORRECT VARIABLE NAME
+    //THIS IS A LIST 
+    //WE implement list interface using the arraylist 
+    //it is a LIST but has functions of arraylist 
 
     protected static List<MenuItems> MenuList = new ArrayList<>(30);
     protected static List<SetPackage> SPList = new ArrayList<>(30); 
     protected static List<Staff> StaffList = new ArrayList<>(30);
     protected static List<Table> TableList = new ArrayList<>(30);
     protected static List<Order> TotalOrders = new ArrayList<>(10000);
+    protected static List<Reservation> ReservationList = new ArrayList<>(30);
+    public static int tableNum = -1;
+    
+	/*public static String staffID;
+	public static Timestamp DateTime;
+	public static String customerName;
+	public static int contactNum;
 
-    //everytime you declare the order increment the order number and add it into the list; 
+
+    	public static int peopleNum;*/
+    public static final int MAX_Time = 2200; 
+	public static final int MIN_Time = 1000;
+    public static int ReservationID = 0;
+    public static int OrderID=0;
     
     public static void main(String[] args){
-        System.out.println("Cleaning up and Setting up Restaurant.....");
-        System.out.println("Staff taking attendance.......");
+        System.out.println("Restaurant Opening.....");
         FileToObject.staff();
+        FileToObject.table();
         FileToObject.MenuItems();
-        ReservationFTO.table();
         FileToObject.setPackage();
+        FileToObject.Order();
+        FileToObject.reservation(); //Error! cannot make static reference to the non static method  
         
         List<Reservation> ReservationList = new ArrayList<>(10000);
         Scanner sc = new Scanner(System.in);
-        //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Date date = new Date();
-        System.out.println("-----------" + new Timestamp(date.getTime()) + "---------------------------");
+        System.out.println("-----------" + new Timestamp(date.getTime()) + "---------------------------"); //this is system time 
         int c = 0;
-        System.out.println("Opening Sally's Burger Town Restaurant!");
-        System.out.println("~~~~~~~~~~~~~~~~Welcome!~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~Welcome to Sally's Burger Town Restaurant!~~~~~~~~~~~~");
 
         while (c >= 0){
             System.out.println("----------------------------STAFF ACCESS---------------------------");
             System.out.println("| (1) Create An Order                                             |");
-            System.out.println("| (2) Place An Alacarte Order                                     |");
-            System.out.println("| (3) Place A Set Package                                         |");
-            System.out.println("| (4) View an Order                                               |");
-            System.out.println("| (5) Reservation (Make, Remove, Check)                           |");
-            System.out.println("| (6) Print Order Invoice                                         |");
-            System.out.println("| (7) Manager Access Only (Menu Item, Promotion, Sales Revenue)   |");
-            System.out.println("| (8) Close Shop                                                  |");
+            System.out.println("| (2) Place/Remove An item                                        |");
+            System.out.println("| (3) View an Order                                               |");
+            System.out.println("| (4) Reservation (Make, Remove, Check)                           |");
+            System.out.println("| (5) Print Order Invoice                                         |");
+            System.out.println("| (6) Manager Access Only (Menu Item, Promotion, Sales Revenue)   |");
+            System.out.println("| (7) Close Shop                                                  |");
             System.out.println("-------------------------------------------------------------------");
             c = sc.nextInt();
         switch(c){
-            case 1:
-                System.out.println("Enter Staff ID: ");
-                System.out.println("Enter number of people to be seated in the table"); 
-                TotalOrders.add(new Order()); //create the orders 
-                //print menu
+            case 1: //SHREYA
+                System.out.println("Enter number of people to be seated in the table\n"); 
+                int customerpax = sc.nextInt();
+                Order case1order = new Order();
+                case1order.setStaff();
+                String staffFound = case1order.getStaff();
 
-                System.out.println("Print order");
-                //Object attributes of the order to be filled here --> table, staff
-                //Date and time to be updated this is NEEDED for case 6 please do not miss it out 
-                //initialize total price to 0 for every new order made 
-                // You are only allowed to acces the order class 
+                if (staffFound == ""){
+                    System.out.println("No Staff available at the moment!\n");
+                }
+                else{
+                    System.out.printf("Staff %d will be helping you!\n",case1order.getStaff());
+                }
+
+                int tableFound = case1order.FindTable(customerpax);
+                if (tableFound == 0){
+                    System.out.println("No table available at the moment!\n");
+                }
+                else{
+                    System.out.printf("You are allocated to %d\n",case1order.getTable());
+                }
+
+                case1order.setOrderID(OrderID);
+                System.out.printf("OrderID:%d",case1order.getOrderID());
+                case1order.setTimestamp();
+                TotalOrders.add(OrderID, case1order);
+                OrderID++; // DO NOT EDIT THIS VARIABLE 
                 break;
-            case 2:
-                //remember that user cannot do 2 and 3 and 5 without order creation! --> account for exception handling 
-                //allowed to access order and menuitems 
-                //System.out.println("Printing Menuitems....");
-                //create function to print all menuitems 
-                //initialize menu items here or at the front or wherever --> parsing in flat file etc.
-                System.out.println("Enter in Order Number: ");
-                System.out.println("What is your Ala Carte Order...?");
-                System.out.println("This is your final order");
+
+            case 2: //ARUSHI
+                int case2orderID;
+                System.out.println("Enter your order ID:");
+                case2orderID = sc.nextInt();
+                Order case2order = TotalOrders.get(case2orderID);
+                case2order.printMenu(); //should we add a while loop for cutomer to order mulitple items in one order?
+                System.out.println("Enter the menu item number you want to order from the menu: ");
+                String menuitem = sc.next(); 
+                case2order.addOrder(menuitem , case2order.customerOrder); 
+                System.out.println("This is your updated order");
+			    case2order.printOrder(case2order.customerOrder);
                 break;
-            case 3:
-                //allowed to access order and menuitems 
-                //initialize setpackage items here or at the fron or wherever --> parsing in flat file etc.
-                System.out.println("Enter in Order Number: ");
-                System.out.println("What is your Set Package Order...?");
-                System.out.println("This is your final order");
+            case 3: //MELISE DO THIS
+                int case3orderID;
+                System.out.println("Enter your order ID:");
+                case3orderID = sc.nextInt();
+                if(case3orderID ==0){
+                    System.out.println("Order does not exist!");
+                }
+                Order case3order = TotalOrders.get(case3orderID);
+                System.out.println("View your order:");
+                case3order.printOrder(case3order.customerOrder);
                 break;
-            case 4:
-                System.out.println("What order would you like to see?");
-                //print the order, note this is different from order invoice because order invoice is print the receipt 
-                break;
-            case 5:
-                //create reservation object --> the entire reservation can one person do only! 
-                
+            case 4: //XINGKUN
+                int count = 0;
                 System.out.println("Enter Staff ID: ");
+                int staffIDint = Integer.parseInt(sc.nextLine());
+                String staffID = String.valueOf(staffIDint); //staffID cannot be resolved to a variable
+
                 System.out.println("Enter Name of Customer: ");
+                int customerNameint = Integer.parseInt(sc.nextLine());
+                String customerName = String.valueOf(customerNameint); //customerName cannot be resolved to a variable
+
+                System.out.println("Enter month (e.g. 01, 02 ...12): ");
+                String month = sc.nextLine();
+                System.out.println("Enter day (e.g 00, 01, 02..., 21)");
+                String day = sc.nextLine();
+                String datestr = month + day;
+                int dateint = Integer.parseInt(datestr);
+                System.out.println("Enter time (e.g 1000, 1030, 1100..., 2200)" + "Valid time is: "+ MIN_Time +"-"+MAX_Time);
+                String startTime = sc.nextLine();
+
+                try{
+                    int endTimeint = Integer.parseInt(startTime) + 0200;
+                    String endTime = "2021-"+month+"-"+day+endTimeint;
+                }catch(Exception e){
+                    System.out.println("Please enter a valid time. "+ MIN_Time +"-"+MAX_Time);
+                    
+                }
+
+
+
+
                 System.out.println("Enter in number of people to be there: ");
+                int peopleNum = sc.nextInt(); //peopleNum cannot be resolved to a variable
+
                 // allocate a table as well 
                 // at that time the table becomes reserved
-                System.out.println("Enter Date and Time to come to restaurant: ");
+                System.out.println("Enter Date and Time to come to restaurant: (yyyy-MM-dd-HH-mm)");
+                int DateTimeint = Integer.parseInt(sc.nextLine());
+                String DateTimestr = String.valueOf(DateTimeint);
+                Timestamp DateTime = Timestamp.valueOf(DateTimestr); //DateTime cannot be resolved to a variable
+
+
                 //if there is no table available at that date and time, tell the customer 
                 //in the reservation object, enter data and time by date and time DATA TYPE!
                 System.out.println("Enter Contact Number: ");
-                ReservationList.add(new Reservation());
-                break;
-            case 6: //to print invoice
-                //get order number 
-                //clear table
-                //ask if member 
-                //since the list is sorted parse the list until the item is not the same thats the quantity 
-                //get raw price from order class
-                //get 7% GST 
-                //get 5% Service tax 
-                double totalPrice = 0.0;
-                double MemberDiscount= 0.0;
-                double GSTamount = 0.0;
-                double Taxamount = 0.0;
-                double PayablePrice = 0.0;
-                System.out.println("Enter in Order Number: ");
-                //retrive price based on orderID
-                totalPrice = Order.getPrice(); //error here also
-                System.out.println("Are you a member?");
-                boolean isMember = sc.nextBoolean();
-                if (isMember){
-                    System.out.println("You are a Member! You will get a 10% Discount");
-                    MemberDiscount = totalPrice*0.1;
-                    //minus 10% member discount 
-                }
-                GSTamount = totalPrice*0.07;
-                Taxamount = totalPrice*0.10;
-                PayablePrice = totalPrice - MemberDiscount + GSTamount + Taxamount;
+                int contactNum = sc.nextInt(); //contactNum cannot be resolved to a variable
 
-                //this are just placeholders you must print like an actual receipt
-                System.out.println("Here is your final invoice");
-                System.out.println("-----------" + new Timestamp(date.getTime()) + "------------");
-                System.out.println("-------------------------------------------------------------");
-                System.out.println("|-------------------- Sally's Burger Town ------------------|");
-                System.out.println("|  Staff ID:                                                |");
-                System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
-                System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
-                System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
-                System.out.println("|  Total Price : "+totalPrice+"                             |");
-                System.out.println("|  Total GST   : "+GSTamount+"                              |");
-                System.out.println("|  Total Service Tax : "+Taxamount+"                        |");
-                System.out.println("|  Total Member's Discount : "+MemberDiscount+"             |");
-                System.out.println("|  Total Payable Amount: "+PayablePrice+"                   |");
-                System.out.println("|---------------- Thank you for Visiting! ------------------|");
-                System.out.println("|----------------- Please do come again! ------------------ |");
-                System.out.println("-------------------------------------------------------------");
-                    
-                //are they a member 
-                //call price function in ORDER CLASS
+
+                int tableNum = Reservation.FindTable(TableList, peopleNum);
+                //this is one ReservationList.add <-- thats how you add into list in java
                 
+
+                    
+                if (tableNum != -1) {
+	                //reservation.setTable(tableNum);
+                    ReservationList.add(new Reservation(staffID, customerName, DateTime, contactNum, peopleNum, tableNum, ReservationID));
+	            // ReservationFTO....
+                } else {
+	                System.out.println("There is no table available. ");
+                }
+                ReservationID++;
                 break;
-            case 7:
-                int count = 0;
-                int tryAgain = 1, choice=0;
+
+            case 5: //MELISE
+                int case5orderID;
+                System.out.println("Enter your order ID:");
+                case5orderID = sc.nextInt();
+                if(case5orderID ==0){
+                    System.out.println("Order does not exist!");
+                }
+                Order case5order = TotalOrders.get(case5orderID);
+                System.out.println("View your order:");
+                
+                case5order.printInvoice(case5order.customerOrder); //error! cannot make static reference to non static method
+                break;
+            
+            case 6:
+                int tryAgain = 1, choice=0, case6count=0;
                 String temp;
                 Scanner sc2 = new Scanner(System.in);
                 Console cs = System.console();
 
 
-                while (count < 3 && tryAgain == 1){
+                while (case6count < 3 && tryAgain == 1){
                     System.out.println("Enter EmployeeID: ");
                     temp = sc2.nextLine();
                     //add in ismanager later
@@ -198,44 +239,30 @@ public class mainapp {
                             }else{
                                 securityKey = null;
                                 System.out.println("You are not allowed access! To Try again press 1:");
-                                temp = sc2.nextLine();
-                                tryAgain = Integer.parseInt(temp);
-                                count++;
+                                temp = sc2.nextLine(); 
+                                tryAgain = Integer.parseInt(temp); 
+
+                                case6count++;
                             }
                         }
-                        if (tryAgain == 1 && count == 3){
+                        if (tryAgain == 1 && case6count == 3){
                             System.out.println("You tried too many times. You are a potential threat. Calling manager now....");
 
                         }
-                        
+                            System.out.println("You tried too many times. You are a potential threat. Calling manager now....");
 
+                        }
                     
                 break;
-            case 8:
+            case 7:
+            
+                FileToObject.MenuItemStore();
+                FileToObject.SPitemsStore();
+                FileToObject.OrderStore();
                 c=-1;
                 break;
+
             default:
-                //to test if staff works 
-                
-                for (int i=0; i<StaffList.size(); i++){
-                    System.out.printf("%s %s %d %s", StaffList.get(i).getEmployeeID(), StaffList.get(i).getName(), StaffList.get(i).getContactNumber(), StaffList.get(i).getGender());
-                    System.out.println();
-                }
-                //to test if menu works
-                for (int i=0; i<MenuList.size(); i++){
-                    System.out.printf("%s %s %d %s %s", MenuList.get(i).getitemID(), MenuList.get(i).getName(), MenuList.get(i).getPrice(), MenuList.get(i).getType(), MenuList.get(i).getDescription());
-                    System.out.println();
-                }
-                //to test if SP works
-
-                //to test if reservation works
-                for (int i=0; i<TableList.size(); i++){
-                    System.out.printf("%d %d %b", TableList.get(i).gettableCapacity(), TableList.get(i).gettableCapacity(), TableList.get(i).isAvailable());
-                    System.out.println();
-                }
-                //to test if table works
-
-                //to test if order works
                 System.out.println("Wrong input! Try Again");
                 c = 0;
                 break;
@@ -245,4 +272,3 @@ public class mainapp {
         
 
     }
-}

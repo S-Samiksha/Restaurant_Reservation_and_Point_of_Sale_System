@@ -21,15 +21,23 @@ public class Order {
 	private float totalPrice;
 	public ArrayList<MenuItems> customerOrder;
 
-
-	//create the constructor!
 	public Order(){
-		staffID = new String("");
-		orderID = 0;
-		tableNumber = 0;
-		totalPrice = (float)0;
-		customerOrder = new ArrayList<MenuItems>(); 
+		this.staffID = new String("");
+		this.orderID = 0;
+		this.tableNumber = 0;
+		this.totalPrice = (float)0;
+		this.customerOrder = new ArrayList<MenuItems>(); 
 	}
+	//create the constructor!
+	public Order(int orderID,String staffID, int tableNumber, Timestamp timestamp,float totalPrice, ArrayList<MenuItems> customerOrder){
+		this.staffID = staffID;
+		this.orderID = orderID;
+		this.tableNumber = tableNumber;
+		this.totalPrice = totalPrice;
+		this.customerOrder = customerOrder;
+		this.timestamp = timestamp;
+	}
+
 
 	//edit this part according to the  data structure of the menuitems 
 	public void printOrder(ArrayList<MenuItems> customerOrder) {
@@ -44,7 +52,32 @@ public class Order {
 		}
 	}
 
-	public void printInvoice(int orderID){
+
+	public void viewInvoiceOrder(ArrayList<MenuItems> customerOrder){
+		int i = 0;
+		if(customerOrder.size() == 0){
+			System.out.println("No orders yet! \n");
+		}
+		int count = 0;
+		int j = 0;
+		int k = 0;
+		String temp;
+		//to get quantity
+		for (j=0;j<customerOrder.size();j++){
+			temp = customerOrder.get(j).getitemID();
+			for (k=j; j<customerOrder.size();k++){
+				if(customerOrder.get(k).getitemID().equals(temp)){
+				count++;
+				}
+			}
+		}
+		while (i<customerOrder.size()){
+			System.out.printf("|%d %s %f| \n", count, customerOrder.get(i).getName(),customerOrder.get(i).getPrice());
+			i++;
+		}
+	}
+
+	public void printInvoice(ArrayList<MenuItems> customerOrder){
 		//shift everything over from mainapp
 		//based on orderID, retrieve price and items fron order.txt
 		//either we do this by a per order basis--> not very good because this means when we create other order this screws up
@@ -59,6 +92,7 @@ public class Order {
         double Taxamount = 0.0;
         double PayablePrice = 0.0;
 
+		totalPrice = getPrice(customerOrder);
         System.out.println("Are you a member?");
         boolean isMember = sc.nextBoolean();
         if (isMember){
@@ -66,50 +100,57 @@ public class Order {
             MemberDiscount = totalPrice*0.1;
             //minus 10% member discount 
         }
-
+ 
         GSTamount = totalPrice*0.07;
         Taxamount = totalPrice*0.10;
         PayablePrice = totalPrice - MemberDiscount + GSTamount + Taxamount;
+		String staffid = this.getStaff();
+		int tableNum = this.getTable();
+		Date date = new Date();
 
         System.out.println("Here is your final invoice");
-        System.out.println("-----------" + new Timestamp(date.getTime()) + "------------");
+        System.out.println("-----------" + new Timestamp(date.getDate()) + "------------");
         System.out.println("-------------------------------------------------------------");
         System.out.println("|-------------------- Sally's Burger Town ------------------|");
-        System.out.println("|  Staff ID:                                                |");
-        System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
-        System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
-        System.out.println("|  Items                   | Qty | Unit Price | Total Price |");
-        System.out.println("|  Total Price : "+totalPrice+"                             |");
-        System.out.println("|  Total GST   : "+GSTamount+"                              |");
-        System.out.println("|  Total Service Tax : "+Taxamount+"                        |");
-        System.out.println("|  Total Member's Discount : "+MemberDiscount+"             |");
-        System.out.println("|  Total Payable Amount: "+PayablePrice+"                   |");
+		System.out.println("|----------------------50 Nanyang Avenue--------------------|");
+		System.out.println("|----------------------------639798-------------------------|");
+		System.out.println("|-------------------------Tel: 98765432 --------------------|");
+        System.out.println("|  Staff ID: "+ staffid +"Table No.:" + tableNum+"          |");
+		viewInvoiceOrder(customerOrder);
+        System.out.println("|  Total Price : SGD"+totalPrice+"                          |");
+        System.out.println("|  Total GST   : SGD"+GSTamount+"                           |");
+        System.out.println("|  Total Service Tax : SGD"+Taxamount+"                     |");
+        System.out.println("|  Total Member's Discount : SGD "+MemberDiscount+"         |");
+        System.out.println("|  Total Payable Amount: SGD "+PayablePrice+"               |");
         System.out.println("|---------------- Thank you for Visiting! ------------------|");
         System.out.println("|----------------- Please do come again! ------------------ |");
         System.out.println("-------------------------------------------------------------");
 	}
 	
-	public void printMenu(ArrayList<MenuItems> menuitems, MenuItems[] setpackages){
-		timestamp = new Timestamp(System.currentTimeMillis());
+	public void printMenu(){
 		int i = 0;
 		System.out.println("Menu:");
 		System.out.println("Ala Carte Menu");
-		while (i < menuitems.size()){
+		List<MenuItems> menuitems = mainapp.MenuList; //error
+		while (i < menuitems.size()){ //error
 			System.out.printf("ID:%s Name:%s Type:%s Description:%s Price:%f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getDescription(),menuitems.get(i).getPrice());
 			i++;
 		}
+		List<SetPackage> setpackages = mainapp.SPList; //error 
 		System.out.println("\nSet Package Menu");
-		while (i < setpackages.length){
-			System.out.printf("ID:%s Name:%s Type:%s Description:%s Price:%f\n",setpackages[i].getitemID(), setpackages[i].getName(), setpackages[i].getType(),setpackages[i].getDescription(),setpackages[i].getPrice());
+		while (i < setpackages.size()){ //ERROR! 137 adn 138
+			System.out.printf("ID:%s Name:%s Type:%s Description:%s Price:%f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getDescription(),setpackages.get(i).getPrice());
 			i++;
 		}
 	}
 
-	public void addOrder(String ItemID,ArrayList<MenuItems> menuitems, MenuItems[] setpackages){
+	public void addOrder(String ItemID, ArrayList<MenuItems> customerOrder){
 		System.out.println("Select an item to order and enter the ID:");
 		String ID = sc.next();
 		System.out.println("Enter the quantity");
 		int quantity = sc.nextInt();
+		List<MenuItems> menuitems = mainapp.MenuList; //ERROR! here also cannot be resolved
+		List<SetPackage> setpackages = mainapp.SPList;
 		if (ID.substring(0,1) == "AC") {
 			for (int i = 0 ; i < quantity; i++){
 				customerOrder.add(menuitems.get(i-1));
@@ -117,7 +158,7 @@ public class Order {
 		}
 		if (ID.substring(0,1) == "SP") {
 			for (int i = 0 ; i < quantity; i++){
-				customerOrder.add(setpackages[i-1]);
+				customerOrder.add(setpackages.get(i-1));
 			}
 		}
 		System.out.println("Item(s) added successfully");
@@ -144,28 +185,39 @@ public class Order {
 		this.totalPrice = totalPrice;
 		return this.totalPrice;
 	} 
-
-
-	public String getStaff(ArrayList<Staff> StaffList){
-		for (int i = 0; i< StaffList.size();i++){
-			if(StaffList.get(i).getisAvailable()){
-				return this.staffID;
+	
+	public int setOrderID(int i){
+		this.orderID = i;
+		return i;
+	}
+	public int getOrderID(){
+		return this.orderID;
+	}
+	public void setTimestamp(){
+		this.timestamp = new Timestamp(System.currentTimeMillis());
+	}
+	 
+	public Timestamp getTimestamp(){
+		return this.timestamp;
+	}
+	public void setStaff(){
+		List<Staff> staffList = mainapp.StaffList;
+		for (int i = 0; i< staffList.size();i++){ 
+			if(staffList.get(i).getisAvailable()){
+				this.staffID = staffList.get(i).getEmployeeID() ;
 			}
 		}
 		System.out.println("No Available Staff");
-		return " ";
+	}
+
+	public String getStaff(){
+		return this.staffID;
 	}
 
 
-
-	public int FindTable( ArrayList<Table> TableList, ArrayList<Reservation> ReservationList, int customerPax) {
-		//this has to be based on whether table is available
-		// //Approach: whenever there is a demand for a table (FindTable is called), we check the reservation list to see what tables need to be blocked at this point in time and consider the rest
-		// Collections.sort(ReservationList, Reservation.bystartdate);
-		// Collections.sort(ReservationList, Reservation.bystarttime);
-		// Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+	public int FindTable(int customerPax) {
+		List<Table> TableList = mainapp.TableList; //Error! No protected inside a method of a class
 		int i = 0;
-		// ok i can only complete this part if reservation is done
         for(i=0; i<TableList.size();i++){
 			if(TableList.get(i).isAvailable() == true && TableList.get(i).gettableCapacity() >= customerPax){
 				TableList.get(i).setisAvailable(false);
@@ -173,9 +225,7 @@ public class Order {
 				return TableList.get(i).gettableNum();
 			}
 		}
-
-		return 1; //this error return type must have --> is it meant to be this 
-
+		return 0;
 	}
 
 	public int getTable(){
@@ -190,6 +240,10 @@ public class Order {
 		return this.timestamp;
 	}
 
-
+	public float getTotalprice(){
+		return this.getTotalprice();
 	}
+}
+
+
 

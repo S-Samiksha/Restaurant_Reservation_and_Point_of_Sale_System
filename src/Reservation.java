@@ -1,5 +1,6 @@
 package src;
 import java.util.*;
+import java.sql.Timestamp;
 import java.io.*;
 /**
  * Reservation has a table relationship (reservation cannot live without table in other words its a composition update it in the class diagram)
@@ -16,7 +17,7 @@ public class Reservation {
 
 	public static final int MAX_ContactNum = 99999999; 
 	public static final int MAX_NumPeople = 10; 
-	public static final int MAX_Table= 10;
+	public static final int MAX_Table = 10;
 	//there is a minimum number of 2 people --> account for this 
 	
 
@@ -38,17 +39,28 @@ public class Reservation {
 	cap to 3 tables a day 
 	*/
 
-	private String CustomerName;
-	private String Date;
-	private int Time;
-	private int ContactNumber;
-	private int NumPeople;
+	private String customerName; //change to lower camel case
+	private Timestamp timestamp;
+	private int contactNumber;
+	private int numPeople;
 	private int table; //I added this 
+	private String staffID;
+	private int reservationID;
+	
+	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
+		this.customerName = customerName;
+		this.timestamp = timestamp;
+		this.contactNumber = contactNumber;
+		this.numPeople = numPeople;
+		this.staffID = staffID;
+		this.table = table;
+		this.reservationID = reservationID;
+	}
 
 	//its int not Int --> idk if this was churned out by visual paradigm but we need to fix it if thats the case 
 
 	public String getCustomerName() {
-		return this.CustomerName;
+		return this.customerName;
 	}
 
 	/**
@@ -56,38 +68,41 @@ public class Reservation {
 	 * @param CustomerName
 	 */
 	public void setCustomerName(String CustomerName) {
-		//what if customer name is empty??
-		this.CustomerName = CustomerName;
+		this.customerName = CustomerName;
+			
+	}
+	
+
+
+
+	public int getReservationID() {
+		return this.reservationID;
 	}
 
-	public String getDate() {
+	public void setReservationID(String ReservationID) {
+		this.reservationID = reservationID;
+			
+	}
 
-		return this.Date;
+	
+	
+	public Timestamp getTimestamp() {
+		return this.timestamp;
 	}
 
 	/**
 	 * 
-	 * @param Date
+	 * @param CustomerName
 	 */
-	public void setDate(String Date) {
-		this.Date = Date;
+
+	public void setTimestamp(Timestamp Timestamp) {
+		this.timestamp = Timestamp;
 	}
 
-	public int getTime() {
-		return this.Time;
-	}
-
-
-	public void setTime(int Time) {
-		if (Time > MAX_Time && Time < MIN_Time) {
-			System.out.println("Please enter a valid time. ");
-		}else {
-			this.Time = Time ;
-		}
-	}
+	
 
 	public int getContactNumber() {
-		return this.ContactNumber ;
+		return this.contactNumber ;
 	}
 
 	/**
@@ -99,12 +114,12 @@ public class Reservation {
 		if ( ContactNumber >= MAX_ContactNum) {
 			System.out.println("Please enter a valid contact number. ");
 		}else {
-			this.ContactNumber = ContactNumber ;
+			this.contactNumber = ContactNumber ;
 		}
 	}
 
 	public int getNumPeople() {
-		return this.NumPeople ;
+		return this.numPeople ;
 	}
 
 	public void setNumPeople(int NumPeople) {
@@ -112,88 +127,45 @@ public class Reservation {
 		if ( NumPeople > MAX_NumPeople) {
 			System.out.println("Sorry, the max numble of people per table is " + MAX_NumPeople);
 		}else {
-			this.NumPeople = NumPeople;
+			this.numPeople = NumPeople;
 		}
+	}
+
+	public static int FindTable(List<Table> TableList, int customerPax) {
+		int i = 0;
+        for(i=0; i<TableList.size();i++){
+			if(TableList.get(i).isAvailable() == true && TableList.get(i).gettableCapacity() >= customerPax){
+				TableList.get(i).setisAvailable(false); //change list
+				this.table = TableList.get(i).gettableNum(); //get table number
+				return TableList.get(i).gettableNum(); //return table number
+			}
+		}
+		return 0;
+	}
+
+	public List ReservationMaker(String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
+		Reservation.get(tableNum).setStaffID(staffID);
+		this.reservation();
 	}
 
 	public int getTableNumber(){
 		return this.table;
 	}
-	/// To sort reservations by starttime -> used in order to find table 
-	public static Comparator<Reservation> bystartdate = new Comparator<Reservation>() {
 
-		public int compare(Reservation s1, Reservation s2) {
-
-				
-			int startdate1 = s1.getDate();
-			int startdate2 = s2.getDate();
-
-				return startdate1-startdate2;
-
-		}
-	};
-	public static Comparator<Reservation> bystarttime = new Comparator<Reservation>() {
-
-		public int compare(Reservation s1, Reservation s2) {
-
-			
-			int starttime1 = s1.getTime();
-			int starttime2 = s2.getTime();
-
-				return starttime1-starttime2;
-
-			}
-	};
-	protected static List<Table> TableList = new ArrayList<>(30);
-	
-	//the reason why i labelled this find is to make things clearer that we are in fact finding a table 
-	/*public void findTable(){
-		/*
-		Line of logic 
-		1. Find a table available at that table -1 to +2 hours of booking time 
-		2. If there are no available tables, suggest that they reduce number of people coming 
-		
-		
-
-	 	public static void main(String args[]){
-		
-			System.out.println("Loading Reservation Data......"); 
-        	try {
-            	FileReader Table = new FileReader("data/table.txt"); 
-				BufferedReader file = new BufferedReader(Table); 
-				String line;
-				String[] tableObject; 
-				line = file.readLine();
-            	while(line!= null) { 
-                	tableObject = line.split("[|]"); 
-					mainapp.TableList.add(new Table(Integer.parseInt(tableObject[0]), Integer.parseInt(tableObject[1]), Boolean.parseBoolean(tableObject[2])));
-					/*Giving you more functions if the objects require 
-					Integer.parseInt --> convert string to int like that of contact number
-					Double.parseDouble --> convert string to double 
-					Float.parseFloat --> convert float to double 
-					string to date time --> https://www.javatpoint.com/java-string-to-date 
-					
-					line = file.readLine();
-            	}
-
-				file.close();
-			
-
-			
-			} catch (IOException e) {
-			e.printStackTrace();
-			}
-
-
-		
+	public void setStaffID(String staffID) {
+		this.staffID = staffID;
 	}
-	 	{
-	 	for (int i=0; i<TableList.size(); i++){
-            System.out.printf("%d %d %b", TableList.get(i).gettableCapacity(), TableList.get(i).gettableCapacity(), TableList.get(i).getisAvailable());
-            System.out.println();
-        }
-	    }*/
+	
+	public String getStaffID(){
+		return this.staffID;
+	}
+	
+	public void setTable(int table) {
+		this.table = table;
+	}
+	
+	public int getTable(){
+		return this.table;
+	}
 	 	
-
-
 }
