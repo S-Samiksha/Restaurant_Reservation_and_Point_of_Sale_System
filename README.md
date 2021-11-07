@@ -1,6 +1,7 @@
 ### Problems and Fixes (I came up with this version due to the kazillion errors that poped up)
-**Updates (7/11/21)**
-Caes 1,2,3,5 can work! I haven't really looked at Use Case 6 or 7 but for reservation, I wou;d say one of the key problems is the data and the constructor.
+***Updates (7/11/21)***
+
+Cases 1,2,3,5 can work! I haven't really looked at Use Case 6 or 7 but for reservation, I wou;d say one of the key problems is the data and the constructor.
 Data: 1|2021-10-17 15:24:00|2|XXXXX|99999999|123456|
 Constructor: public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, String reservationID)
 
