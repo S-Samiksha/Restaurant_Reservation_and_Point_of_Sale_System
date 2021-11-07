@@ -40,22 +40,22 @@ public class Order {
 
 
 	//edit this part according to the  data structure of the menuitems 
-	public void printOrder(ArrayList<MenuItems> customerOrder) {
+	public void printOrder() {
 		System.out.println("Your Order:");
 		int i = 0;
-		if(customerOrder.size() == 0) {
+		if(this.customerOrder.size() == 0) {
 			System.out.printf("No orders yet!\n");
 		}
-		while (i < customerOrder.size()){
+		while (i < this.customerOrder.size()){
 			System.out.printf("Order %d: ID:%s Name:%s Type:%s Description:%s Price:%f\n",i+1, customerOrder.get(i).getitemID(), customerOrder.get(i).getName(), customerOrder.get(i).getType(), customerOrder.get(i).getDescription(), customerOrder.get(i).getPrice());
 			i++;
 		}
 	}
 
 
-	public void viewInvoiceOrder(ArrayList<MenuItems> customerOrder){
+	public void viewInvoiceOrder(){
 		int i = 0;
-		if(customerOrder.size() == 0){
+		if(this.customerOrder.size() == 0){
 			System.out.println("No orders yet! \n");
 		}
 		int count = 0;
@@ -63,21 +63,21 @@ public class Order {
 		int k = 0;
 		String temp;
 		//to get quantity
-		for (j=0;j<customerOrder.size();j++){
-			temp = customerOrder.get(j).getitemID();
-			for (k=j; j<customerOrder.size();k++){
-				if(customerOrder.get(k).getitemID().equals(temp)){
+		for (j=0;j<this.customerOrder.size();j++){
+			temp = this.customerOrder.get(j).getitemID();
+			for (k=j; k<this.customerOrder.size();k++){
+				if(this.customerOrder.get(k).getitemID().equals(temp)){
 				count++;
 				}
 			}
 		}
-		while (i<customerOrder.size()){
-			System.out.printf("|%d %s %f| \n", count, customerOrder.get(i).getName(),customerOrder.get(i).getPrice());
+		while (i<this.customerOrder.size()){
+			System.out.printf("|%d %s %f| \n", count, this.customerOrder.get(i).getName(),this.customerOrder.get(i).getPrice());
 			i++;
 		}
 	}
 
-	public void printInvoice(ArrayList<MenuItems> customerOrder){
+	public void printInvoice(){
 		//shift everything over from mainapp
 		//based on orderID, retrieve price and items fron order.txt
 		//either we do this by a per order basis--> not very good because this means when we create other order this screws up
@@ -92,7 +92,7 @@ public class Order {
         double Taxamount = 0.0;
         double PayablePrice = 0.0;
 
-		totalPrice = getPrice(customerOrder);
+		totalPrice = getPrice();
         System.out.println("Are you a member?");
         boolean isMember = sc.nextBoolean();
         if (isMember){
@@ -109,14 +109,14 @@ public class Order {
 		Date date = new Date();
 
         System.out.println("Here is your final invoice");
-        System.out.println("-----------" + new Timestamp(date.getDate()) + "------------");
+        System.out.println("-----------" + new Timestamp(System.currentTimeMillis()) + "------------");
         System.out.println("-------------------------------------------------------------");
         System.out.println("|-------------------- Sally's Burger Town ------------------|");
 		System.out.println("|----------------------50 Nanyang Avenue--------------------|");
 		System.out.println("|----------------------------639798-------------------------|");
 		System.out.println("|-------------------------Tel: 98765432 --------------------|");
         System.out.println("|  Staff ID: "+ staffid +"Table No.:" + tableNum+"          |");
-		viewInvoiceOrder(customerOrder);
+		viewInvoiceOrder();
         System.out.println("|  Total Price : SGD"+totalPrice+"                          |");
         System.out.println("|  Total GST   : SGD"+GSTamount+"                           |");
         System.out.println("|  Total Service Tax : SGD"+Taxamount+"                     |");
@@ -131,55 +131,57 @@ public class Order {
 		int i = 0;
 		System.out.println("Menu:");
 		System.out.println("Ala Carte Menu");
-		List<MenuItems> menuitems = mainapp.MenuList; //error
-		while (i < menuitems.size()){ //error
+		List<MenuItems> menuitems = mainapp.MenuList; 
+		while (i < menuitems.size()){ 
 			System.out.printf("ID:%s Name:%s Type:%s Description:%s Price:%f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getDescription(),menuitems.get(i).getPrice());
 			i++;
 		}
-		List<SetPackage> setpackages = mainapp.SPList; //error 
+		List<SetPackage> setpackages = mainapp.SPList; 
 		System.out.println("\nSet Package Menu");
-		while (i < setpackages.size()){ //ERROR! 137 adn 138
+		i = 0;
+		while (i < setpackages.size()){ 
 			System.out.printf("ID:%s Name:%s Type:%s Description:%s Price:%f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getDescription(),setpackages.get(i).getPrice());
 			i++;
 		}
 	}
 
-	public void addOrder(String ItemID, ArrayList<MenuItems> customerOrder){
+	public void addOrder(String ItemID){
+		int ID = Integer.parseInt(ItemID.substring(2).intern());
 		System.out.println("Enter the quantity");
 		int quantity = sc.nextInt();
 		List<MenuItems> menuitems = mainapp.MenuList;
 		List<SetPackage> setpackages = mainapp.SPList;
-		if (ItemID.substring(0,1) == "AC") {
+		if (ItemID.substring(0,2).intern() == "AC") {
 			for (int i = 0 ; i < quantity; i++){
-				customerOrder.add(menuitems.get(i-1));
-				System.out.printf("%d\n",menuitems.get(i-1).getName());
+				this.customerOrder.add(menuitems.get(ID-1));
+				//System.out.printf("%d\n",menuitems.get(i-1).getName());
 			}
 		}
-		if (ItemID.substring(0,1) == "SP") {
+		if (ItemID.substring(0,2).intern() == "SP") {
 			for (int i = 0 ; i < quantity; i++){
-				customerOrder.add(setpackages.get(i-1));
+				this.customerOrder.add(setpackages.get(ID-1));
 			}
 		}
 		System.out.println("Item(s) added successfully");
 	}
 
-	public void removeFromOrder(ArrayList<MenuItems> customerOrder){
-		printOrder(customerOrder);
-		if (customerOrder.size() == 0) {
+	public void removeFromOrder(){
+		printOrder();
+		if (this.customerOrder.size() == 0) {
 			System.out.printf("Cannot remove from order.\n");
 		}
 		else {
 			System.out.println("Select an item to remove from order and enter the number:");
 			int orderNumber = sc.nextInt();
-			customerOrder.remove(orderNumber - 1);
+			this.customerOrder.remove(orderNumber - 1);
 			System.out.println("Item removed successfully");
 		}
 	}
 	
-	public float getPrice(ArrayList<MenuItems> customerOrder){
+	public float getPrice(){
 		float totalPrice = (float)0;
-		for (int i = 0; i< customerOrder.size();i++) {
-			totalPrice += customerOrder.get(i).getPrice();
+		for (int i = 0; i< this.customerOrder.size();i++) {
+			totalPrice += this.customerOrder.get(i).getPrice();
 		}
 		this.totalPrice = totalPrice;
 		return this.totalPrice;
@@ -203,7 +205,9 @@ public class Order {
 		List<Staff> staffList = mainapp.StaffList;
 		for (int i = 0; i< staffList.size();i++){ 
 			if(staffList.get(i).getisAvailable()){
+				staffList.get(i).setisAvailable(false);
 				this.staffID = staffList.get(i).getEmployeeID() ;
+				return;
 			}
 		}
 		System.out.println("No Available Staff");

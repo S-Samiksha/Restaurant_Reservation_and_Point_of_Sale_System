@@ -45,9 +45,9 @@ public class Reservation {
 	private int numPeople;
 	private int table; //I added this 
 	private String staffID;
-	private int reservationID;
+	private String reservationID;
 	
-	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
+	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, String reservationID){
 		this.customerName = customerName;
 		this.timestamp = timestamp;
 		this.contactNumber = contactNumber;
@@ -75,12 +75,12 @@ public class Reservation {
 
 
 
-	public int getReservationID() {
+	public String getReservationID() {
 		return this.reservationID;
 	}
 
 	public void setReservationID(String ReservationID) {
-		this.reservationID = reservationID;
+		this.reservationID = ReservationID;
 			
 	}
 
@@ -113,7 +113,8 @@ public class Reservation {
 		// what if the number is EQUAL 9999 99999 (need to consider so I added the =)
 		if ( ContactNumber >= MAX_ContactNum) {
 			System.out.println("Please enter a valid contact number. ");
-		}else {
+		}
+		else {
 			this.contactNumber = ContactNumber ;
 		}
 	}

@@ -5,13 +5,12 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 //for conversion of flat file into objects 
 public class FileToObject {
 
 	public static void staff(){
-		System.out.println("Staff is taking attendance....."); 
+		System.out.println("Staff are taking attendance....."); 
         try {
             FileReader Staff = new FileReader("data/staff.txt"); 
 			BufferedReader file = new BufferedReader(Staff); 
@@ -45,24 +44,19 @@ public class FileToObject {
 			String[] SetPackageObject; 
 			line = file.readLine(); 
             while(line!= null) { 
-                SetPackageObject = line.split("[|]"); 
-	
-				String[] lista = SetPackageObject[1].split("[,]");
-				//add for loop to parse everything rom string to int
-				int i=0;
 				MenuItems[] newList = {};
-				for (String temp:lista){
+                SetPackageObject = line.split("[|]"); 
+				String[] list = SetPackageObject[1].split("[,]");
+				//add for loop to parse everything rom string to int
+				for (String temp:list){
 					for (int x=0; x<mainapp.MenuList.size(); x++){
-                        if (temp.equals(mainapp.MenuList.get(x).getitemID())){
+                        if (temp.equals(mainapp.MenuList.get(x).getitemID().substring(2).intern())){
 							newList = Arrays.copyOf(newList, newList.length+1);
 							newList[newList.length-1] = new MenuItems(mainapp.MenuList.get(x).getName(), mainapp.MenuList.get(x).getType(), mainapp.MenuList.get(x).getDescription(), mainapp.MenuList.get(x).getPrice() , temp);
                         }
                     }	
-					i++;
 				}
-
 				mainapp.SPList.add(new SetPackage(SetPackageObject[0], newList , SetPackageObject[2],Boolean.parseBoolean(SetPackageObject[3]),SetPackageObject[4]));
-				
 				line = file.readLine();
             }
 
@@ -164,22 +158,19 @@ public class FileToObject {
 	}
 
 	public static void reservation(){
-		System.out.println("Cleaning and Sanitizing Table......"); 
+		System.out.println("Checking the Reservation Logs......"); 
         try {
-           String filePath = new File("").getAbsolutePath();
-        	FileReader fr = new FileReader(filePath+"/src/data/reservation.txt"); 
+        	FileReader fr = new FileReader("data/reservation.txt"); 
 			BufferedReader br = new BufferedReader(fr); 
 			String line;
 			String[] reservationObject; 
 			line = br.readLine();
-			int numOfLine = 0;
-			
         	while(line!= null) { 
             	reservationObject = line.split("[|]"); 
-            	Timestamp DateTimeT = Timestamp.valueOf(reservationObject[2]);
-				mainapp.ReservationList.add(new Reservation(reservationObject[0], reservationObject[1], DateTimeT,Integer.parseInt(reservationObject[3]),Integer.parseInt(reservationObject[4]),Integer.parseInt(reservationObject[5]), Integer.parseInt(reservationObject[6])));
+            	Timestamp DateTime = Timestamp.valueOf(reservationObject[1]);
+				mainapp.ReservationList.add(new Reservation(reservationObject[0], reservationObject[2], DateTime,Integer.parseInt(reservationObject[3]),Integer.parseInt(reservationObject[4]),Integer.parseInt(reservationObject[5]), Integer.parseInt(reservationObject[6])));
 				line = br.readLine();
-				numOfLine++;
+
         	}
         	
 			br.close();

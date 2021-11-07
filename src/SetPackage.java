@@ -24,8 +24,8 @@ public class SetPackage extends MenuItems {
 		this.setPrice(calculatePrice(NewSetList));
 	}
 
-	public SetPackage(String itemID,MenuItems[] SetList,String Name,boolean promo,String Description) {
-		super(Name,"Set Item",Description, (float)0,itemID);
+	public SetPackage(String itemID, MenuItems[] SetList, String Name,boolean promo, String Description) {
+		super(itemID,Name,"Set Item",(float)0,Description);
 		this.setPromo(promo);
 		this.SetList = SetList;
 		super.setPrice(calculatePrice(SetList));

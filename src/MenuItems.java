@@ -21,7 +21,7 @@ public class MenuItems {
 
 	*/
 
-	public MenuItems(String Name,String Type, String Description, float Price, String itemID) {
+	public MenuItems(String itemID, String Name,String Type,float Price,String Description) {
         this.Name = Name;
         this.Type = Type;
         this.Description = Description;
@@ -30,9 +30,6 @@ public class MenuItems {
 		//remember this needs to be parsed through flat file 
 	}
 
-	public MenuItems getMenuItem(String ItemID){
-		return this;
-	}
 
 	public String getitemID(){
 		return this.itemID;

@@ -24,7 +24,7 @@ public class mainapp {
     public static final int MAX_Time = 2200; 
 	public static final int MIN_Time = 1000;
     public static int ReservationID = 0;
-    public static int OrderID = 0;//change later!!!!
+    public static int OrderID = 11;//change later!!!!
     
     public static void main(String[] args) throws IOException{
         System.out.println("Restaurant Opening.....");
@@ -102,14 +102,14 @@ public class mainapp {
                             case2order.printMenu(); 
                             System.out.println("Enter the menu item number you want to order from the menu: ");
                             String menuitem = sc.next(); 
-                            case2order.addOrder(menuitem , case2order.customerOrder); 
+                            case2order.addOrder(menuitem); 
                             System.out.println("This is your updated order");
-			                case2order.printOrder(case2order.customerOrder);
+			                case2order.printOrder();
                             break;
                         case 2:
-                            case2order.removeFromOrder(case2order.customerOrder);
+                            case2order.removeFromOrder();
                             System.out.println("This is your updated order");
-			                case2order.printOrder(case2order.customerOrder);
+			                case2order.printOrder();
                             break;
                         case 3:
                             break;
@@ -123,6 +123,7 @@ public class mainapp {
     
             case 3: //MELISE DO THIS
                 int case3orderID;
+                System.out.println(TotalOrders.get(0));
                 System.out.println("Enter your order ID:");
                 case3orderID = sc.nextInt();
                 try{
@@ -134,9 +135,9 @@ public class mainapp {
                 }
                 Order case3order = TotalOrders.get(case3orderID);
                 System.out.println("View your order:");
-                case3order.printOrder(case3order.customerOrder);
-        
+                case3order.printOrder();
                 
+                break;
 
 
             case 4: //XINGKUN
@@ -195,13 +196,10 @@ public class mainapp {
                 int case5orderID;
                 System.out.println("Enter your order ID:");
                 case5orderID = sc.nextInt();
-                if(case5orderID ==0){
-                    System.out.println("Order does not exist!");
-                }
                 Order case5order = TotalOrders.get(case5orderID);
                 System.out.println("View your order:");
                 
-                case5order.printInvoice(case5order.customerOrder); 
+                case5order.printInvoice(); 
                 break;
             
             case 6:
