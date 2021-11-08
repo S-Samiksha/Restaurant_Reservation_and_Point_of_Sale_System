@@ -1,7 +1,6 @@
 package src;
 import java.util.*;
 import java.sql.Timestamp;
-import java.io.*;
 /**
  * Reservation has a table relationship (reservation cannot live without table in other words its a composition update it in the class diagram)
  * this one missing STAFF 
@@ -13,7 +12,7 @@ import java.io.*;
 public class Reservation {
 
 	public static final int MAX_Time = 2200; 
-	public static final int MIN_Time = 1000; //is this the opening time?? 
+	public static final int MIN_Time = 1000; 
 
 	public static final int MAX_ContactNum = 99999999; 
 	public static final int MAX_NumPeople = 10; 
@@ -65,13 +64,11 @@ public class Reservation {
 
 	public void printReservation() {
 		System.out.println("Your Order:");
-		int i = 0;
 		if(this.getReservationID() == -1) {
 			System.out.printf("No reservation yet!\n");
 		}
 		else{
 			System.out.printf("Reservation ID:%d Name:%s Time Of Reservation :%s Contact Number:%d Number of People:%d Table:%d StaffId:%s\n",this.getReservationID(),this.getCustomerName(),this.getTimestamp(),this.getContactNumber(), this.getNumPeople(),this.getTable(),this.getStaffID());
-			i++;
 		}
 	}
 

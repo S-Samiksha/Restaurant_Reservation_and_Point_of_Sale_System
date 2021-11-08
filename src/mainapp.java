@@ -183,29 +183,27 @@ public class mainapp {
                             System.out.println("Enter Staff ID: ");
                             String staffID = sc.next();
                             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-                            System.out.printf("The current time is %s\n", currentTime);
-                            
                             System.out.println("Enter Name of Customer:");
                             String customerName = sc.next();
                             Timestamp startTime = new Timestamp(System.currentTimeMillis());
                             startTime.setTime(0);
-                            boolean setDate = false;
+                            boolean dateSet = false;
                             sc.nextLine();
-                            while(!setDate){
+                            while(!dateSet){
                                 try{
                                     System.out.println("Enter a Reservation Date and Time:\nformat:yyyy-MM-dd HH:mm:ss\nBooking Hours: 10:00:00 - 20:00:00");
-                                    String Date = sc.nextLine();
-                                    startTime = Timestamp.valueOf(Date); 
+                                    String dateTime = sc.nextLine();
+                                    startTime = Timestamp.valueOf(dateTime); 
                                     SimpleDateFormat getDate = new SimpleDateFormat("yyyy-MM-dd");
-                                    String currentDate = getDate.format(startTime);
-                                    Timestamp closingTime = Timestamp.valueOf(currentDate+" 20:01:00");
-                                    Timestamp openingTime = Timestamp.valueOf(currentDate+" 9:59:00");
+                                    String reservationDate = getDate.format(startTime);
+                                    Timestamp closingTime = Timestamp.valueOf(reservationDate+" 20:01:00");
+                                    Timestamp openingTime = Timestamp.valueOf(reservationDate+" 9:59:00");
 
                                     if (currentTime.before(startTime)){
                                         if(startTime.before(closingTime)){
                                             if((startTime).after(openingTime)){
                                                 System.out.println("Entered date and time are valid!");
-                                                setDate = true;
+                                                dateSet = true;
                                             }
                                             else{
                                                 System.out.println("Entered date and time are before booking hours!");
@@ -225,15 +223,20 @@ public class mainapp {
                             }
                             System.out.print("Enter the number of people to be there:");
                             int peopleNum = sc.nextInt();
-
-                            System.out.println("Enter Contact Number:");
+                            if (peopleNum < 2 || peopleNum > 10){
+                                System.out.println("Invalid number of people, number of people must be between 2 and 10");
+                            }
+                            System.out.println("Enter Contact Number(8 digits):");
                             int contactNum = sc.nextInt();
+                            if (contactNum < 1000_0000|| contactNum > 99999999){
+                                System.out.println("Invalid contact number, must be 8 digits long");
+                                break;
+                            }
                             int tableNum = -1;
-
                             Reservation newReservation = new Reservation(staffID, customerName, startTime, contactNum, peopleNum, tableNum, ReservationID);
                             newReservation.FindTable(peopleNum);
                             if (newReservation.getTable() == -1){
-                                System.out.printf("No Tables Available! Reservation cannot be made the moment!\n");
+                                System.out.println("No Tables Available! Reservation cannot be made the moment!");
                                 break;
                             }
                             else{

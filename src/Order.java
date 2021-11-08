@@ -106,7 +106,6 @@ public class Order {
         PayablePrice = totalPrice - MemberDiscount + GSTamount + Taxamount;
 		String staffid = this.getStaff();
 		int tableNum = this.getTable();
-		Date date = new Date();
 
         System.out.println("Here is your final invoice");
         System.out.println("-----------" + new Timestamp(System.currentTimeMillis()) + "------------");
