@@ -45,9 +45,9 @@ public class Reservation {
 	private int numPeople;
 	private int table; //I added this 
 	private String staffID;
-	private String reservationID;
+	private int reservationID = -1;
 	
-	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, String reservationID){
+	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
 		this.customerName = customerName;
 		this.timestamp = timestamp;
 		this.contactNumber = contactNumber;
@@ -63,6 +63,18 @@ public class Reservation {
 		return this.customerName;
 	}
 
+	public void printReservation() {
+		System.out.println("Your Order:");
+		int i = 0;
+		if(this.getReservationID() == -1) {
+			System.out.printf("No reservation yet!\n");
+		}
+		else{
+			System.out.printf("Reservation ID:%d Name:%s Time Of Reservation :%s Contact Number:%d Number of People:%d Table:%d StaffId:%s\n",this.getReservationID(),this.getCustomerName(),this.getTimestamp(),this.getContactNumber(), this.getNumPeople(),this.getTable(),this.getStaffID());
+			i++;
+		}
+	}
+
 	/**
 	 * 
 	 * @param CustomerName
@@ -75,11 +87,11 @@ public class Reservation {
 
 
 
-	public String getReservationID() {
+	public int getReservationID() {
 		return this.reservationID;
 	}
 
-	public void setReservationID(String ReservationID) {
+	public void setReservationID(int ReservationID) {
 		this.reservationID = ReservationID;
 			
 	}
@@ -99,7 +111,6 @@ public class Reservation {
 		this.timestamp = Timestamp;
 	}
 
-	
 
 	public int getContactNumber() {
 		return this.contactNumber ;
@@ -156,8 +167,16 @@ public class Reservation {
 		return this.table;
 	}
 
-	public void setStaffID(String staffID) {
-		this.staffID = staffID;
+	public void setStaff(String StaffID){
+		List<Staff> staffList = mainapp.StaffList;
+		for (int i = 0; i< staffList.size();i++){
+			if(staffList.get(i).getEmployeeID() == StaffID){
+				staffList.get(i).setisAvailable(false);
+				this.staffID = StaffID;
+				return;
+			}
+		}
+		System.out.println("No Staff with that ID");
 	}
 	
 	public String getStaffID(){

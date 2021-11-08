@@ -191,9 +191,11 @@ public class Order {
 		this.orderID = i;
 		return i;
 	}
+
 	public int getOrderID(){
 		return this.orderID;
 	}
+
 	public void setTimestamp(){
 		this.timestamp = new Timestamp(System.currentTimeMillis());
 	}
@@ -201,6 +203,7 @@ public class Order {
 	public Timestamp getTimestamp(){
 		return this.timestamp;
 	}
+
 	public void setStaff(){
 		List<Staff> staffList = mainapp.StaffList;
 		for (int i = 0; i< staffList.size();i++){ 
@@ -211,6 +214,10 @@ public class Order {
 			}
 		}
 		System.out.println("No Available Staff");
+	}
+
+	public void setStaff(String StaffID){
+		this.staffID = StaffID;
 	}
 
 	public String getStaff(){
@@ -229,6 +236,10 @@ public class Order {
 			}
 		}
 		return 0;
+	}
+
+	public void setTable(int TableNum){
+		this.tableNumber = TableNum;
 	}
 
 	public int getTable(){

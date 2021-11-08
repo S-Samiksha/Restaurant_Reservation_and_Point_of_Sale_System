@@ -157,7 +157,7 @@ public class FileToObject {
 		//end copy here 
 	}
 
-	/*public static void reservation(){
+	public static void reservation(){
 		System.out.println("Checking the Reservation Logs......"); 
         try {
         	FileReader fr = new FileReader("data/reservation.txt"); 
@@ -167,8 +167,8 @@ public class FileToObject {
 			line = br.readLine();
         	while(line!= null) { 
             	reservationObject = line.split("[|]"); 
-            	Timestamp DateTime = Timestamp.valueOf(reservationObject[1]);
-				mainapp.ReservationList.add(new Reservation(reservationObject[0], reservationObject[2], DateTime,Integer.parseInt(reservationObject[3]),Integer.parseInt(reservationObject[4]),Integer.parseInt(reservationObject[5]), Integer.parseInt(reservationObject[6])));
+            	Timestamp DateTime = Timestamp.valueOf(reservationObject[2]);
+				mainapp.ReservationList.add(new Reservation(reservationObject[0], reservationObject[1], DateTime,Integer.parseInt(reservationObject[3]),Integer.parseInt(reservationObject[4]),Integer.parseInt(reservationObject[5]), Integer.parseInt(reservationObject[6])));
 				line = br.readLine();
 
         	}
@@ -180,7 +180,7 @@ public class FileToObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 
 

@@ -6,6 +6,7 @@ package src;
  */
 import java.util.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.io.Console;
 import java.io.IOException;
 
@@ -23,8 +24,9 @@ public class mainapp {
 
     public static final int MAX_Time = 2200; 
 	public static final int MIN_Time = 1000;
-    public static int ReservationID = 0;
-    public static int OrderID = 11;//change later!!!!
+    /// change according to number of lines in data.txt
+    public static int ReservationID = 3;
+    public static int OrderID = 11;
     
     public static void main(String[] args) throws IOException{
         System.out.println("Restaurant Opening.....");
@@ -33,7 +35,7 @@ public class mainapp {
         FileToObject.MenuItems();
         FileToObject.setPackage();
         FileToObject.Order();
-        //FileToObject.reservation();
+        FileToObject.reservation();
         
         List<Reservation> ReservationList = new ArrayList<>(10000);
         Scanner sc = new Scanner(System.in);
@@ -55,6 +57,32 @@ public class mainapp {
             c = sc.nextInt();
         switch(c){
             case 1: //SHREYA
+                boolean reservationFound = false;
+                System.out.println("Have you reserved a table? Enter true or false.\n"); 
+                Boolean reserved = sc.nextBoolean();
+                if(reserved){
+                    System.out.println("Please enter your Reservation ID:\n");
+                    int reservationID = sc.nextInt();
+                    for(int i=0; i<mainapp.ReservationList.size();i++){
+                        if(mainapp.ReservationList.get(i).getReservationID() == reservationID){
+                            System.out.println("Reservation found!\n");
+                            Order reservationOrder = new Order();
+                            reservationOrder.setOrderID(OrderID);
+                            reservationOrder.setStaff(mainapp.ReservationList.get(i).getStaffID());
+                            reservationOrder.setTimestamp();
+                            reservationOrder.setTable(mainapp.ReservationList.get(i).getTable());
+                            TotalOrders.add(OrderID, reservationOrder);
+                            OrderID++; // DO NOT EDIT THIS VARIABLE 
+                            mainapp.ReservationList.remove(i);
+                            System.out.printf("OrderID:%d\n",reservationOrder.getOrderID());
+                            reservationFound =true;
+                        }
+                    }
+
+                }
+                if(reservationFound){
+                    break;
+                }
                 System.out.println("Enter number of people to be seated in the table\n"); 
                 int customerpax = sc.nextInt();
                 Order case1order = new Order();
@@ -141,55 +169,117 @@ public class mainapp {
 
 
             case 4: //XINGKUN
-               /* //int count = 0;
-                int table=0;
-                System.out.println("Enter Staff ID: ");
-                int staffIDint = Integer.parseInt(sc.nextLine());
-                String staffID = String.valueOf(staffIDint); //staffID cannot be resolved to a variable
+            /// MAJOR EDITS 
+                int choicecase4 = 0;
+                do{
+                    System.out.println("Enter choice:");
+                    System.out.println("(1): Make a Reservation");
+                    System.out.println("(2): Remove a Reservation");
+                    System.out.println("(3): Check a Reservation");
+                    System.out.println("(4): Exit");
+                    choicecase4 = sc.nextInt();
+                    switch(choicecase4){
+                        case 1:
+                            System.out.println("Enter Staff ID: ");
+                            String staffID = sc.next();
+                            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+                            System.out.printf("The current time is %s\n", currentTime);
+                            
+                            System.out.println("Enter Name of Customer:");
+                            String customerName = sc.next();
+                            Timestamp startTime = new Timestamp(System.currentTimeMillis());
+                            startTime.setTime(0);
+                            boolean setDate = false;
+                            sc.nextLine();
+                            while(!setDate){
+                                try{
+                                    System.out.println("Enter a Reservation Date and Time:\nformat:yyyy-MM-dd HH:mm:ss\nBooking Hours: 10:00:00 - 20:00:00");
+                                    String Date = sc.nextLine();
+                                    startTime = Timestamp.valueOf(Date); 
+                                    SimpleDateFormat getDate = new SimpleDateFormat("yyyy-MM-dd");
+                                    String currentDate = getDate.format(startTime);
+                                    Timestamp closingTime = Timestamp.valueOf(currentDate+" 20:01:00");
+                                    Timestamp openingTime = Timestamp.valueOf(currentDate+" 9:59:00");
 
-                System.out.println("Enter Name of Customer: ");
-                int customerNameint = Integer.parseInt(sc.nextLine());
-                String customerName = String.valueOf(customerNameint); //customerName cannot be resolved to a variable
+                                    if (currentTime.before(startTime)){
+                                        if(startTime.before(closingTime)){
+                                            if((startTime).after(openingTime)){
+                                                System.out.println("Entered date and time are valid!");
+                                                setDate = true;
+                                            }
+                                            else{
+                                                System.out.println("Entered date and time are before booking hours!");
+                                            }
+                                        }
+                                        else{
+                                            System.out.println("Entered date and time are after booking hours!");
+                                        }
+                                    }
+                                    else{
+                                        System.out.println("Entered date and time have already passed!");
+                                    }
+                                }
+                                catch(Exception e){
+                                    System.out.println("Enter a valid date and time in yyyy-MM-dd HH:mm:ss format!");
+                                }
+                            }
+                            System.out.print("Enter the number of people to be there:");
+                            int peopleNum = sc.nextInt();
 
-                System.out.println("Enter month (e.g. 01, 02 ...12): ");
-                String month = sc.nextLine();
-                System.out.println("Enter day (e.g 00, 01, 02..., 21)");
-                String day = sc.nextLine();
-                String datestr = month + day;
-                int dateint = Integer.parseInt(datestr);
-                System.out.println("Enter time (e.g 1000, 1030, 1100..., 2200)" + "Valid time is: "+ MIN_Time +"-"+MAX_Time);
-                String startTime = sc.nextLine();
+                            System.out.println("Enter Contact Number:");
+                            int contactNum = sc.nextInt();
+                            int tableNum = -1;
 
-                try{
-                    int endTimeint = Integer.parseInt(startTime) + 0200;
-                    String endTime = "2021-"+month+"-"+day+endTimeint;
-                }catch(Exception e){
-                    System.out.println("Please enter a valid time. "+ MIN_Time +"-"+MAX_Time);
-                    
-                }
-                System.out.println("Enter in number of people to be there: ");
-                int peopleNum = sc.nextInt();
-                System.out.println("Enter Date and Time to come to restaurant: (yyyy-MM-dd HH:mm:ss)");
-                int DateTimeint = Integer.parseInt(sc.nextLine());
-                String DateTimestr = String.valueOf(DateTimeint);
-                Timestamp DateTime = Timestamp.valueOf(DateTimestr); 
-                System.out.println("Enter Contact Number: ");
-                int contactNum = sc.nextInt();
-                int tableNum = ReservationList.get(ReservationID).FindTable(peopleNum);
-                
-                if (tableNum != -1 ) {
-                    for (int i=0; i <= ReservationID; i++){
-                        Timestamp check = ReservationList.get(i).getTimestamp(); //Error here!!! i cannot be resolved to a variable 
-                        if (check.after(DateTime) && check.before(DateTime)){
-                            System.out.println("There is no table available. Please change pax/time");
-                        }
+                            Reservation newReservation = new Reservation(staffID, customerName, startTime, contactNum, peopleNum, tableNum, ReservationID);
+                            newReservation.FindTable(peopleNum);
+                            if (newReservation.getTable() == -1){
+                                System.out.printf("No Tables Available! Reservation cannot be made the moment!\n");
+                                break;
+                            }
+                            else{
+                                System.out.printf("Table %d has been blocked for you!\n", newReservation.getTable());
+                            }
+                            System.out.printf("Reservation Made!Your reservation ID is:%d\n", newReservation.getReservationID());
+                            mainapp.ReservationList.add(newReservation);
+                            break;
+                        case 2:
+                            boolean reservationFound1 = false;
+                            System.out.println("Please enter your Reservation ID:\n");
+                            int reservationID1 = sc.nextInt();
+                            for(int i=0; i<mainapp.ReservationList.size();i++){
+                                if(mainapp.ReservationList.get(i).getReservationID() == reservationID1){
+                                    System.out.printf("Reservation with ID %d found!\n", reservationID1);
+                                    mainapp.ReservationList.remove(i);
+                                    System.out.printf("Reservation Removed.\n");
+                                    reservationFound1 = true;
+                                }
+                            }
+                            if(!reservationFound1){
+                                System.out.printf("No reservation with ID %d found!\n",reservationID1);
+                            }
+                            break;
+                        case 3:
+                            System.out.println("Please enter your Reservation ID:\n");
+                            boolean reservationFound2 = false;
+                            int reservationID2 = sc.nextInt();
+                            for(int i=0; i<mainapp.ReservationList.size();i++){
+                                if(mainapp.ReservationList.get(i).getReservationID() == reservationID2){
+                                    System.out.printf("Reservation Details are as follows:\n");
+                                    mainapp.ReservationList.get(i).printReservation();
+                                    reservationFound2 = true;
+                                }
+                            }
+                            if(!reservationFound2){
+                                System.out.printf("No reservation with ID %d found!\n",reservationID2);
+                            }
+                            break;
+                        default:
+                        System.out.println("Wrong choice!");
+                        choicecase = 0;
+                        break;
                     }
-                    ReservationList.add(new Reservation(staffID, customerName, DateTime, contactNum, peopleNum, tableNum, ReservationID));
-                        
-                } else {
-	                System.out.println("There is no table available. Please change pax/time");
                 }
-                ReservationID++;*/
+                while(choicecase4 != 4);
                 break;
 
             case 5: //MELISE
