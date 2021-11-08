@@ -30,7 +30,7 @@ wherever i thought the code become uneccessary i put a comment there. please loo
 2. When reservation has random inputs like "s" like 1 like 8 --> account for this 
 
 **Issues**
-1. Input: enter order with 10 people, enter order with 10 people (the second time it shows no table available)
+1. Input: enter order with 10 people, enter order with 10 people (the second time it shows no table available)-> RESOLVED(table.txt has 10 tables only)
 2. Order Exception Handling 
 3. printinvoice error uploaded to the snapshots of testing issues 
 4. Remember to use sc.nextline() at all places if not it will cause the character to int input buffer issue. If not before you take in int, take in the "" from the sc.nextline(). refer: https://stackoverflow.com/questions/24770531/java-scanner-skips-over-my-last-nextline-request 
