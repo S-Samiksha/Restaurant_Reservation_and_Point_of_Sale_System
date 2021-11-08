@@ -20,7 +20,8 @@ wherever i thought the code become uneccessary i put a comment there. please loo
 3. When you ask user input tell them what to input. "Are you a member" to "Are you a member? Enter 'true' if yes and 'false' is no". remember this comes under the design user friendliness (20marks if I am remember correctly)
 4. the Alignment is really off... so idk if that comes under the userfriendliness. 
 5. There is an additional marks for Code  correctness,   readability,   Java   naming   convention, exception handling, completeness of Java Doc and overall quality. We clearly aint following naming convention 100% + exception handling not done completely. 
-6. Overall 40 marks.
+6. Naming must be clear and concise such that when prof reads it he understands what it is suggest have a data dictionary for variables 
+7. Overall 40 marks
 
 
 **Exception Handling for mainapp(Just some too many to write):**
