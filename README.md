@@ -8,7 +8,7 @@ Theres also a few issues about when the staff is not available -> i let them be 
 
 Also, I changed the reservation ID to int to make sure we can arraylist.get() and arraylist.remove().
 
-My main concern is that for case 4: almost all the control is happening in the mainapp. The reservation class has almost nothing in it other than getting and setting. Should we create fucntions in the class? Thsi will make the mainapp smaller and will make our code make more sense in terms of boundary, control and entity classes.
+My main concerns for Case 4 is that almost all the control is happening in the mainapp. The reservation class has almost no control functions in it that are not getting and setting. Should we move the control parts from mainapp to the class? This will make the mainapp smaller and will make our code make more sense in terms of boundary, control and entity classes.
 
 that's it! 
 ***
