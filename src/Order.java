@@ -93,8 +93,8 @@ public class Order {
         double PayablePrice = 0.0;
 
 		totalPrice = getPrice();
-        System.out.println("Are you a member?");
-        boolean isMember = sc.nextBoolean();
+        System.out.println("Are you a member? Enter 'true' if yes and 'false' is no");
+        boolean isMember = Boolean.parseBoolean(sc.nextLine());
         if (isMember){
             System.out.println("You are a Member! You will get a 10% Discount");
             MemberDiscount = totalPrice*0.1;

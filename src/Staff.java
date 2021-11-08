@@ -101,7 +101,7 @@ public class Staff {
 
 
 	public boolean isManager(){
-		if (this.JobTitle == "manager"){
+		if (this.JobTitle.equals("Manager")){
 			return true;
 		}else{
 			return false; 

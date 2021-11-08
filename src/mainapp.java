@@ -54,38 +54,41 @@ public class mainapp {
             System.out.println("| (6) Manager Access Only (Menu Item, Promotion, Sales Revenue)   |");
             System.out.println("| (7) Close Shop                                                  |");
             System.out.println("-------------------------------------------------------------------");
-            c = sc.nextInt();
+            c = Integer.parseInt(sc.nextLine());
         switch(c){
-            case 1: //SHREYA
-                boolean reservationFound = false;
-                System.out.println("Have you reserved a table? Enter true or false.\n"); 
-                Boolean reserved = sc.nextBoolean();
-                if(reserved){
-                    System.out.println("Please enter your Reservation ID:\n");
-                    int reservationID = sc.nextInt();
-                    for(int i=0; i<mainapp.ReservationList.size();i++){
-                        if(mainapp.ReservationList.get(i).getReservationID() == reservationID){
-                            System.out.println("Reservation found!\n");
-                            Order reservationOrder = new Order();
-                            reservationOrder.setOrderID(OrderID);
-                            reservationOrder.setStaff(mainapp.ReservationList.get(i).getStaffID());
-                            reservationOrder.setTimestamp();
-                            reservationOrder.setTable(mainapp.ReservationList.get(i).getTable());
-                            TotalOrders.add(OrderID, reservationOrder);
-                            OrderID++; // DO NOT EDIT THIS VARIABLE 
-                            mainapp.ReservationList.remove(i);
-                            System.out.printf("OrderID:%d\n",reservationOrder.getOrderID());
-                            reservationFound =true;
-                        }
-                    }
-
+            case 1: 
+                boolean reservationFound = false; //problem 1
+                Boolean reserved=false;
+                try{System.out.println("Have you reserved a table? Enter true or false.\n"); 
+                    reserved = Boolean.parseBoolean(sc.nextLine());
+                }catch(Exception e){
+                    System.out.println("You did not input the correct value! Reservation set to false");
+                    reserved = false;
+                    break; 
                 }
+
+                
+                //problem 1: do we need this...? boolean reservationFound = false; it is already false seems quite redunant to me
                 if(reservationFound){
                     break;
                 }
-                System.out.println("Enter number of people to be seated in the table\n"); 
-                int customerpax = sc.nextInt();
-                Order case1order = new Order();
+                int customerpax =0;
+                Order case1order;
+                try{
+                    System.out.println("Enter number of people to be seated in the table\n"); 
+                    customerpax = Integer.parseInt(sc.nextLine());
+                    if (customerpax > 0 && customerpax <=10){
+                        case1order = new Order();
+                    }else{
+                        break;
+                    }
+                    
+
+                }catch(Exception e){
+                    System.out.println("Invalid Entry!");
+                    break;
+                }
+                
                 
                 case1order.setStaff();
                 String staffFound = case1order.getStaff();
@@ -96,12 +99,13 @@ public class mainapp {
                     System.out.printf("Staff %s will be helping you!\n",case1order.getStaff());
                 }
 
+
                 int tableFound = case1order.FindTable(customerpax);
                 if (tableFound == 0){
                     System.out.println("No table available at the moment!\n");
                 }
                 else{
-                    System.out.printf("You are allocated to %d\n",case1order.getTable());
+                    System.out.printf("You are allocated to table %d\n",case1order.getTable());
                 }
 
                 case1order.setOrderID(OrderID);
@@ -112,49 +116,73 @@ public class mainapp {
                 System.out.printf("%d\n", TotalOrders.size());
                 break;
 
-            case 2: //ARUSHI 
+            case 2: 
                 int case2orderID=0;
                 int choicecase = 0;
-                System.out.println("Enter your order ID:");
-                case2orderID = sc.nextInt(); 
+                try{
+                    System.out.println("Enter your order ID:");
+                    case2orderID = Integer.parseInt(sc.nextLine()); 
+                    
+
+                }catch(Exception e){
+                    System.out.println("Invalid Order ID");
+                    break;
+
+                }
                 Order case2order = TotalOrders.get(case2orderID);
-                do{
+                do{ 
                     System.out.println("Enter choice:");
                     System.out.println("(1): Add item to Order");
                     System.out.println("(2): Remove Item From Order ");
                     System.out.println("(3): Exit ");
+                    try {
+                        choicecase = Integer.parseInt(sc.nextLine());
 
-                    choicecase = sc.nextInt();
+                    }catch (Exception e){
+                        System.out.print("Invalid choice! Try Again! Input an Integer");
+                        choicecase = 0;
+                    }
+                    
                     switch(choicecase){
                         case 1:
                             case2order.printMenu(); 
                             System.out.println("Enter the menu item number you want to order from the menu: ");
-                            String menuitem = sc.next(); 
-                            case2order.addOrder(menuitem); 
-                            System.out.println("This is your updated order");
-			                case2order.printOrder();
+                            String menuitem;
+                            try{
+                                menuitem = sc.nextLine();
+                                case2order.addOrder(menuitem); 
+                                System.out.println("This is your updated order");
+                                case2order.printOrder();
+                            }catch(Exception e){
+                                System.out.println("Invalid menu item"); 
+                                choicecase = 0;
+                                break;
+                            }
+                            
                             break;
                         case 2:
                             case2order.removeFromOrder();
                             System.out.println("This is your updated order");
-			                case2order.printOrder();
+                            case2order.printOrder();
                             break;
                         case 3:
                             break;
                         default:
                             System.out.println("Wrong choice!");
                             choicecase = 0;
+                            break;
                     }
                 }while(choicecase != 3);
+               
                 
                 break;
     
-            case 3: //MELISE DO THIS
+            case 3: 
                 int case3orderID;
-                System.out.println(TotalOrders.get(0));
+                System.out.println(TotalOrders.get(0)); //Problem 2 why do we need this?
                 System.out.println("Enter your order ID:");
-                case3orderID = sc.nextInt();
                 try{
+                    case3orderID = Integer.parseInt(sc.nextLine());
                     TotalOrders.get(case3orderID);
                 }
                 catch(Exception e){
@@ -168,8 +196,7 @@ public class mainapp {
                 break;
 
 
-            case 4: //XINGKUN
-            /// MAJOR EDITS 
+            case 4: 
                 int choicecase4 = 0;
                 do{
                     System.out.println("Enter choice:");
@@ -285,7 +312,7 @@ public class mainapp {
                 while(choicecase4 != 4);
                 break;
 
-            case 5: //MELISE
+            case 5: 
                 int case5orderID;
                 System.out.println("Enter your order ID:");
                 case5orderID = sc.nextInt();
@@ -298,13 +325,23 @@ public class mainapp {
             case 6:
                 int tryAgain = 1, choice=0, count=0;
                 String temp;
+                Boolean access = false;
                 Scanner sc2 = new Scanner(System.in);
-                Console cs = System.console();
                 while (count < 3 && tryAgain == 1){
                     System.out.println("Enter EmployeeID: ");
                     temp = sc2.nextLine();
-                    //add in ismanager later
+                    for (int i=0; i<StaffList.size();i++){
+                        if (StaffList.get(i).getEmployeeID().equals(temp) && StaffList.get(i).isManager()==true){
+                            access = true;
+                            break;
+                        }
 
+                    }
+                    
+                        if (!access){
+                            System.out.println("You are not the manager!");
+                            break;
+                        }
                         System.out.println("Enter Security key: ");
 
                         String securityKey = sc2.nextLine();

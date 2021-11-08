@@ -1,5 +1,45 @@
 ### Problems and Fixes (I came up with this version due to the kazillion errors that poped up)
 ***
+Updates (8/11/21): Samiksha
+
+case 7 works. 
+
+There was an issue with the order.txt file which had to fix it before the Set Packages were called properly. for further reference, refer to the version history of github. 
+
+MenuItem[] listb was solved using arraylist whereby dynamically changing arraylist was used then it was converted to a fixed size list.
+
+also question: if the user inputs opening and closing time, shouldn't it be asked at the very start?
+
+main app being long doesnt matter.... exception handling made it long anyway
+
+wherever i thought the code become uneccessary i put a comment there. please look through. 
+
+**Designs**
+1. Alignment, spelling etc. 
+2. print menu in the securityaccess has a different design 
+3. When you ask user input tell them what to input. "Are you a member" to "Are you a member? Enter 'true' if yes and 'false' is no". remember this comes under the design user friendliness (20marks if I am remember correctly)
+
+
+
+
+**Exception Handling for mainapp:**
+
+1. When customerpax > 0 --> account for this AND when customerpax > 10 --> account for this
+2. When reservation has random inputs like "s" like 1 like 8 --> account for this 
+
+**Issues**
+1. Input: enter order with 10 people, enter order with 10 people (the second time it shows no table available)
+2. Order Exception Handling 
+3. printinvoice error uploaded to the snapshots of testing issues 
+4. Remember to use sc.nextline() at all places if not it will cause the character to int input buffer issue. If not before you take in int, take in the "" from the sc.nextline(). refer: https://stackoverflow.com/questions/24770531/java-scanner-skips-over-my-last-nextline-request 
+
+
+
+***
+
+
+
+***
 Updates (8/11/21)
 
 Case 4 can work. I basically deleted almost everything xingkun wrote about the parsing and just took in the date time as an input string and converted it to a timestamp. Introduced 2 more variables, openingTime and closingTime , which are variables that take in the user's input and find the opening and closing hours of the day the user inputs. I know that the requirement is to offer same day reservations, and this works for both same day and different day. Will change it to offer same day only soon. 

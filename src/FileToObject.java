@@ -104,18 +104,19 @@ public class FileToObject {
             while(line!= null) { 
                 OrderObject = line.split("[|]");
 				String[] listb = OrderObject[5].split("[,]");
-				//AC1, AC2 
-				//[AC1, AC2]
-				//add for loop to parse everything rom string to int
-				int i=0;
+
 				ArrayList<MenuItems> newListb = new ArrayList<>(30);
 				for (String temp:listb){
 					for (int x=0; x<mainapp.MenuList.size(); x++){
                         if (temp.equals(mainapp.MenuList.get(x).getitemID())){
-                            newListb.add(new MenuItems(mainapp.MenuList.get(i).getName(), mainapp.MenuList.get(i).getType(), mainapp.MenuList.get(i).getDescription(), mainapp.MenuList.get(i).getPrice() , temp));
+                            newListb.add(mainapp.MenuList.get(x));
                         }
-                    }	
-					i++;
+                    }
+					for(int y=0;y<mainapp.SPList.size();y++){
+						if(temp.equals(mainapp.SPList.get(y).getitemID())){
+							newListb.add(mainapp.SPList.get(y));
+						}
+					}	
 				}
 
 
