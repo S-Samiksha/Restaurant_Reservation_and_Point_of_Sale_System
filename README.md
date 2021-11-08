@@ -23,7 +23,7 @@ wherever i thought the code become uneccessary i put a comment there. please loo
 6. Overall 40 marks.
 
 
-**Exception Handling for mainapp:**
+**Exception Handling for mainapp(Just some too many to write):**
 
 1. When customerpax > 0 --> account for this AND when customerpax > 10 --> account for this
 2. When reservation has random inputs like "s" like 1 like 8 --> account for this 
