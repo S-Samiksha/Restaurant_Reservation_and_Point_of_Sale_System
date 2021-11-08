@@ -1,5 +1,20 @@
 ### Problems and Fixes (I came up with this version due to the kazillion errors that poped up)
 ***
+Updates (8/11/21)
+
+Cases 4 can work. I basically deleted almost everything xingkun wrote about the parsing and just took in the date time as an input string and converted it to a timestamp. Introduced 2 more variables, openingTime and closingTime , which are variables that take in the user's input and find the opening and closing hours of the day the user inputs. I know that the requirement is to offer same day reservations, and this works for both same day and different day. Will change it to offer same day only soon. 
+
+Theres also a few issues about when the staff is not available -> i let them be unavailable from when they are in charge of a reservation till the invoice is printed for thier reserved table. In non reservation cases, the normal case applies.
+
+Also, I changed the reservation ID to int to make sure we can arraylist.get(). 
+
+My main concern is that for case 4: almost all the control is happening in the mainapp. The reservation class has almost nothing in it other than getting and setting. Should we create fucntions in the class? Thsi will make the mainapp smaller and will make our code make more sense in terms of boundary, control and entity classes.
+
+that's it! 
+***
+
+
+***
 Updates (7/11/21)
 
 Cases 1,2,3,5 can work! I haven't really looked at Use Case 6 or 7 but for reservation, one of the key problems is that the data and the constructor are inconsistent.
