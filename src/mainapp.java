@@ -33,7 +33,7 @@ public class mainapp {
         FileToObject.MenuItems();
         FileToObject.setPackage();
         FileToObject.Order();
-        FileToObject.reservation();
+        //FileToObject.reservation();
         
         List<Reservation> ReservationList = new ArrayList<>(10000);
         Scanner sc = new Scanner(System.in);
@@ -141,7 +141,7 @@ public class mainapp {
 
 
             case 4: //XINGKUN
-                //int count = 0;
+               /* //int count = 0;
                 int table=0;
                 System.out.println("Enter Staff ID: ");
                 int staffIDint = Integer.parseInt(sc.nextLine());
@@ -189,7 +189,7 @@ public class mainapp {
                 } else {
 	                System.out.println("There is no table available. Please change pax/time");
                 }
-                ReservationID++;
+                ReservationID++;*/
                 break;
 
             case 5: //MELISE

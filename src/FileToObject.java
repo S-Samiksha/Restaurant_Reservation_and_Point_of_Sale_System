@@ -157,7 +157,7 @@ public class FileToObject {
 		//end copy here 
 	}
 
-	public static void reservation(){
+	/*public static void reservation(){
 		System.out.println("Checking the Reservation Logs......"); 
         try {
         	FileReader fr = new FileReader("data/reservation.txt"); 
@@ -180,7 +180,7 @@ public class FileToObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 
 
