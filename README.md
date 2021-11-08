@@ -2,7 +2,7 @@
 ***
 Updates (8/11/21)
 
-Cases 4 can work. I basically deleted almost everything xingkun wrote about the parsing and just took in the date time as an input string and converted it to a timestamp. Introduced 2 more variables, openingTime and closingTime , which are variables that take in the user's input and find the opening and closing hours of the day the user inputs. I know that the requirement is to offer same day reservations, and this works for both same day and different day. Will change it to offer same day only soon. 
+Case 4 can work. I basically deleted almost everything xingkun wrote about the parsing and just took in the date time as an input string and converted it to a timestamp. Introduced 2 more variables, openingTime and closingTime , which are variables that take in the user's input and find the opening and closing hours of the day the user inputs. I know that the requirement is to offer same day reservations, and this works for both same day and different day. Will change it to offer same day only soon. 
 
 Theres also a few issues about when the staff is not available -> i let them be unavailable from when they are in charge of a reservation till the invoice is printed for thier reserved table. In non reservation cases, the normal case applies.
 
