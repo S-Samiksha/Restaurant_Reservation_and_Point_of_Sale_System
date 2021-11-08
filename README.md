@@ -18,6 +18,9 @@ wherever i thought the code become uneccessary i put a comment there. please loo
 1. Alignment, spelling etc. 
 2. print menu in the securityaccess has a different design 
 3. When you ask user input tell them what to input. "Are you a member" to "Are you a member? Enter 'true' if yes and 'false' is no". remember this comes under the design user friendliness (20marks if I am remember correctly)
+4. the Alignment is really off... so idk if that comes under the userfriendliness. 
+5. There is an additional marks for Code  correctness,   readability,   Java   naming   convention, exception handling, completeness of Java Doc and overall quality. We clearly aint following naming convention 100% + exception handling not done completely. 
+6. Overall 40 marks.
 
 
 **Exception Handling for mainapp:**
@@ -45,6 +48,8 @@ public float getTotalprice(){
 ```
 
 can help me check if the rest are not like this.
+
+6. Other issues are shown through screen shots in the screenshot folder. 
 
 
 ***
