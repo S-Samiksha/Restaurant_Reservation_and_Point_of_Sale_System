@@ -44,7 +44,7 @@ public float getTotalprice(){
 //was originally
 
 public float getTotalprice(){
-    return this.gettotalPrice();
+    return this.getTotalPrice();
 }
 ```
 
