@@ -2,7 +2,7 @@
 ***
 Updates (8/11/21): Samiksha
 
-case 7 works. 
+case 6, 7 works. 
 
 There was an issue with the order.txt file which had to fix it before the Set Packages were called properly. for further reference, refer to the version history of github. 
 
