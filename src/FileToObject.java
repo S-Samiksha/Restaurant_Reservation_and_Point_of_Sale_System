@@ -190,8 +190,7 @@ public class FileToObject {
 			FileWriter fw = new FileWriter("data/MenuItems.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (int j=0; j<mainapp.MenuList.size() ; j++) {
-				MenuItems item = mainapp.MenuList.get(j);
-				String stritem = String.valueOf(item.getitemID() + "|" +item.getName() +  "|" + item.getType() + "|" + String.valueOf(item.getPrice()) + "|" + item.getDescription());
+				String stritem = mainapp.MenuList.get(j).getitemID() + "|" + mainapp.MenuList.get(j).getName() +  "|" + mainapp.MenuList.get(j).getType() + "|" + String.valueOf(mainapp.MenuList.get(j).getPrice()) + "|" + mainapp.MenuList.get(j).getDescription() + "|";
 				bw.write(stritem);
 				bw.newLine();
 				}
@@ -210,13 +209,22 @@ public class FileToObject {
 		try{
 			FileWriter fw = new FileWriter("data/setPackage.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
+			String menulist = "";
 			for (int j=0; j<mainapp.SPList.size() ; j++) {
-				SetPackage item = mainapp.SPList.get(j);
-				String stritem = String.valueOf(item.getitemID() + "|" +  String.valueOf(item.getSetList()) + "|" +item.getName() +  "|" + String.valueOf(item.getPromo()) + item.getDescription());
+				menulist = "";
+				for (int i=0; i<mainapp.SPList.get(j).getSetList().length;i++){
+					menulist += (mainapp.SPList.get(j).getSetList())[i].getDescription(); //why is this returning me Menulist ID??
+					if (mainapp.SPList.get(j).getSetList().length-1>i){
+						menulist += ",";
+					}
+					
+				}
+				
+				String stritem = mainapp.SPList.get(j).getitemID() + "|" +  menulist + "|" +mainapp.SPList.get(j).getName() +  "|" + String.valueOf(mainapp.SPList.get(j).getPromo()) + "|" + mainapp.SPList.get(j).getDescription() + "|";
 				bw.write(stritem);
 				bw.newLine();
 				}
-			System.out.println("Write Menu Items Data successful....");
+			System.out.println("Write Set Package Items Data successful....");
 			bw.close();
 		}
 		catch (Exception e) {
@@ -228,9 +236,17 @@ public class FileToObject {
 		try{
 			FileWriter fw = new FileWriter("data/order.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
+			String customerOrderList = "";
 			for (int j=0; j<mainapp.TotalOrders.size() ; j++) {
-				Order item = mainapp.TotalOrders.get(j);
-				String stritem = String.valueOf(String.valueOf(item.getOrderID()) + "|" +  String.valueOf(item.getStaff()) + "|" + String.valueOf(item.getTable()) +"|" + (item.getDateTime()).toString() +  "|" + String.valueOf(item.getTotalprice())) + String.valueOf(item.getOrdersList());
+				customerOrderList = "";
+				for (int i=0; i<mainapp.TotalOrders.get(j).getOrdersList().size();i++){
+					customerOrderList += mainapp.TotalOrders.get(j).getOrdersList().get(i).getitemID();
+					if (mainapp.TotalOrders.get(j).getOrdersList().size()-1>i){
+						customerOrderList += ",";
+					}
+				}
+				//System.out.println(customerOrderList);
+				String stritem = mainapp.TotalOrders.get(j).getOrderID() + "|" +  mainapp.TotalOrders.get(j).getStaff() + "|" + String.valueOf(mainapp.TotalOrders.get(j).getTable()) +"|" + (mainapp.TotalOrders.get(j).getDateTime()).toString() +  "|" + String.valueOf(mainapp.TotalOrders.get(j).getTotalprice()) +"|" + customerOrderList + "|";
 				bw.write(stritem);
 				bw.newLine();
 			}

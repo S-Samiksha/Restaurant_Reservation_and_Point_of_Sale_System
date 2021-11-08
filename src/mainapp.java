@@ -7,7 +7,6 @@ package src;
 import java.util.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.io.Console;
 import java.io.IOException;
 
 public class mainapp {
@@ -54,7 +53,12 @@ public class mainapp {
             System.out.println("| (6) Manager Access Only (Menu Item, Promotion, Sales Revenue)   |");
             System.out.println("| (7) Close Shop                                                  |");
             System.out.println("-------------------------------------------------------------------");
-            c = Integer.parseInt(sc.nextLine());
+            try{
+                c = Integer.parseInt(sc.nextLine());
+            }catch(Exception e){
+                c=9;
+            }
+            
         switch(c){
             case 1: 
                 boolean reservationFound = false; //problem 1
@@ -402,9 +406,6 @@ public class mainapp {
                 break;
 
             default:
-                for (int i=0; i<TotalOrders.size();i++){
-                    System.out.println(TotalOrders.get(i).getOrdersList());
-                }
                 System.out.println("Wrong Input Try Again!");
                 c=0;
                 break;
@@ -413,6 +414,7 @@ public class mainapp {
       
 
     }
+    sc.close();
     }
  
         

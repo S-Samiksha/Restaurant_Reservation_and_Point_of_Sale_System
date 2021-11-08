@@ -20,8 +20,6 @@ wherever i thought the code become uneccessary i put a comment there. please loo
 3. When you ask user input tell them what to input. "Are you a member" to "Are you a member? Enter 'true' if yes and 'false' is no". remember this comes under the design user friendliness (20marks if I am remember correctly)
 
 
-
-
 **Exception Handling for mainapp:**
 
 1. When customerpax > 0 --> account for this AND when customerpax > 10 --> account for this
@@ -32,7 +30,21 @@ wherever i thought the code become uneccessary i put a comment there. please loo
 2. Order Exception Handling 
 3. printinvoice error uploaded to the snapshots of testing issues 
 4. Remember to use sc.nextline() at all places if not it will cause the character to int input buffer issue. If not before you take in int, take in the "" from the sc.nextline(). refer: https://stackoverflow.com/questions/24770531/java-scanner-skips-over-my-last-nextline-request 
+5. 
 
+```java
+public float getTotalprice(){
+		return this.totalPrice;
+}
+
+//was originally
+
+public float getTotalprice(){
+    return this.gettotalPrice();
+}
+```
+
+can help me check if the rest are not like this.
 
 
 ***

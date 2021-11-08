@@ -254,7 +254,7 @@ public class Order {
 	}
 
 	public float getTotalprice(){
-		return this.getTotalprice();
+		return this.totalPrice;
 	}
 }
 
