@@ -8,44 +8,77 @@ import java.sql.Timestamp;
  * 
  */
 
+/**
+ * Represents a reservation made for each table. A staff is required to make a reservation.
+ */
 
 public class Reservation {
 
+	/**
+	 * The closing hour of the restaurant.
+	 */
 	public static final int MAX_Time = 2200; 
+	/**
+	 * Opening hour of the restaurant.
+	 */
 	public static final int MIN_Time = 1000; 
-
+	/**
+	 * Contact number of the customer making reservation.
+	 */
 	public static final int MAX_ContactNum = 99999999; 
+	/**
+	 * Maximum number of customer for each reservation.
+	 */
 	public static final int MAX_NumPeople = 10; 
+	/**
+	 * Minimum number of customer for each reservation.
+	 */
+	public static final int MIN_NumPeople = 2;
+	/**
+	 * Total number of table in the restaurant.
+	 */
 	public static final int MAX_Table = 10;
-	//there is a minimum number of 2 people --> account for this 
 	
-
-	//Also, when I think about it the following things needs to be added
-	/*
-	1. reservation of table --> in other words find a table to reserve
-	2. two hour before the reservation time the table has to go reserved aka unavailable
-	3. addition of two hours to reservation time, the table has to become available again 
-	4. it has to be based on system time as in mainapp.java
-
-	line of logic 
-	1. when a person enters a data and time you need to convert into date date type and store it as ONE variable known as DateTime
-	2. then if DateTime of System == DateTime of Reservation - 2 --> table becomes unavailable (in other words find a table that is available, but also account for what happens if there is no table at all)
-	3. if not table is booked the whole day which does make sense 
-	4. if DateTime of System == DateTime of Reservation + 15 min --> if the person has not checked in --> table become available
-	5. if person is still at table after 2 hours, let it be --> this part book till end
-
-
-	cap to 3 tables a day 
-	*/
-
-	private String customerName; //change to lower camel case
+	/**
+	 * Name of the customer making reservation.
+	 */
+	private String customerName; 
+	/**
+	 * Reservation timing.
+	 */
 	private Timestamp timestamp;
+	/**
+	 * Customer contact number.
+	 * Able to contact the customer is necessary.
+	 */
 	private int contactNumber;
+	/**
+	 * Number of customer for each reservation.
+	 */
 	private int numPeople;
-	private int table; //I added this 
+	/**
+	 * Table number assignment for that reservation.
+	 */
+	private int table; 
+	/**
+	 * ID of the staff taking the reservation.
+	 */
 	private String staffID;
+	/**
+	 * Specific ID of the reservation.
+	 */
 	private int reservationID = -1;
 	
+	/**
+	 * Creates a new reservation.
+	 * @param staffID This Reservation's staff ID.
+	 * @param customerName This Reservation's customer name.
+	 * @param timestamp This Reservation's start time.
+	 * @param contactNumber This Reservation's customer contact number.
+	 * @param numPeople This Reservation's number of people.
+	 * @param table This Reservation's assigned table.
+	 * @param reservationID This Reservation's ID.
+	 */
 	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
 		this.customerName = customerName;
 		this.timestamp = timestamp;
@@ -58,10 +91,17 @@ public class Reservation {
 
 	//its int not Int --> idk if this was churned out by visual paradigm but we need to fix it if thats the case 
 
+	/**
+	 * Gets the customer's name for this reservation.
+	 * @return This Reservation's customer's name.
+	 */
 	public String getCustomerName() {
 		return this.customerName;
 	}
 
+	/**
+	 * Prints out the information of this reservation.
+	 */
 	public void printReservation() {
 		System.out.println("Your Order:");
 		if(this.getReservationID() == -1) {
@@ -73,49 +113,58 @@ public class Reservation {
 	}
 
 	/**
-	 * 
-	 * @param CustomerName
+	 * Changes the name of this customer for this reservation.
+	 * @param CustomerName This Reservation's customer name.
 	 */
 	public void setCustomerName(String CustomerName) {
 		this.customerName = CustomerName;
 			
 	}
-	
 
-
-
+	/**
+	 * Gets this reservation's ID
+	 * @return This Reservation's ID
+	 */
 	public int getReservationID() {
 		return this.reservationID;
 	}
 
+	/**
+	 * Changes the ID of this reservation.
+	 * @param ReservationID This Reservation's ID.
+	 */
 	public void setReservationID(int ReservationID) {
 		this.reservationID = ReservationID;
 			
 	}
-
 	
-	
+	/**
+	 * Gets the Reservation's start time.
+	 * @return This reservation start time.
+	 */
 	public Timestamp getTimestamp() {
 		return this.timestamp;
 	}
 
 	/**
-	 * 
-	 * @param CustomerName
+	 * Changes the start time of this reservation.
+	 * @param CustomerName This Reservation's start time.
 	 */
-
 	public void setTimestamp(Timestamp Timestamp) {
 		this.timestamp = Timestamp;
 	}
 
-
+	/**
+	 * Gets the contact number of the customer for this reservation.
+	 * @return This customer contact number.
+	 */
 	public int getContactNumber() {
 		return this.contactNumber ;
 	}
 
 	/**
-	 * 
-	 * @param ContactNumber
+	 * Changes the contact number of the customer of this reservation.
+	 * @param ContactNumber This Reservation's customer contact number.
 	 */
 	public void setContactNumber(int ContactNumber) {
 		// what if the number is EQUAL 9999 99999 (need to consider so I added the =)
@@ -127,19 +176,32 @@ public class Reservation {
 		}
 	}
 
+	/**
+	 * Gets the number of customer for this reservation.
+	 * @return This Reservation's number of customer.
+	 */
 	public int getNumPeople() {
 		return this.numPeople ;
 	}
 
+	/**
+	 * Changes the number of customer for this reservation.
+	 * @param NumPeople This Reservation's number of customer.
+	 */
 	public void setNumPeople(int NumPeople) {
 
-		if ( NumPeople > MAX_NumPeople) {
-			System.out.println("Sorry, the max numble of people per table is " + MAX_NumPeople);
+		if ( NumPeople > MAX_NumPeople || NumPeople<MIN_NumPeople) {
+			System.out.println("Sorry, the max numble of people per table is " + MAX_NumPeople+"and the minimum is "+MIN_NumPeople);
 		}else {
 			this.numPeople = NumPeople;
 		}
 	}
 
+	/**
+	 * Find the available table for reservation.
+	 * @param customerPax This Reservation's number of customer.
+	 * @return The available table for this reservation.
+	 */
 	public int FindTable(int customerPax) {
 		int i = 0;
 		List<Table> tableList = mainapp.TableList;
@@ -160,10 +222,18 @@ public class Reservation {
 
 	}*/
 
+	/**
+	 * Gets the table number for this reservation.
+	 * @return This reservation's table number.
+	 */
 	public int getTableNumber(){
 		return this.table;
 	}
 
+	/**
+	 * Changes the staff ID for this reservation.
+	 * @param StaffID This Reservation's staff ID.
+	 */
 	public void setStaff(String StaffID){
 		List<Staff> staffList = mainapp.StaffList;
 		for (int i = 0; i< staffList.size();i++){
@@ -176,14 +246,26 @@ public class Reservation {
 		System.out.println("No Staff with that ID");
 	}
 	
+	/**
+	 * Gets the staff ID for this reservation.
+	 * @return The Reservation's staff ID.
+	 */
 	public String getStaffID(){
 		return this.staffID;
 	}
 	
+	/**
+	 * Changes the table number for this reservation.
+	 * @param table This Reservation's table nubmer.
+	 */
 	public void setTable(int table) {
 		this.table = table;
 	}
 	
+	/**
+	 * Gets the table number of this reservation.
+	 * @return This Reservation's table number.
+	 */
 	public int getTable(){
 		return this.table;
 	}
