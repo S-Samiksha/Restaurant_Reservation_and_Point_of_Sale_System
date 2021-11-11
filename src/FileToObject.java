@@ -7,8 +7,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 //for conversion of flat file into objects 
+	/**
+	 * Read and converts various flat file (eg text file) into object.
+	 * Return and store update object into the original text file.
+	 */
 public class FileToObject {
 
+	/**
+	 * Read and converts staff text file into object to be used in the main function.
+	 */
 	public static void staff(){
 		System.out.println("Staff are taking attendance....."); 
         try {
@@ -32,9 +39,11 @@ public class FileToObject {
 			e.printStackTrace();
 		}
 
-		//end copy here 
 	}
 
+	/**
+	 * Read and converts set package text file into object to be used in the main function.
+	 */
 	public static void setPackage(){
 		System.out.println("Cooking Set Package Food......");
 		try {
@@ -69,6 +78,9 @@ public class FileToObject {
 		}
 	}
 
+	/**
+	 * Read and converts menuItem text file into object to be used in the main function.
+	 */
 	public static void MenuItems(){
 		System.out.println("Cooking Ala Carte Food......");
 		try {
@@ -93,6 +105,10 @@ public class FileToObject {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Read and converts order text file into object to be used in the main function.
+	 */
 	public static void Order(){
 		System.out.println("Loading Order Data......");
 		try {
@@ -132,6 +148,10 @@ public class FileToObject {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Read and converts staff text file into object to be used in the main function.
+	 */
 	public static void table(){
 		System.out.println("Cleaning and Sanitizing Table......"); 
         try {
@@ -155,9 +175,11 @@ public class FileToObject {
 			e.printStackTrace();
 		}
 
-		//end copy here 
 	}
 
+	/**
+	 * Read and converts reservation text file into object to be used in the main function.
+	 */
 	public static void reservation(){
 		System.out.println("Checking the Reservation Logs......"); 
         try {
@@ -184,7 +206,9 @@ public class FileToObject {
 	}
 
 
-
+	/**
+	 * Return and update changed item in menu into the original menuItem text file.
+	 */
 	public static void MenuItemStore(){
 		try{
 			FileWriter fw = new FileWriter("data/MenuItems.txt");
@@ -205,6 +229,9 @@ public class FileToObject {
 		
 	}
 
+	/**
+	 * Return and update changed item into the original set package text file.
+	 */
 	public static void SPitemsStore(){
 		try{
 			FileWriter fw = new FileWriter("data/setPackage.txt");
@@ -232,6 +259,9 @@ public class FileToObject {
 		}
 	}
 
+	/**
+	 * Return and update changed order into the original order text file.
+	 */
 	public static void OrderStore() throws IOException{
 		try{
 			FileWriter fw = new FileWriter("data/order.txt");
@@ -259,14 +289,9 @@ public class FileToObject {
 	}
 
 
-
-
-
-
-
-
-
-
+	/**
+	 * Return and update changed table into the original table text file.
+	 */
 	public static void TableStore() throws IOException{
 		FileWriter fw = new FileWriter("data/table.txt");
 		BufferedWriter bw = new BufferedWriter(fw);
@@ -281,9 +306,9 @@ public class FileToObject {
 	}
 
 
-
-
-
+	/**
+	 * Return and update changed reservation into the original reservation text file.
+	 */
 	public static void ReservationStore() throws IOException{
 		FileWriter fw = new FileWriter("data/reservation.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
