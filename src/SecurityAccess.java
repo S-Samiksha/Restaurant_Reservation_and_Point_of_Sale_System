@@ -7,18 +7,49 @@ import java.util.Scanner;
 
 import java.sql.Timestamp; //import this 
 
+/**
+ * Only authorized personnel is able to access this class to edit menu, set package and view the sales revenue.
+ */
 public class SecurityAccess{
 
-    private String temp, name, type, description, item;
+	/**
+	 * Temporary value used.
+	 */
+    private String temp;
+    /**
+     * Name of the food item.
+     */
+    private String name;
+    /**
+     * Type of the food item.
+     */
+    private String type;
+    /**
+     * Detailed description of the food item.
+     */
+    private String description;
+    /**
+     * ID of the food item.
+     */
+    private String item;
+    /**
+     * Specific price of the food item.
+     */
     private float price;
-    //private MenuItems[] list; 
+    /**
+     * Choice made by the authorized person to select the function.
+     */
     private int choice;
+
     private Scanner sc = new Scanner(System.in);
 
     public SecurityAccess(){
 
     }
 
+    /**
+     * Prints out the option available for the authorized personnel.
+     */
     public void showOptions(){
         System.out.println("---------------------------------------------");
         System.out.println("|------------Manager Access Only-------------|");
@@ -32,6 +63,9 @@ public class SecurityAccess{
         System.out.println("---------------------------------------------");
     }
 
+    /**
+     * Creates and add new items into a new menu.
+     */
     public void createMenu(){
         System.out.println("Here is the Menu: ");
         printMenu();
@@ -85,6 +119,10 @@ public class SecurityAccess{
         
         
     }
+    
+    /**
+     * Creates and add new a set package using items in menu.
+     */
     public void createSet(){ 
         System.out.println("Here is the Menu: ");
         printMenu();
@@ -131,6 +169,10 @@ public class SecurityAccess{
 
 
     }
+    
+    /**
+     * Updates new item into the menu.
+     */
     public void updateMenu(){
         System.out.println("Here is the Menu: ");
         printMenu();
@@ -166,6 +208,10 @@ public class SecurityAccess{
         
 
     }
+    
+    /**
+     * Updates the new set package in the set package.
+     */
     public void updateSet(){//Done!
         System.out.println("Here is the Menu: ");
         printMenu();
@@ -221,6 +267,10 @@ public class SecurityAccess{
 
 
     }
+    
+    /**
+     * Removes an item from menu.
+     */
     public void removeItem(){
         System.out.println("Here is the Menu: ");
         printMenu();
@@ -265,6 +315,10 @@ public class SecurityAccess{
         
 
     }
+    
+    /**
+     * Prints out the total sales for the specific day or month.
+     */
     public void totalSales(){
         ArrayList<MenuItems> TotalItems = new ArrayList<>(10000);
         int count =0;
@@ -363,6 +417,9 @@ public class SecurityAccess{
 
     }
 
+    /**
+     * Prints out all the item in the menu.
+     */
     public static void printMenu(){
 		int i = 0;
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
