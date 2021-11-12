@@ -17,7 +17,7 @@ public class FileToObject {
 	 * Read and converts staff text file into object to be used in the main function.
 	 */
 	public static void staff(){
-		System.out.println("Staff are taking attendance....."); 
+		System.out.println("Staff are taking attendance.....\n"); 
         try {
             FileReader Staff = new FileReader("data/staff.txt"); 
 			BufferedReader file = new BufferedReader(Staff); 
@@ -45,7 +45,7 @@ public class FileToObject {
 	 * Read and converts set package text file into object to be used in the main function.
 	 */
 	public static void setPackage(){
-		System.out.println("Cooking Set Package Food......");
+		System.out.println("Cooking Set Package Food......\n");
 		try {
             FileReader setPackage = new FileReader("data/setPackage.txt"); 
 			BufferedReader file = new BufferedReader(setPackage); 
@@ -82,7 +82,7 @@ public class FileToObject {
 	 * Read and converts menuItem text file into object to be used in the main function.
 	 */
 	public static void MenuItems(){
-		System.out.println("Cooking Ala Carte Food......");
+		System.out.println("Cooking Ala Carte Food......\n");
 		try {
             FileReader MenuItems = new FileReader("data/MenuItems.txt"); 
 			BufferedReader file = new BufferedReader(MenuItems); 
@@ -110,7 +110,7 @@ public class FileToObject {
 	 * Read and converts order text file into object to be used in the main function.
 	 */
 	public static void Order(){
-		System.out.println("Loading Order Data......");
+		System.out.println("Loading Order Data......\n");
 		try {
             FileReader Order = new FileReader("data/order.txt"); 
 			BufferedReader file = new BufferedReader(Order); 
@@ -153,7 +153,7 @@ public class FileToObject {
 	 * Read and converts staff text file into object to be used in the main function.
 	 */
 	public static void table(){
-		System.out.println("Cleaning and Sanitizing Table......"); 
+		System.out.println("Cleaning and Sanitizing Table......\n"); 
         try {
             FileReader Table = new FileReader("data/table.txt"); 
 			BufferedReader file = new BufferedReader(Table); 
@@ -181,7 +181,7 @@ public class FileToObject {
 	 * Read and converts reservation text file into object to be used in the main function.
 	 */
 	public static void reservation(){
-		System.out.println("Checking the Reservation Logs......"); 
+		System.out.println("Checking the Reservation Logs......\n"); 
         try {
         	FileReader fr = new FileReader("data/reservation.txt"); 
 			BufferedReader br = new BufferedReader(fr); 
@@ -192,7 +192,6 @@ public class FileToObject {
             	reservationObject = line.split("[|]"); 
             	Timestamp DateTime = Timestamp.valueOf(reservationObject[2]);
 				mainapp.ReservationList.add(new Reservation(reservationObject[0], reservationObject[1], DateTime,Integer.parseInt(reservationObject[3]),Integer.parseInt(reservationObject[4]),Integer.parseInt(reservationObject[5]), Integer.parseInt(reservationObject[6])));
-				System.out.println(mainapp.ReservationList.size());
 				line = br.readLine();
 
         	}

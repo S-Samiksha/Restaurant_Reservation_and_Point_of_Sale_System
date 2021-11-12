@@ -41,13 +41,13 @@ public class Order {
 
 	//edit this part according to the  data structure of the menuitems 
 	public void printOrder() {
-		System.out.println("Your Order:");
+		System.out.println("Your Order:\n");
 		int i = 0;
 		if(this.customerOrder.size() == 0) {
 			System.out.printf("No orders yet!\n");
 		}
 		while (i < this.customerOrder.size()){
-			System.out.printf("Order %d: ID:%s Name:%s Type:%s Description:%s Price:%f\n",i+1, customerOrder.get(i).getitemID(), customerOrder.get(i).getName(), customerOrder.get(i).getType(), customerOrder.get(i).getDescription(), customerOrder.get(i).getPrice());
+			System.out.printf("Order %d: ID:%s Name:%s Type:%s Description:%s Price:$%.2f\n",i+1, customerOrder.get(i).getitemID(), customerOrder.get(i).getName(), customerOrder.get(i).getType(), customerOrder.get(i).getDescription(), customerOrder.get(i).getPrice());
 			i++;
 		}
 	}
@@ -72,7 +72,12 @@ public class Order {
 			}
 		}
 		while (i<this.customerOrder.size()){
-			System.out.printf("|%d %s %f| \n", count, this.customerOrder.get(i).getName(),this.customerOrder.get(i).getPrice());
+			String line = "  "+count+" "+this.customerOrder.get(i).getName()+" "+this.customerOrder.get(i).getPrice();
+			System.out.printf("|  %d %s %f", count, this.customerOrder.get(i).getName(),this.customerOrder.get(i).getPrice());
+			for ( int  l = 0; l<55-line.length();l++){
+				System.out.printf(" ");
+			}
+			System.out.printf("|\n");
 			i++;
 		}
 	}
@@ -96,7 +101,7 @@ public class Order {
         System.out.println("Are you a member? Enter 'true' if yes and 'false' is no");
         boolean isMember = Boolean.parseBoolean(sc.nextLine());
         if (isMember){
-            System.out.println("You are a Member! You will get a 10% Discount");
+            System.out.println("You are a Member! You will get a 10% Discount.");
             MemberDiscount = totalPrice*0.1;
             //minus 10% member discount 
         }
@@ -107,41 +112,77 @@ public class Order {
 		String staffid = this.getStaff();
 		int tableNum = this.getTable();
 
-        System.out.println("Here is your final invoice");
-        System.out.println("-----------" + new Timestamp(System.currentTimeMillis()) + "------------");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("|-------------------- Sally's Burger Town ------------------|");
+        System.out.println("Here is your final invoice:\n");
+        System.out.println("+------------------" + new Timestamp(System.currentTimeMillis()) + "------------------+"); 
+        System.out.println("|-----------------------------------------------------------|"); 
+        System.out.println("|--------------------Sally's Burger Town--------------------|"); 
 		System.out.println("|----------------------50 Nanyang Avenue--------------------|");
 		System.out.println("|----------------------------639798-------------------------|");
 		System.out.println("|-------------------------Tel: 98765432 --------------------|");
-        System.out.println("|  Staff ID: "+ staffid +"Table No.:" + tableNum+"          |");
+        System.out.println("|------------------Staff ID: "+ staffid +" Table No.:" + tableNum+"-----------------|");
 		viewInvoiceOrder();
-        System.out.println("|  Total Price : SGD"+totalPrice+"                          |");
-        System.out.println("|  Total GST   : SGD"+GSTamount+"                           |");
-        System.out.println("|  Total Service Tax : SGD"+Taxamount+"                     |");
-        System.out.println("|  Total Member's Discount : SGD "+MemberDiscount+"         |");
-        System.out.println("|  Total Payable Amount: SGD "+PayablePrice+"               |");
+        System.out.printf("|  Total Price : SGD$%.2f                                  |\n",totalPrice);
+        System.out.printf("|  Total GST : SGD$%.2f                                     |\n",GSTamount);
+        System.out.printf("|  Total Service Tax : SGD$%.2f                             |\n",Taxamount);
+        System.out.printf("|  Total Member's Discount : SGD$%.2f                       |\n",MemberDiscount);
+        System.out.printf("|  Total Payable Amount: SGD $%.2f                         |\n",PayablePrice);
         System.out.println("|---------------- Thank you for Visiting! ------------------|");
         System.out.println("|----------------- Please do come again! ------------------ |");
-        System.out.println("-------------------------------------------------------------");
+        System.out.println("+-----------------------------------------------------------+\n");
 	}
-	
+
 	public void printMenu(){
 		int i = 0;
-		System.out.println("Menu:");
-		System.out.println("Ala Carte Menu");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("---------------------------------------------------------------------------------------------------------");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Ala Carte Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println();
 		List<MenuItems> menuitems = mainapp.MenuList; 
+		class MenuItemsComparator implements Comparator<MenuItems> {
+			@Override
+			public int compare(MenuItems o1, MenuItems o2) {
+				return o2.getType().compareTo(o1.getType());
+			}
+		}
+		Collections.sort(menuitems, new MenuItemsComparator());
+		String Type = menuitems.get(0).getType();
+		System.out.printf("\n%s\n", Type);
+		System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 		while (i < menuitems.size()){ 
-			System.out.printf("ID:%s Name:%s Type:%s Description:%s Price:%f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getDescription(),menuitems.get(i).getPrice());
+			if(!Type.equals(menuitems.get(i).getType())){
+				Type = menuitems.get(i).getType();
+				System.out.printf("\n%s\n", Type);
+				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
+			}
+            System.out.println();
+			System.out.printf("ID: %s Name: %s Type: %s       Price: %f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
+            System.out.printf("Description: %s ", menuitems.get(i).getDescription());
+            System.out.println();
+            System.out.println("                                                 -----                                                   ");
 			i++;
 		}
 		List<SetPackage> setpackages = mainapp.SPList; 
-		System.out.println("\nSet Package Menu");
+		Collections.sort(setpackages, new MenuItemsComparator());
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Set Package Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
 		i = 0;
+		Type = setpackages.get(0).getType();
+		System.out.printf("\n%s\n", Type);
+		System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 		while (i < setpackages.size()){ 
-			System.out.printf("ID:%s Name:%s Type:%s Description:%s Price:%f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getDescription(),setpackages.get(i).getPrice());
-			i++;
+			if(!Type.equals(setpackages.get(i).getType())){
+				Type = setpackages.get(i).getType();
+				System.out.printf("\n%s\n", Type);
+				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
+			}
+            System.out.println();
+			System.out.printf("ID: %s Name: %s Type: %s Price: %f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
+            System.out.printf("Description: %s ", setpackages.get(i).getDescription());
+            System.out.println();
+            System.out.println("                                                 -----                                                   ");
+            i++;
 		}
+        System.out.println("---------------------------------------------------------------------------------------------------------");
 	}
 
 	public void addOrder(String ItemID, int quantity){
@@ -202,8 +243,7 @@ public class Order {
 		List<Staff> staffList = mainapp.StaffList;
 		for (int i = 0; i< staffList.size();i++){ 
 			if(staffList.get(i).getisAvailable()){
-				staffList.get(i).setisAvailable(false);
-				this.staffID = staffList.get(i).getEmployeeID() ;
+				this.staffID = staffList.get(i).getEmployeeID();
 				return;
 			}
 		}
@@ -228,11 +268,10 @@ public class Order {
 
 
 	public int FindTable(int customerPax) {
-		List<Table> TableList = mainapp.TableList; //Error! No protected inside a method of a class
+		List<Table> TableList = mainapp.TableList; 
 		int i = 0;
         for(i=0; i<TableList.size();i++){
 			if(TableList.get(i).isAvailable() == true && TableList.get(i).gettableCapacity() >= customerPax){
-				TableList.get(i).setisAvailable(false);
 				this.tableNumber = TableList.get(i).gettableNum();
 				return TableList.get(i).gettableNum();
 			}

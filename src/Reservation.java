@@ -154,12 +154,11 @@ public class Reservation {
 	 * Prints out the information of this reservation.
 	 */
 	public void printReservation() {
-		System.out.println("Your Order:");
 		if(this.getReservationID() == -1) {
 			System.out.printf("No reservation yet!\n");
 		}
 		else{
-			System.out.printf("Reservation ID:%d Name:%s Time Of Reservation :%s Contact Number:%d Number of People:%d Table:%d StaffId:%s\n",this.getReservationID(),this.getCustomerName(),this.getTimestamp(),this.getContactNumber(), this.getNumPeople(),this.getTable(),this.getStaffID());
+			System.out.printf("Reservation ID:%d\nName:%s\nTime Of Reservation :%s\nContact Number:%d\nNumber of People:%d\nTable:%d\nStaffId:%s\n",this.getReservationID(),this.getCustomerName(),this.getTimestamp(),this.getContactNumber(), this.getNumPeople(),this.getTable(),this.getStaffID());
 		}
 	}
 
