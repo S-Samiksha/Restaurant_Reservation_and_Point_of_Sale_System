@@ -12,15 +12,41 @@ import java.sql.Timestamp;
  * You also need a staff --> this is also a must in other words also a composition relationship
  * 
  */
+	/**
+	 * Represents an order made for each table in the restaurant.
+	 * An order must have a item in the menu, a staff and a table.
+	 * An order may have a set package. 
+	 */
 public class Order {
 	Scanner sc = new Scanner(System.in);
+	/**
+	 * Time when this order is been made.
+	 */
 	private Timestamp timestamp;
+	/**
+	 * Specific ID of this order.
+	 */
 	private int orderID;
+	/**
+	 * ID of the staff assigned to this order.
+	 */
 	private String staffID; 
+	/**
+	 * Table number of the table assigned to this order.
+	 */
 	private int tableNumber;
+	/**
+	 * Sum of total price for this order.
+	 */
 	private float totalPrice;
+	/**
+	 * List of item/set packages on this order.
+	 */
 	public ArrayList<MenuItems> customerOrder;
 
+	/**
+	 * Creates and initialize a new empty order.
+	 */
 	public Order(){
 		this.staffID = new String("");
 		this.orderID = 0;
@@ -28,7 +54,19 @@ public class Order {
 		this.totalPrice = (float)0;
 		this.customerOrder = new ArrayList<MenuItems>(); 
 	}
-	//create the constructor!
+	
+	/**
+	 * Creates a new order by staff for the customer with details.
+	 * @param orderID This Order's ID
+	 * 					Should not be changed once set.
+	 * @param staffID This Order's assigned staff.
+	 * @param tableNumber This Order's assigned table number.
+	 * 						Should not be changed once assigned.
+	 * @param timestamp This Order's start time.
+	 * @param totalPrice This Order's total price.
+	 * 						This is constantly updated when item/set package is added or removed.
+	 * @param customerOrder This Order's list of item/set package.
+	 */
 	public Order(int orderID,String staffID, int tableNumber, Timestamp timestamp,float totalPrice, ArrayList<MenuItems> customerOrder){
 		this.staffID = staffID;
 		this.orderID = orderID;
@@ -40,6 +78,9 @@ public class Order {
 
 
 	//edit this part according to the  data structure of the menuitems 
+	/**
+	 * Prints the item/set package in this order.
+	 */
 	public void printOrder() {
 		System.out.println("Your Order:\n");
 		int i = 0;
@@ -52,7 +93,9 @@ public class Order {
 		}
 	}
 
-
+	/**
+	 * Gets the invoice of this order.
+	 */
 	public void viewInvoiceOrder(){
 		int i = 0;
 		if(this.customerOrder.size() == 0){
@@ -81,7 +124,11 @@ public class Order {
 			i++;
 		}
 	}
-
+	
+	/**
+	 * Prints the invoice for this order for the customer.
+	 * This should be printed at check out to show customer item ordered and the total price payable.
+	 */
 	public void printInvoice(){
 		//shift everything over from mainapp
 		//based on orderID, retrieve price and items fron order.txt
@@ -130,7 +177,10 @@ public class Order {
         System.out.println("|----------------- Please do come again! ------------------ |");
         System.out.println("+-----------------------------------------------------------+\n");
 	}
-
+	 
+	/**
+	 * Prints the item, price and description in the menu for the customer to order for this order.
+	 */
 	public void printMenu(){
 		int i = 0;
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -185,6 +235,11 @@ public class Order {
         System.out.println("---------------------------------------------------------------------------------------------------------");
 	}
 
+	/**
+	 * Adds an item with specific quantity for this order.
+	 * @param ItemID This Order's new item added.
+	 * @param quantity This Order's quantity of the new item added.
+	 */
 	public void addOrder(String ItemID, int quantity){
 		int ID = Integer.parseInt(ItemID.substring(2).intern());
 		List<MenuItems> menuitems = mainapp.MenuList;
@@ -203,6 +258,10 @@ public class Order {
 		System.out.println("Item(s) added successfully");
 	}
 
+	/**
+	 * Removes an item from this order.
+	 * @param orderNumber This Order's ID of the item to be removed.
+	 */
 	public void removeFromOrder(int orderNumber){
 		if (this.customerOrder.size() == 0) {
 			System.out.printf("Cannot remove from order.\n");
@@ -213,6 +272,10 @@ public class Order {
 		}
 	}
 	
+	/**
+	 * Gets the total price for the order.
+	 * @return
+	 */
 	public float getPrice(){
 		float totalPrice = (float)0;
 		for (int i = 0; i< this.customerOrder.size();i++) {
@@ -222,23 +285,44 @@ public class Order {
 		return this.totalPrice;
 	} 
 	
+
+	/**
+	 * Changes the order ID for this order.
+	 * @param i This Order's ID.
+	 * @return This Order's ID.
+	 */
 	public int setOrderID(int i){
 		this.orderID = i;
 		return i;
 	}
 
+	/**
+	 * Gets the order ID for this order.
+	 * @return This Order's order ID
+	 * 			Should not be changed once set.
+	 */
 	public int getOrderID(){
 		return this.orderID;
 	}
 
+	/**
+	 * Changes the time accordingly with the real time.
+	 */
 	public void setTimestamp(){
 		this.timestamp = new Timestamp(System.currentTimeMillis());
 	}
 	 
+	/**
+	 * Gets the time for this order.
+	 * @return
+	 */
 	public Timestamp getTimestamp(){
 		return this.timestamp;
 	}
 
+	/**
+	 * Assign an available staff to serve this order.
+	 */
 	public void setStaff(){
 		List<Staff> staffList = mainapp.StaffList;
 		for (int i = 0; i< staffList.size();i++){ 
@@ -250,6 +334,11 @@ public class Order {
 		System.out.println("No Available Staff");
 	}
 
+	/**
+	 * Checks if the number of customer for this order is within the acceptable range.
+	 * @param customerPax This Order's number of customer.
+	 * @return True for within the acceptable range. False for not within the acceptable range.
+	 */
 	public boolean validatecustomerPax(int customerPax){
 		if(customerPax >= 2 && customerPax <= 10){
 			return true;
@@ -257,16 +346,29 @@ public class Order {
 		return false;
 	}
 	
-	
+	/**
+	 * Changes the staff serving this order.
+	 * @param StaffID This Order's staff ID.
+	 */
 	public void setStaff(String StaffID){
 		this.staffID = StaffID;
 	}
 
+	/**
+	 * Gets the ID of the staff serving this order.
+	 * @return This Order's staff ID.
+	 */
 	public String getStaff(){
 		return this.staffID;
 	}
 
 
+	/**
+	 * Finds a available table for this order.
+	 * This order can only be created if there is an empty table.
+	 * @param customerPax This Order's number of customer.
+	 * @return Table number if a table is found and 0 if no table is found.
+	 */
 	public int FindTable(int customerPax) {
 		List<Table> TableList = mainapp.TableList; 
 		int i = 0;
@@ -279,26 +381,43 @@ public class Order {
 		return 0;
 	}
 
+	/**
+	 * Changes the table number for this order.
+	 * @param TableNum This Order's table number.
+	 */
 	public void setTable(int TableNum){
 		this.tableNumber = TableNum;
 	}
 
+	/**
+	 * Gets the table number for this order.
+	 * @return This Order's assigned table number.
+	 */
 	public int getTable(){
 		return this.tableNumber;
 	}
-
+	/**
+	 * Gets the list of item in this order.
+	 * @return This Order's list of item.
+	 */
 	public ArrayList<MenuItems> getOrdersList(){
 		return this.customerOrder;
 	}
 
+	/**
+	 * Gets the date and time for this order.
+	 * @return This order's date and time.
+	 */
 	public Timestamp getDateTime(){
 		return this.timestamp;
 	}
 
+	/**
+	 * Gets the total price for this order.
+	 * Subject to change when item is added or removed and when the price of item changed.
+	 * @return This Order's total price.
+	 */
 	public float getTotalprice(){
 		return this.totalPrice;
 	}
 }
-
-
-
