@@ -172,7 +172,7 @@ public class Order {
         System.out.println("|----------------- Please do come again! ------------------ |");
         System.out.println("-------------------------------------------------------------");
 	}
-	
+	 
 	/**
 	 * Prints the item, price and description in the menu for the customer to order for this order.
 	 */
@@ -245,11 +245,15 @@ public class Order {
 	} 
 	
 
-	/* order id should not be able to change.
+	/**
+	 * Changes the order ID for this order.
+	 * @param i This Order's ID.
+	 * @return This Order's ID.
+	 */
 	public int setOrderID(int i){
 		this.orderID = i;
 		return i;
-	}*/
+	}
 
 	/**
 	 * Gets the order ID for this order.
@@ -338,10 +342,13 @@ public class Order {
 		return 0;
 	}
 
-	//should not be able to change table number
-	/*public void setTable(int TableNum){
+	/**
+	 * Changes the table number for this order.
+	 * @param TableNum This Order's table number.
+	 */
+	public void setTable(int TableNum){
 		this.tableNumber = TableNum;
-	}*/
+	}
 
 	/**
 	 * Gets the table number for this order.
