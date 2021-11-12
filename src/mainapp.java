@@ -17,7 +17,7 @@ public class mainapp {
     protected static List<Staff> StaffList = new ArrayList<>(30);
     protected static List<Table> TableList = new ArrayList<>(30);
     protected static List<Order> TotalOrders = new ArrayList<>(10000);
-    protected static List<Reservation> ReservationList = new ArrayList<>(30);
+    protected static List<Reservation> ReservationList = new ArrayList<>(10000);
     public static int tableNum = -1;
     
 
@@ -26,6 +26,7 @@ public class mainapp {
     /// change according to number of lines in data.txt
     public static int ReservationID = 3;
     public static int OrderID = 11;
+    public static boolean exceptionLoop = false;
     
     public static void main(String[] args) throws IOException{
         System.out.println("Restaurant Opening.....");
@@ -35,10 +36,38 @@ public class mainapp {
         FileToObject.setPackage();
         FileToObject.Order();
         FileToObject.reservation();
-        
-        List<Reservation> ReservationList = new ArrayList<>(10000);
+        System.out.println(ReservationList.size());
         Scanner sc = new Scanner(System.in);
         Date date = new Date();
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run(){
+                Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+                for(int i = 0; i < mainapp.ReservationList.size();i++){
+                   if (((currentTime.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000)/60 >= 720){
+                       System.out.printf("NOTICE:Reservation with ID %d has been deleted due reservation period expiry\n", mainapp.ReservationList.get(i).getReservationID());
+                       mainapp.ReservationList.remove(i);
+                       int tableID = mainapp.ReservationList.get(i).getTable();
+                       String StaffID = mainapp.ReservationList.get(i).getStaffID();
+                       int j;
+                       for (j=0; j<mainapp.TableList.size();j++){
+                            if(tableID == mainapp.TableList.get(j).gettableNum()){
+                                mainapp.TableList.get(i).setisAvailable(true);
+                                return;
+                            }
+                        }
+                        for (j = 0 ; j<mainapp.StaffList.size();j++){
+                            if(StaffID.equals(mainapp.StaffList.get(j).getEmployeeID())){
+                                mainapp.StaffList.get(i).setisAvailable(true);;
+                                return;
+                            }
+                        }
+                   }
+               }
+            }
+            },0,5000);
         System.out.println("-----------" + new Timestamp(date.getTime()) + "---------------------------"); 
         int c = 0;
         System.out.println("~~~~~~~~~~~~Welcome to Sally's Burger Town Restaurant!~~~~~~~~~~~~");
@@ -56,60 +85,108 @@ public class mainapp {
             try{
                 c = Integer.parseInt(sc.nextLine());
             }catch(Exception e){
-                c=9;
-            }
+                c = 9;
+            } 
             
         switch(c){
             case 1: 
-                boolean reservationFound = false; //problem 1
-                Boolean reserved=false;
-                try{System.out.println("Have you reserved a table? Enter true or false.\n"); 
-                    reserved = Boolean.parseBoolean(sc.nextLine());
-                }catch(Exception e){
-                    System.out.println("You did not input the correct value! Reservation set to false");
-                    reserved = false;
-                    break; 
+                boolean reservationFound = false;
+                boolean reserved = false;
+                while(!exceptionLoop){
+                    System.out.println("Have you reserved a table? Enter true or false.");
+                    String reservedString = sc.nextLine();
+                    if(reservedString.equals("true") || reservedString.equals("false")){
+                        reserved = Boolean.parseBoolean(reservedString);
+                        exceptionLoop = true;
+                    }
+                    else{
+                        System.out.println("Please enter either true or false!");  
+                    }
                 }
+                exceptionLoop = false;
+                if(reserved){
+                    int reservationID = -1;
+                    while(!exceptionLoop){
+                        try{
+                            System.out.println("Please enter your Reservation ID:");
+                            String reservationIDString = sc.nextLine();
+                            reservationID = Integer.parseInt(reservationIDString);
+                            exceptionLoop = true;
+                        }
+                        catch(Exception e){
+                            System.out.println("Please enter a valid integer value for Reservation ID!"); 
+                        }
+                    }
+                    exceptionLoop = false;
 
-                
-                //problem 1: do we need this...? boolean reservationFound = false; it is already false seems quite redunant to me
+                    for(int i=0; i<mainapp.ReservationList.size();i++){
+                        if(mainapp.ReservationList.get(i).getReservationID() == reservationID){
+                            System.out.println("Reservation found!");
+                            Timestamp timeNow  = new Timestamp(System.currentTimeMillis());
+                            reservationFound = true;
+                            if (Math.abs(timeNow.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000/60 <= 30){
+                                System.out.println("Your reservation is active!");
+                                Order reservationOrder = new Order();
+                                reservationOrder.setOrderID(OrderID);
+                                reservationOrder.setStaff(mainapp.ReservationList.get(i).getStaffID());
+                                reservationOrder.setTimestamp();
+                                reservationOrder.setTable(mainapp.ReservationList.get(i).getTable());
+                                TotalOrders.add(OrderID, reservationOrder);
+                                OrderID++; // DO NOT EDIT THIS VARIABLE 
+                                mainapp.ReservationList.remove(i);
+                                System.out.printf("Staff %s will be helping you!\n",reservationOrder.getStaff());
+                                System.out.printf("You are allocated to %d\n",reservationOrder.getTable());
+                                System.out.printf("OrderID:%d\n",reservationOrder.getOrderID());
+                            }
+                            else{
+                                System.out.println("Your reservation is not within the past or next 30 minutes! Please come back later!");
+                            }
+                        }
+                    }
+                }
                 if(reservationFound){
                     break;
                 }
-                int customerpax =0;
-                Order case1order;
-                try{
-                    System.out.println("Enter number of people to be seated in the table\n"); 
-                    customerpax = Integer.parseInt(sc.nextLine());
-                    if (customerpax > 0 && customerpax <=10){
-                        case1order = new Order();
-                    }else{
-                        break;
-                    }
-                    
-
-                }catch(Exception e){
-                    System.out.println("Invalid Entry!");
-                    break;
+                else{
+                    System.out.println("The ID you entered does not belong to an existing reservation!");
                 }
-                
+
+                Order case1order = new Order();
+                int customerPax = 0;
+                while(!exceptionLoop){
+                    try{
+                        System.out.println("Enter number of people to be seated in the table");
+                        String customerPaxString = sc.nextLine();
+                        customerPax = Integer.parseInt(customerPaxString);
+                    }
+                    catch(Exception e){
+                        System.out.println("Pleaee enter an integer value for the number of people to be seated!"); 
+                        continue;
+                    }
+                    if(case1order.validatecustomerPax(customerPax)){
+                        exceptionLoop = true;
+                    }
+                    else{
+                        System.out.println("Number of people for reservation ahould be between 2-10!");
+                    }
+                }
+                exceptionLoop = false;
                 
                 case1order.setStaff();
                 String staffFound = case1order.getStaff();
-                if (staffFound == ""){ // edit this
+                if (staffFound == ""){ 
                     System.out.println("No Staff available at the moment!\n");
                 }
                 else{
                     System.out.printf("Staff %s will be helping you!\n",case1order.getStaff());
                 }
 
-
-                int tableFound = case1order.FindTable(customerpax);
+                int tableFound = case1order.FindTable(customerPax);
                 if (tableFound == 0){
                     System.out.println("No table available at the moment!\n");
                 }
                 else{
-                    System.out.printf("You are allocated to table %d\n",case1order.getTable());
+                    System.out.printf("You are allocated to %d\n",case1order.getTable());
                 }
 
                 case1order.setOrderID(OrderID);
@@ -122,17 +199,18 @@ public class mainapp {
 
             case 2: 
                 int case2orderID=0;
-                int choicecase = 0;
-                try{
-                    System.out.println("Enter your order ID:");
-                    case2orderID = Integer.parseInt(sc.nextLine()); 
-                    
+                int choicecase2 = 0;
+                while(!exceptionLoop){
+                    try{
+                        System.out.println("Enter your order ID:");
+                        case2orderID = Integer.parseInt(sc.nextLine()); 
+                        exceptionLoop = true;
 
-                }catch(Exception e){
-                    System.out.println("Invalid Order ID");
-                    break;
-
+                    }catch(Exception e){
+                        System.out.println("Invalid Order ID");
+                    }
                 }
+                exceptionLoop = false;
                 Order case2order = TotalOrders.get(case2orderID);
                 do{ 
                     System.out.println("Enter choice:");
@@ -140,65 +218,81 @@ public class mainapp {
                     System.out.println("(2): Remove Item From Order ");
                     System.out.println("(3): Exit ");
                     try {
-                        choicecase = Integer.parseInt(sc.nextLine());
+                        choicecase2 = Integer.parseInt(sc.nextLine());
 
                     }catch (Exception e){
                         System.out.print("Invalid choice! Try Again! Input an Integer");
-                        choicecase = 0;
+                        choicecase2 = 0;
                     }
                     
-                    switch(choicecase){
+                    switch(choicecase2){
                         case 1:
                             case2order.printMenu(); 
-                            System.out.println("Enter the menu item number you want to order from the menu: ");
+                            System.out.println("Enter the menu item number you want to order from the menu:");
                             String menuitem;
-                            try{
-                                menuitem = sc.nextLine();
-                                case2order.addOrder(menuitem); 
-                                System.out.println("This is your updated order");
-                                case2order.printOrder();
-                            }catch(Exception e){
-                                System.out.println("Invalid menu item"); 
-                                choicecase = 0;
-                                break;
+                            while(!exceptionLoop){
+                                try{
+                                    menuitem = sc.nextLine();
+                                    System.out.println("Enter the quantity");
+                                    int quantity = sc.nextInt();
+                                    case2order.addOrder(menuitem,quantity); 
+                                    System.out.println("This is your updated order");
+                                    case2order.printOrder();
+                                    exceptionLoop = true;
+                                }catch(Exception e){
+                                    System.out.println("Invalid menu item/quantity value"); 
+                                }
                             }
+                            exceptionLoop = false;
                             
                             break;
                         case 2:
-                            case2order.removeFromOrder();
-                            System.out.println("This is your updated order");
                             case2order.printOrder();
+                            while(!exceptionLoop){
+                                try{
+                                    System.out.println("Select an item to remove from order and enter the number:");
+                                    int orderNumber = sc.nextInt();
+                                    case2order.removeFromOrder(orderNumber-1);
+                                    exceptionLoop = true;
+                                    System.out.println("This is your updated order");
+                                    case2order.printOrder();
+                                }
+                                catch(Exception e){
+                                    System.out.println("Please enter an integer value");
+                                }
+                            }
+                            exceptionLoop = false;
                             break;
                         case 3:
                             break;
                         default:
                             System.out.println("Wrong choice!");
-                            choicecase = 0;
+                            choicecase2 = 0;
                             break;
                     }
-                }while(choicecase != 3);
+                }while(choicecase2 != 3);
                
                 
                 break;
     
             case 3: 
                 int case3orderID;
-                System.out.println(TotalOrders.get(0)); //Problem 2 why do we need this?
-                System.out.println("Enter your order ID:");
-                try{
-                    case3orderID = Integer.parseInt(sc.nextLine());
-                    TotalOrders.get(case3orderID);
-                }
-                catch(Exception e){
-                    System.out.println("Invalid OrderID");
-                    break;
-                }
-                Order case3order = TotalOrders.get(case3orderID);
-                System.out.println("View your order:");
-                case3order.printOrder();
-                
-                break;
+                Order case3order = new Order();
+                while(!exceptionLoop){
+                    try{
+                        System.out.println("Enter your order ID:");
+                        case3orderID = Integer.parseInt(sc.nextLine()); 
+                        case3order = TotalOrders.get(case3orderID);
+                        exceptionLoop = true;
 
+                    }catch(Exception e){
+                        System.out.println("Invalid Order ID!");
+                    }
+                }
+                exceptionLoop = false;
+                System.out.println();
+                case3order.printOrder();
+                break;
 
             case 4: 
                 int choicecase4 = 0;
@@ -208,14 +302,33 @@ public class mainapp {
                     System.out.println("(2): Remove a Reservation");
                     System.out.println("(3): Check a Reservation");
                     System.out.println("(4): Exit");
-                    choicecase4 = sc.nextInt();
+                    try {
+                        choicecase4 = Integer.parseInt(sc.nextLine());
+
+                    }catch (Exception e){
+                        System.out.print("Invalid choice! Try Again! Input an Integer");
+                        choicecase4 = 4;
+                    }
                     switch(choicecase4){
                         case 1:
-                            System.out.println("Enter Staff ID: ");
-                            String staffID = sc.next();
-                            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+                            Reservation newReservation = new Reservation();
+                            String staffID = "";
+                            while(!exceptionLoop){
+                                System.out.println("Enter Staff ID: ");
+                                staffID = sc.nextLine();
+                                if(newReservation.validateStaffID(staffID)){
+                                    exceptionLoop = true;
+                                }
+                                else{
+                                    System.out.println("Invalid StaffID");
+                                }
+                            }
+                            exceptionLoop = false;
+
                             System.out.println("Enter Name of Customer:");
                             String customerName = sc.next();
+
+                            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
                             Timestamp startTime = new Timestamp(System.currentTimeMillis());
                             startTime.setTime(0);
                             boolean dateSet = false;
@@ -227,45 +340,64 @@ public class mainapp {
                                     startTime = Timestamp.valueOf(dateTime); 
                                     SimpleDateFormat getDate = new SimpleDateFormat("yyyy-MM-dd");
                                     String reservationDate = getDate.format(startTime);
-                                    Timestamp closingTime = Timestamp.valueOf(reservationDate+" 20:01:00");
+                                    Timestamp closingTime = Timestamp.valueOf(reservationDate+" 21:01:00");
                                     Timestamp openingTime = Timestamp.valueOf(reservationDate+" 9:59:00");
-
-                                    if (currentTime.before(startTime)){
-                                        if(startTime.before(closingTime)){
-                                            if((startTime).after(openingTime)){
-                                                System.out.println("Entered date and time are valid!");
-                                                dateSet = true;
-                                            }
-                                            else{
-                                                System.out.println("Entered date and time are before booking hours!");
-                                            }
-                                        }
-                                        else{
-                                            System.out.println("Entered date and time are after booking hours!");
-                                        }
-                                    }
-                                    else{
-                                        System.out.println("Entered date and time have already passed!");
+                                    if (newReservation.validateStartTime(currentTime, startTime, openingTime, closingTime)){
+                                        dateSet = true;
                                     }
                                 }
                                 catch(Exception e){
                                     System.out.println("Enter a valid date and time in yyyy-MM-dd HH:mm:ss format!");
                                 }
                             }
-                            System.out.print("Enter the number of people to be there:");
-                            int peopleNum = sc.nextInt();
-                            if (peopleNum < 2 || peopleNum > 10){
-                                System.out.println("Invalid number of people, number of people must be between 2 and 10");
+
+                            int reservationPax = 0;
+                            while(!exceptionLoop){
+                                try{
+                                    System.out.println("Enter number of people to be there");
+                                    String reservationPaxString = sc.nextLine();
+                                    reservationPax = Integer.parseInt(reservationPaxString);
+                                }
+                                catch(Exception e){
+                                    System.out.println("Pleasee enter an integer value for the number of people to be seated!"); 
+                                    continue;
+                                }
+                                if(newReservation.validatecustomerPax(reservationPax)){
+                                    exceptionLoop = true;
+                                }
+                                else{
+                                    System.out.println("Number of people for reservation ahould be between 2-10!");
+                                }
                             }
-                            System.out.println("Enter Contact Number(8 digits):");
-                            int contactNum = sc.nextInt();
-                            if (contactNum < 1000_0000|| contactNum > 99999999){
-                                System.out.println("Invalid contact number, must be 8 digits long");
-                                break;
+                            exceptionLoop = false;
+                            
+                            int contactNum = 0;
+                            while(!exceptionLoop){
+                                try{
+                                    System.out.println("Enter Customer Contact Number(8 digits):");
+                                    String contactNumString = sc.nextLine();
+                                    contactNum = Integer.parseInt(contactNumString);
+                                }
+                                catch(Exception e){
+                                    System.out.println("Pleaee enter an integer value for the contact number!"); 
+                                    continue;
+                                }
+                                if(newReservation.validateContactNumber(contactNum)){
+                                    exceptionLoop = true;
+                                }
+                                else{
+                                    System.out.println("Invalid contact number, must be 8 digits long");
+                                }
                             }
-                            int tableNum = -1;
-                            Reservation newReservation = new Reservation(staffID, customerName, startTime, contactNum, peopleNum, tableNum, ReservationID);
-                            newReservation.FindTable(peopleNum);
+                            exceptionLoop = false;
+
+
+                            newReservation.setStaff(staffID);
+                            newReservation.setCustomerName(customerName);
+                            newReservation.setTimestamp(startTime);
+                            newReservation.setContactNumber(contactNum);
+                            newReservation.setNumPeople(reservationPax);
+                            newReservation.FindTable(reservationPax);
                             if (newReservation.getTable() == -1){
                                 System.out.println("No Tables Available! Reservation cannot be made the moment!");
                                 break;
@@ -273,13 +405,25 @@ public class mainapp {
                             else{
                                 System.out.printf("Table %d has been blocked for you!\n", newReservation.getTable());
                             }
-                            System.out.printf("Reservation Made!Your reservation ID is:%d\n", newReservation.getReservationID());
+                            newReservation.setReservationID(ReservationID);
+                            ReservationID++; // DO NOT EDIT THIS VALUE
+                            System.out.printf("Reservation Made! Your reservation ID is:%d\n", newReservation.getReservationID());
                             mainapp.ReservationList.add(newReservation);
                             break;
                         case 2:
                             boolean reservationFound1 = false;
-                            System.out.println("Please enter your Reservation ID:\n");
-                            int reservationID1 = sc.nextInt();
+                            int reservationID1 = -1;
+                            while(!exceptionLoop){
+                                try {
+                                    System.out.println("Please enter your Reservation ID:\n");
+                                    reservationID1 = Integer.parseInt(sc.nextLine());
+                                    exceptionLoop = true;
+            
+                                }catch (Exception e){
+                                    System.out.print("Invalid choice! Try Again! Input an Integer");
+                                }
+                            }
+                            exceptionLoop = false;
                             for(int i=0; i<mainapp.ReservationList.size();i++){
                                 if(mainapp.ReservationList.get(i).getReservationID() == reservationID1){
                                     System.out.printf("Reservation with ID %d found!\n", reservationID1);
@@ -293,9 +437,19 @@ public class mainapp {
                             }
                             break;
                         case 3:
-                            System.out.println("Please enter your Reservation ID:\n");
                             boolean reservationFound2 = false;
-                            int reservationID2 = sc.nextInt();
+                            int reservationID2 = -1;
+                            while(!exceptionLoop){
+                                try {
+                                    System.out.println("Please enter your Reservation ID:\n");
+                                    reservationID2 = Integer.parseInt(sc.nextLine());
+                                    exceptionLoop = true;
+            
+                                }catch (Exception e){
+                                    System.out.print("Invalid choice! Try Again! Input an Integer");
+                                }
+                            }
+                            exceptionLoop = false;
                             for(int i=0; i<mainapp.ReservationList.size();i++){
                                 if(mainapp.ReservationList.get(i).getReservationID() == reservationID2){
                                     System.out.printf("Reservation Details are as follows:\n");
@@ -308,8 +462,8 @@ public class mainapp {
                             }
                             break;
                         default:
-                        System.out.println("Wrong choice!");
-                        choicecase = 0;
+                            System.out.println("Wrong choice!");
+                            choicecase4 = 4;
                         break;
                     }
                 }
@@ -317,13 +471,34 @@ public class mainapp {
                 break;
 
             case 5: 
-                int case5orderID;
-                System.out.println("Enter your order ID:");
-                case5orderID = sc.nextInt();
-                Order case5order = TotalOrders.get(case5orderID);
-                System.out.println("View your order:");
-                
-                case5order.printInvoice(); 
+                int case5orderID = -1;
+                while(!exceptionLoop){
+                    try {
+                        System.out.println("Please enter your Order ID:\n");
+                        case5orderID = Integer.parseInt(sc.nextLine());
+                        exceptionLoop = true;
+                        Order case5order = TotalOrders.get(case5orderID);
+                        System.out.println("View your Order Invoice:");
+                        case5order.printInvoice(); 
+                        int tableID = TotalOrders.get(case5orderID).getTable();
+                        String staffID = TotalOrders.get(case5orderID).getStaff();
+                        for (int i=0; i<mainapp.TableList.size();i++){
+                            if(tableID == mainapp.TableList.get(i).gettableNum()){
+                                mainapp.TableList.get(i).setisAvailable(false);
+                                return;
+                            }
+                        }
+                        for (int i = 0 ; i<mainapp.StaffList.size();i++){
+                            if(staffID.equals(mainapp.StaffList.get(i).getEmployeeID())){
+                                mainapp.StaffList.get(i).setisAvailable(false);;
+                                return;
+                            }
+                        }
+                    }catch (Exception e){
+                        System.out.print("Invalid choice! Try Again! Input an Integer");
+                    }
+                }
+                exceptionLoop = false;
                 break;
             
             case 6:

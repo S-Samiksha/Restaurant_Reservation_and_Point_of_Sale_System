@@ -144,10 +144,8 @@ public class Order {
 		}
 	}
 
-	public void addOrder(String ItemID){
+	public void addOrder(String ItemID, int quantity){
 		int ID = Integer.parseInt(ItemID.substring(2).intern());
-		System.out.println("Enter the quantity");
-		int quantity = sc.nextInt();
 		List<MenuItems> menuitems = mainapp.MenuList;
 		List<SetPackage> setpackages = mainapp.SPList;
 		if (ItemID.substring(0,2).intern() == "AC") {
@@ -164,15 +162,12 @@ public class Order {
 		System.out.println("Item(s) added successfully");
 	}
 
-	public void removeFromOrder(){
-		printOrder();
+	public void removeFromOrder(int orderNumber){
 		if (this.customerOrder.size() == 0) {
 			System.out.printf("Cannot remove from order.\n");
 		}
 		else {
-			System.out.println("Select an item to remove from order and enter the number:");
-			int orderNumber = sc.nextInt();
-			this.customerOrder.remove(orderNumber - 1);
+			this.customerOrder.remove(orderNumber);
 			System.out.println("Item removed successfully");
 		}
 	}
@@ -215,6 +210,14 @@ public class Order {
 		System.out.println("No Available Staff");
 	}
 
+	public boolean validatecustomerPax(int customerPax){
+		if(customerPax >= 2 && customerPax <= 10){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public void setStaff(String StaffID){
 		this.staffID = StaffID;
 	}

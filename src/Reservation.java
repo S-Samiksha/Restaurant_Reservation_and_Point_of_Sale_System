@@ -79,6 +79,8 @@ public class Reservation {
 	 * @param table This Reservation's assigned table.
 	 * @param reservationID This Reservation's ID.
 	 */
+	public Reservation(){};
+
 	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
 		this.customerName = customerName;
 		this.timestamp = timestamp;
@@ -90,6 +92,55 @@ public class Reservation {
 	}
 
 	//its int not Int --> idk if this was churned out by visual paradigm but we need to fix it if thats the case 
+	//NEWLY ADDED FUNCTIONS
+	public boolean validateStaffID(String StaffID){
+		for (int i = 0 ; i<mainapp.StaffList.size(); i++){
+			if (StaffID.equals(mainapp.StaffList.get(i).getEmployeeID())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public boolean validateStartTime(Timestamp currentTime,Timestamp startTime, Timestamp openingTime, Timestamp closingTime){
+		if (currentTime.before(startTime)){
+			if(startTime.before(closingTime)){
+				if((startTime).after(openingTime)){
+					System.out.println("Entered date and time are valid!");
+					return true;
+				}
+				else{
+					System.out.println("Entered date and time are before booking hours!");
+					return false;
+				}
+			}
+			else{
+				System.out.println("Entered date and time are after booking hours!");
+				return false;
+			}
+		}
+		else{
+			System.out.println("Entered date and time have already passed!");
+			return false;
+		}
+	}
+
+
+	public boolean validatecustomerPax(int customerPax){
+		if(customerPax >= 2 && customerPax <= 10){
+			return true;
+		}
+		return false;
+	}
+
+
+	public boolean validateContactNumber(int contactNumber){
+		if (contactNumber >= 1000_0000 && contactNumber <= 99999999){
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Gets the customer's name for this reservation.
@@ -237,7 +288,7 @@ public class Reservation {
 	public void setStaff(String StaffID){
 		List<Staff> staffList = mainapp.StaffList;
 		for (int i = 0; i< staffList.size();i++){
-			if(staffList.get(i).getEmployeeID() == StaffID){
+			if(StaffID.equals(staffList.get(i).getEmployeeID())){
 				staffList.get(i).setisAvailable(false);
 				this.staffID = StaffID;
 				return;
