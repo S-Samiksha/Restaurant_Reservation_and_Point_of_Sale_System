@@ -74,7 +74,7 @@ public class mainapp {
                 }
                 },0,5000);
             /// end of code to delete expired reservations ///
-        System.out.println("-----------" + new Timestamp(date.getTime()) + "---------------------------"); 
+        System.out.println("---------------------" + new Timestamp(date.getTime()) + "---------------------"); 
         int c = 0;
         System.out.println("~~~~~~~~~~~~Welcome to Sally's Burger Town Restaurant!~~~~~~~~~~~~");
 

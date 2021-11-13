@@ -188,7 +188,11 @@ public class FileToObject {
 			String line;
 			String[] reservationObject; 
 			line = br.readLine();
-        	while(line!= null) { 
+			if(!(line.trim().equals(""))){
+				br.close();
+				return;
+			}
+        	while(line != null) { 
             	reservationObject = line.split("[|]"); 
             	Timestamp DateTime = Timestamp.valueOf(reservationObject[2]);
 				mainapp.ReservationList.add(new Reservation(reservationObject[0], reservationObject[1], DateTime,Integer.parseInt(reservationObject[3]),Integer.parseInt(reservationObject[4]),Integer.parseInt(reservationObject[5]), Integer.parseInt(reservationObject[6])));
