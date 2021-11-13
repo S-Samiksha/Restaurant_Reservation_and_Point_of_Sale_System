@@ -393,7 +393,7 @@ public class SecurityAccess{
             }
             totalrevenue += (float)count * mainapp.MenuList.get(i).getPrice();
             //System.out.println(count);
-            System.out.printf("%s     %-20s          %d         %.2f", mainapp.MenuList.get(i).getitemID(), mainapp.MenuList.get(i).getName(), count, (float)count*mainapp.MenuList.get(i).getPrice());
+            System.out.printf("%s     %-20s          %d         $%.2f", mainapp.MenuList.get(i).getitemID(), mainapp.MenuList.get(i).getName(), count, (float)count*mainapp.MenuList.get(i).getPrice());
             System.out.println();
             
         }
@@ -408,11 +408,11 @@ public class SecurityAccess{
                 
             }
             totalrevenue += (float)count * mainapp.MenuList.get(i).getPrice();
-            System.out.printf("%s     %-20s          %d         %.2f", mainapp.SPList.get(i).getitemID(), mainapp.SPList.get(i).getName(), count, (float)count*mainapp.SPList.get(i).getPrice());
+            System.out.printf("%s     %-20s          %d         $%.2f", mainapp.SPList.get(i).getitemID(), mainapp.SPList.get(i).getName(), count, (float)count*mainapp.SPList.get(i).getPrice());
             System.out.println();
         }
 
-        System.out.printf("Total Revenue: %.2f", totalrevenue);
+        System.out.printf("Total Revenue: $%.2f", totalrevenue);
         System.out.println();
 
     }
@@ -429,7 +429,7 @@ public class SecurityAccess{
 		List<MenuItems> menuitems = mainapp.MenuList; 
 		while (i < menuitems.size()){ 
             System.out.println();
-			System.out.printf("ID: %s Name: %s Type: %s       Price: %f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
+			System.out.printf("ID: %s Name: %s Type: %s       Price: $%f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
             System.out.printf("Description: %s ", menuitems.get(i).getDescription());
             System.out.println();
             System.out.println("                                                 -----                                                   ");
@@ -441,7 +441,7 @@ public class SecurityAccess{
 		i = 0;
 		while (i < setpackages.size()){ 
             System.out.println();
-			System.out.printf("ID: %s Name: %s Type: %s Price: %f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
+			System.out.printf("ID: %s Name: %s Type: %s Price: $%f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
             System.out.printf("Description: %s ", setpackages.get(i).getDescription());
             System.out.println();
             System.out.println("                                                 -----                                                   ");
