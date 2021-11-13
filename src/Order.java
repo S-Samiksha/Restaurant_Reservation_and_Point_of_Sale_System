@@ -188,15 +188,7 @@ public class Order {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Ala Carte Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
 		List<MenuItems> menuitems = mainapp.MenuList; 
-		String Type = menuitems.get(0).getType();
-		System.out.printf("\n%s\n", Type);
-		System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 		while (i < menuitems.size()){ 
-			if(!Type.equals(menuitems.get(i).getType())){
-				Type = menuitems.get(i).getType();
-				System.out.printf("\n%s\n", Type);
-				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
-			}
             System.out.println();
 			System.out.printf("ID: %s Name: %s Type: %s       Price: %.2f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
             System.out.printf("Description: %s ", menuitems.get(i).getDescription());
@@ -208,15 +200,7 @@ public class Order {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Set Package Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		i = 0;
-		Type = setpackages.get(0).getType();
-		System.out.printf("\n%s\n", Type);
-		System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 		while (i < setpackages.size()){ 
-			if(!Type.equals(setpackages.get(i).getType())){
-				Type = setpackages.get(i).getType();
-				System.out.printf("\n%s\n", Type);
-				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
-			}
             System.out.println();
 			System.out.printf("ID: %s Name: %s Type: %s Price: %.2f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
             System.out.printf("Description: %s ", setpackages.get(i).getDescription());
