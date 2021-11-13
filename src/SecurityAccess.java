@@ -194,7 +194,7 @@ public class SecurityAccess{
                     price = Float.parseFloat(sc.nextLine());
                     mainapp.MenuList.get(i).setPrice(price);
                     System.out.println("Menu Item Updated!");
-                    return;
+                    break;
     
                 }
             }
@@ -250,7 +250,7 @@ public class SecurityAccess{
                     boolean promo = Boolean.parseBoolean(sc.nextLine());
                     mainapp.SPList.get(i).setPromo(promo);
                     System.out.println("Successfully updated!");
-                    return;
+                    break;
     
     
     
@@ -263,6 +263,7 @@ public class SecurityAccess{
         }
         System.out.println("Here is the new Menu: ");
         printMenu();
+        return;
  
 
 
@@ -287,7 +288,7 @@ public class SecurityAccess{
                     if (temp.equals(mainapp.MenuList.get(i).getitemID())){
                         mainapp.MenuList.remove(i);
                         System.out.println("Removed Successfully!");
-                        return;
+                        break;
     
                     }
                 }
@@ -300,7 +301,7 @@ public class SecurityAccess{
                     if (temp.equals(mainapp.SPList.get(i).getitemID())){
                         mainapp.SPList.remove(i);
                         System.out.println("Removed Successfully!");
-                        return;
+                        break;
                     }
                 }
             }
@@ -311,6 +312,7 @@ public class SecurityAccess{
         }
             System.out.println("Here is the new Menu: ");
             printMenu();
+            return;
         
         
 
@@ -339,8 +341,9 @@ public class SecurityAccess{
             //ask the user for time
             //end = "2021-"+month+"-"+day+"-" +temp[0]+ temp[1] +"-" +temp[2]+temp[3] 
             //1450 temp 
-            //Timestamp.valueOf(start)) 
-            
+            //Timestamp.valueOf(start))
+           
+
             for(int i=0; i< mainapp.TotalOrders.size(); i++){
                 if (mainapp.TotalOrders.get(i).getDateTime().after(Timestamp.valueOf(start)) && mainapp.TotalOrders.get(i).getDateTime().before(Timestamp.valueOf(end))){
                     TotalItems.addAll(mainapp.TotalOrders.get(i).getOrdersList());
@@ -362,17 +365,16 @@ public class SecurityAccess{
 
                 }
              }
+        }else{
+            System.out.println("Invalid Input! Please Input the correct format!");
+            return;
+            
         }
         }catch(Exception e){
             System.out.println("Invalid Input! Please Input the correct format!");
             return;
         }
 
-        if (choice != 1 || choice != 2){
-            System.out.println("Invalid Input! Please Input the correct format!");
-            return;
-
-        }
 
 
         //System.out.println(TotalItems.size());
@@ -393,7 +395,7 @@ public class SecurityAccess{
             }
             totalrevenue += (float)count * mainapp.MenuList.get(i).getPrice();
             //System.out.println(count);
-            System.out.printf("%s     %-20s          %d         $%.2f", mainapp.MenuList.get(i).getitemID(), mainapp.MenuList.get(i).getName(), count, (float)count*mainapp.MenuList.get(i).getPrice());
+            System.out.printf("%s     %-20s          %d         SGD$%.2f", mainapp.MenuList.get(i).getitemID(), mainapp.MenuList.get(i).getName(), count, (float)count*mainapp.MenuList.get(i).getPrice());
             System.out.println();
             
         }
@@ -407,12 +409,15 @@ public class SecurityAccess{
                 }
                 
             }
-            totalrevenue += (float)count * mainapp.MenuList.get(i).getPrice();
-            System.out.printf("%s     %-20s          %d         $%.2f", mainapp.SPList.get(i).getitemID(), mainapp.SPList.get(i).getName(), count, (float)count*mainapp.SPList.get(i).getPrice());
+            totalrevenue += (float)count * mainapp.SPList.get(i).getPrice();
+            System.out.printf("%s     %-20s          %d         SGD$%.2f", mainapp.SPList.get(i).getitemID(), mainapp.SPList.get(i).getName(), count, (float)count*mainapp.SPList.get(i).getPrice());
             System.out.println();
         }
-
-        System.out.printf("Total Revenue: $%.2f", totalrevenue);
+        System.out.print("\n");
+        System.out.printf("Total: SGD$%.2f \n", totalrevenue);
+        System.out.printf("Total GST: SGD$%.2f\n", totalrevenue*0.07);
+        System.out.printf("Total service tax: SGD$%.2f\n", totalrevenue*0.10);
+        System.out.printf("Total Revenue: SGD$%.2f\n", totalrevenue*1.07*1.10);
         System.out.println();
 
     }
@@ -429,7 +434,7 @@ public class SecurityAccess{
 		List<MenuItems> menuitems = mainapp.MenuList; 
 		while (i < menuitems.size()){ 
             System.out.println();
-			System.out.printf("ID: %s Name: %s Type: %s       Price: $%f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
+			System.out.printf("ID: %s Name: %s Type: %s       Price: $%.2f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
             System.out.printf("Description: %s ", menuitems.get(i).getDescription());
             System.out.println();
             System.out.println("                                                 -----                                                   ");
@@ -441,7 +446,7 @@ public class SecurityAccess{
 		i = 0;
 		while (i < setpackages.size()){ 
             System.out.println();
-			System.out.printf("ID: %s Name: %s Type: %s Price: $%f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
+			System.out.printf("ID: %s Name: %s Type: %s Price: $%.2f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
             System.out.printf("Description: %s ", setpackages.get(i).getDescription());
             System.out.println();
             System.out.println("                                                 -----                                                   ");
