@@ -48,7 +48,7 @@ public class mainapp {
                     int size = mainapp.ReservationList.size();
                     int i = 0;
                     while(i < size){
-                        if (((currentTime.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000)/60 >= 240){
+                        if (((currentTime.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000/60) >= 240){
                             System.out.println("----------------------------------------------------------------------------------------------------------");
                             System.out.printf("|NOTICE:Reservation with ID %d has been deleted due to reservation period expiry at %s|\n", mainapp.ReservationList.get(i).getReservationID(), new Timestamp(System.currentTimeMillis()));
                             System.out.println("----------------------------------------------------------------------------------------------------------");
@@ -150,7 +150,8 @@ public class mainapp {
                                         System.out.println("Reservation found!");
                                         Timestamp timeNow  = new Timestamp(System.currentTimeMillis());
                                         reservationFound = true;
-                                        if (timeNow.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime()/1000/60 >= -30 && timeNow.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime()/1000/60 <= 240){
+                                        System.out.println(((timeNow.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000/60) );
+                                        if (((timeNow.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000/60) >= -30 && ((timeNow.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000/60) <= 240){
                                             System.out.println("Your reservation is active!");
                                             Order reservationOrder = new Order();
                                             reservationOrder.setOrderID(OrderID);
