@@ -197,7 +197,7 @@ public class mainapp {
                                     exceptionLoop = true;
                                 }
                                 else{
-                                    System.out.println("Number of people for reservation ahould be between 2-10!");
+                                    System.out.println("Number of people for reservation should be between 2-10!");
                                 }
                             }
                             exceptionLoop = false;
@@ -420,7 +420,7 @@ public class mainapp {
                                     exceptionLoop = true;
                                 }
                                 else{
-                                    System.out.println("Number of people for reservation ahould be between 2-10!");
+                                    System.out.println("Number of people for reservation should be between 2-10!");
                                 }
                             }
                             exceptionLoop = false;
