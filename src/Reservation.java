@@ -158,7 +158,7 @@ public class Reservation {
 			System.out.printf("No reservation yet!\n");
 		}
 		else{
-			System.out.printf("Reservation ID:%d\nName:%s\nTime Of Reservation :%s\nContact Number:%d\nNumber of People:%d\nTable:%d\nStaffId:%s\n",this.getReservationID(),this.getCustomerName(),this.getTimestamp(),this.getContactNumber(), this.getNumPeople(),this.getTable(),this.getStaffID());
+			System.out.printf("Reservation ID:%d\nName:%s\nTime Of Reservation :%s\nContact Number:%d\nNumber of People:%d\nTable:%d\nStaffID:%s\n",this.getReservationID(),this.getCustomerName(),this.getTimestamp(),this.getContactNumber(), this.getNumPeople(),this.getTable(),this.getStaffID());
 		}
 	}
 

@@ -374,7 +374,7 @@ public class Order {
 		int i = 0;
         for(i=0; i<TableList.size();i++){
 			if(TableList.get(i).isAvailable() == true && TableList.get(i).gettableCapacity() >= customerPax){
-				this.tableNumber = TableList.get(i).gettableNum();
+				setTable(TableList.get(i).gettableNum());
 				return TableList.get(i).gettableNum();
 			}
 		}

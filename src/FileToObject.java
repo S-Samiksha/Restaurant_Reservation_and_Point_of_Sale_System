@@ -188,7 +188,7 @@ public class FileToObject {
 			String line;
 			String[] reservationObject; 
 			line = br.readLine();
-			if(!(line.trim().equals(""))){
+			if((line.trim().equals(""))){
 				br.close();
 				return;
 			}
