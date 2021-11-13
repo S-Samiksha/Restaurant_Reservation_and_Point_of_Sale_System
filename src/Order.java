@@ -188,13 +188,6 @@ public class Order {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Ala Carte Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
 		List<MenuItems> menuitems = mainapp.MenuList; 
-		class MenuItemsComparator implements Comparator<MenuItems> {
-			@Override
-			public int compare(MenuItems o1, MenuItems o2) {
-				return o2.getType().compareTo(o1.getType());
-			}
-		}
-		Collections.sort(menuitems, new MenuItemsComparator());
 		String Type = menuitems.get(0).getType();
 		System.out.printf("\n%s\n", Type);
 		System.out.printf("----------------------------------------------------------------------------------------------------------\n");
@@ -212,7 +205,6 @@ public class Order {
 			i++;
 		}
 		List<SetPackage> setpackages = mainapp.SPList; 
-		Collections.sort(setpackages, new MenuItemsComparator());
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Set Package Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		i = 0;
