@@ -45,25 +45,32 @@ public class mainapp {
                 @Override
                 public void run(){
                     Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-                    for(int i = 0; i < mainapp.ReservationList.size();i++){
-                    if (((currentTime.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000)/60 >= 720){
-                        //System.out.printf("NOTICE:Reservation with ID %d has been deleted due reservation period expiry\n", mainapp.ReservationList.get(i).getReservationID());
-                        mainapp.ReservationList.remove(i);
-                        int tableID = mainapp.ReservationList.get(i).getTable();
-                        String StaffID = mainapp.ReservationList.get(i).getStaffID();
-                        int j;
-                        for (j=0; j<mainapp.TableList.size();j++){
-                                if(tableID == mainapp.TableList.get(j).gettableNum()){
-                                    mainapp.TableList.get(i).setisAvailable(true);
+                    int size = mainapp.ReservationList.size();
+                    int i = 0;
+                    while(i < size){
+                        if (((currentTime.getTime()-mainapp.ReservationList.get(i).getTimestamp().getTime())/1000)/60 >= 2){
+                            System.out.printf("NOTICE:Reservation with ID %d has been deleted due to reservation period expiry at %s\n", mainapp.ReservationList.get(i).getReservationID(), new Timestamp(System.currentTimeMillis()));
+                            int tableID = mainapp.ReservationList.get(i).getTable();
+                            String StaffID = mainapp.ReservationList.get(i).getStaffID();
+                            int j;
+                            for (j=0; j<mainapp.TableList.size();j++){
+                                    if(tableID == mainapp.TableList.get(j).gettableNum()){
+                                        mainapp.TableList.get(i).setisAvailable(true);
+                                    }
                                 }
+                                for (j = 0 ; j<mainapp.StaffList.size();j++){
+                                    if(StaffID.equals(mainapp.StaffList.get(j).getEmployeeID())){
+                                        mainapp.StaffList.get(i).setisAvailable(true);;
+                                    }
                             }
-                            for (j = 0 ; j<mainapp.StaffList.size();j++){
-                                if(StaffID.equals(mainapp.StaffList.get(j).getEmployeeID())){
-                                    mainapp.StaffList.get(i).setisAvailable(true);;
-                                }
-                            }
+                            mainapp.ReservationList.remove(i);
+                            size = mainapp.ReservationList.size();
+                            i = 0;
+                        }
+                        else{
+                            i++;
+                        }
                     }
-                }
                 }
                 },0,5000);
             /// end of code to delete expired reservations ///
@@ -385,7 +392,7 @@ public class mainapp {
                                     SimpleDateFormat getDate = new SimpleDateFormat("yyyy-MM-dd");
                                     String reservationDate = getDate.format(startTime);
                                     Timestamp closingTime = Timestamp.valueOf(reservationDate+" 20:01:00");
-                                    Timestamp openingTime = Timestamp.valueOf(reservationDate+" 9:59:00");
+                                    Timestamp openingTime = Timestamp.valueOf(reservationDate+" 09:59:00");
                                     if (newReservation.validateStartTime(currentTime, startTime, openingTime, closingTime)){
                                         dateSet = true;
                                     }
@@ -403,7 +410,7 @@ public class mainapp {
                                     reservationPax = Integer.parseInt(reservationPaxString);
                                 }
                                 catch(Exception e){
-                                    System.out.println("Pleasee enter an integer value for the number of people to be seated!"); 
+                                    System.out.println("Please enter an integer value for the number of people to be seated!"); 
                                     continue;
                                 }
                                 if(newReservation.validatecustomerPax(reservationPax)){
@@ -441,8 +448,8 @@ public class mainapp {
                             newReservation.setTimestamp(startTime);
                             newReservation.setContactNumber(contactNum);
                             newReservation.setNumPeople(reservationPax);
-                            newReservation.FindTable(reservationPax);
-                            if (newReservation.getTable() == -1){
+                            int tableFound = newReservation.FindTable(reservationPax);
+                            if (tableFound == -1){
                                 System.out.println("No Tables Available! Reservation cannot be made the moment!");
                                 break;
                             }

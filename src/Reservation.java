@@ -218,12 +218,7 @@ public class Reservation {
 	 */
 	public void setContactNumber(int ContactNumber) {
 		// what if the number is EQUAL 9999 99999 (need to consider so I added the =)
-		if ( ContactNumber >= MAX_ContactNum) {
-			System.out.println("Please enter a valid contact number. ");
-		}
-		else {
-			this.contactNumber = ContactNumber ;
-		}
+		this.contactNumber = ContactNumber ;
 	}
 
 	/**
@@ -239,12 +234,7 @@ public class Reservation {
 	 * @param NumPeople This Reservation's number of customer.
 	 */
 	public void setNumPeople(int NumPeople) {
-
-		if ( NumPeople > MAX_NumPeople || NumPeople<MIN_NumPeople) {
-			System.out.println("Sorry, the max numble of people per table is " + MAX_NumPeople+"and the minimum is "+MIN_NumPeople);
-		}else {
-			this.numPeople = NumPeople;
-		}
+		this.numPeople = NumPeople;
 	}
 
 	/**
@@ -258,7 +248,7 @@ public class Reservation {
         for(i=0; i<tableList.size();i++){
 			if(tableList.get(i).isAvailable() == true && tableList.get(i).gettableCapacity() >= customerPax){
 				tableList.get(i).setisAvailable(false); //change list
-				this.table= tableList.get(i).gettableNum(); //get table number
+				this.table = tableList.get(i).gettableNum(); //get table number
 				return tableList.get(i).gettableNum(); //return table number
 			}
 		}

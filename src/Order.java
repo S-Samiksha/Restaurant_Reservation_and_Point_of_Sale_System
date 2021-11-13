@@ -205,7 +205,7 @@ public class Order {
 				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 			}
             System.out.println();
-			System.out.printf("ID: %s Name: %s Type: %s       Price: %f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
+			System.out.printf("ID: %s Name: %s Type: %s       Price: %.2f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
             System.out.printf("Description: %s ", menuitems.get(i).getDescription());
             System.out.println();
             System.out.println("                                                 -----                                                   ");
@@ -226,7 +226,7 @@ public class Order {
 				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 			}
             System.out.println();
-			System.out.printf("ID: %s Name: %s Type: %s Price: %f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
+			System.out.printf("ID: %s Name: %s Type: %s Price: %.2f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
             System.out.printf("Description: %s ", setpackages.get(i).getDescription());
             System.out.println();
             System.out.println("                                                 -----                                                   ");
