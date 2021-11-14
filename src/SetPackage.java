@@ -10,11 +10,11 @@ package src;
 public class SetPackage extends MenuItems {
 
 	/**
-	 * Indicates the availability of promotion for the set package.
+	 * Indicates the availability of promotion for this set package.
 	 */
 	private boolean Promo;
 	/**
-	 * List of item in the set package.
+	 * List of item in this set package.
 	 */
 	private MenuItems[] SetList;
 	
@@ -36,8 +36,8 @@ public class SetPackage extends MenuItems {
 	}
 
 	/**
-	 * Creates a new set package will details required. 
-	 * New set package should not be the same as other set package.
+	 * Creates a new set package with required detail. 
+	 * This new set package should not be the same as other set package.
 	 * @param itemID This Set Package's item ID.
 	 * @param SetList This Set Package's list of items.
 	 * @param Name This Set Package's name.
