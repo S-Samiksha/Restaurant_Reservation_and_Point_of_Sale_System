@@ -1,74 +1,78 @@
 package src;
 import java.util.*;
 import java.sql.Timestamp;
-/**
- * Reservation has a table relationship (reservation cannot live without table in other words its a composition update it in the class diagram)
- * this one missing STAFF 
- * cannot survive without staff so composition relationship 
- * 
- */
+
 
 /**
- * Represents a reservation made for each table. A staff is required to make a reservation.
+ * Represents a reservation made for this restaurant. 
+ * A reservation must have a available staff and table.
  */
 
 public class Reservation {
 
 	/**
-	 * The closing hour of the restaurant.
+	 * The closing hour of this restaurant.
 	 */
 	public static final int MAX_Time = 2200; 
 	/**
-	 * Opening hour of the restaurant.
+	 * Opening hour of this restaurant.
 	 */
 	public static final int MIN_Time = 1000; 
 	/**
-	 * Contact number of the customer making reservation.
+	 * Contact number of the customer making this reservation.
 	 */
 	public static final int MAX_ContactNum = 99999999; 
 	/**
-	 * Maximum number of customer for each reservation.
+	 * Maximum number of customer for this reservation.
 	 */
 	public static final int MAX_NumPeople = 10; 
 	/**
-	 * Minimum number of customer for each reservation.
+	 * Minimum number of customer for this reservation.
 	 */
 	public static final int MIN_NumPeople = 2;
 	/**
-	 * Total number of table in the restaurant.
+	 * Total number of table in this restaurant.
 	 */
 	public static final int MAX_Table = 10;
 	
 	/**
-	 * Name of the customer making reservation.
+	 * Name of the customer making this reservation.
 	 */
 	private String customerName; 
 	/**
-	 * Reservation timing.
+	 * This reservation timing.
 	 */
 	private Timestamp timestamp;
 	/**
-	 * Customer contact number.
-	 * Able to contact the customer is necessary.
+	 * Customer contact number for this reservation.
+	 * Able to contact the customer when necessary.
 	 */
 	private int contactNumber;
 	/**
-	 * Number of customer for each reservation.
+	 * Number of customer for this reservation.
 	 */
 	private int numPeople;
 	/**
-	 * Table number assignment for that reservation.
+	 * Table number assignment for this reservation.
 	 */
 	private int table; 
 	/**
-	 * ID of the staff taking the reservation.
+	 * ID of the staff taking this reservation.
 	 */
 	private String staffID;
 	/**
-	 * Specific ID of the reservation.
+	 * Specific ID for this reservation.
 	 */
 	private int reservationID = -1;
 	
+
+	
+	
+	/**
+	 * Creates an instance in the class mainapp.
+	 */
+	public Reservation(){};
+
 	/**
 	 * Creates a new reservation.
 	 * @param staffID This Reservation's staff ID.
@@ -79,8 +83,6 @@ public class Reservation {
 	 * @param table This Reservation's assigned table.
 	 * @param reservationID This Reservation's ID.
 	 */
-	public Reservation(){};
-
 	public Reservation( String staffID, String customerName, Timestamp timestamp , int contactNumber, int numPeople, int table, int reservationID){
 		this.customerName = customerName;
 		this.timestamp = timestamp;
@@ -91,8 +93,11 @@ public class Reservation {
 		this.reservationID = reservationID;
 	}
 
-	//its int not Int --> idk if this was churned out by visual paradigm but we need to fix it if thats the case 
-	//NEWLY ADDED FUNCTIONS
+	/**
+	 * Checks if the staff ID is valid for this reservation.
+	 * @param StaffID This reservation's staff ID.
+	 * @return Validity of this staff for this reservation.
+	 */
 	public boolean validateStaffID(String StaffID){
 		for (int i = 0 ; i<mainapp.StaffList.size(); i++){
 			if (StaffID.equals(mainapp.StaffList.get(i).getEmployeeID())){
@@ -102,7 +107,15 @@ public class Reservation {
 		return false;
 	}
 
-
+	/**
+	 * Checks if the start time is valid for this reservation.
+	 * Ensures this reservation is made within booking hours.
+	 * @param currentTime Real time when making this reservation.
+	 * @param startTime This reservation's start time.
+	 * @param openingTime Opening hour for this restaurant.
+	 * @param closingTime Closing hour for this restaurant.
+	 * @return Validity of this reservation start time.
+	 */
 	public boolean validateStartTime(Timestamp currentTime,Timestamp startTime, Timestamp openingTime, Timestamp closingTime){
 		if (currentTime.before(startTime)){
 			if(startTime.before(closingTime)){
@@ -127,6 +140,11 @@ public class Reservation {
 	}
 
 
+	/**
+	 * Checks if the number of customer is valid for this reservation.
+	 * @param customerPax This reservation's number of customer.
+	 * @return Validity of the number of customer for this reservation.
+	 */
 	public boolean validatecustomerPax(int customerPax){
 		if(customerPax >= 2 && customerPax <= 10){
 			return true;
@@ -134,7 +152,11 @@ public class Reservation {
 		return false;
 	}
 
-
+	/**
+	 * Checks if the contact number of the customer is valid for this reservation.
+	 * @param contactNumber This reservation's customer contact number.
+	 * @return Validity of the customer contact number for this reservation.
+	 */
 	public boolean validateContactNumber(int contactNumber){
 		if (contactNumber >= 1000_0000 && contactNumber <= 99999999){
 			return true;
@@ -151,7 +173,7 @@ public class Reservation {
 	}
 
 	/**
-	 * Prints out the information of this reservation.
+	 * Prints the information for this reservation.
 	 */
 	public void printReservation() {
 		if(this.getReservationID() == -1) {
@@ -163,7 +185,7 @@ public class Reservation {
 	}
 
 	/**
-	 * Changes the name of this customer for this reservation.
+	 * Changes the name of the customer for this reservation.
 	 * @param CustomerName This Reservation's customer name.
 	 */
 	public void setCustomerName(String CustomerName) {
@@ -198,7 +220,7 @@ public class Reservation {
 
 	/**
 	 * Changes the start time of this reservation.
-	 * @param CustomerName This Reservation's start time.
+	 * @param Timestamp This Reservation's start time.
 	 */
 	public void setTimestamp(Timestamp Timestamp) {
 		this.timestamp = Timestamp;
@@ -217,7 +239,6 @@ public class Reservation {
 	 * @param ContactNumber This Reservation's customer contact number.
 	 */
 	public void setContactNumber(int ContactNumber) {
-		// what if the number is EQUAL 9999 99999 (need to consider so I added the =)
 		this.contactNumber = ContactNumber ;
 	}
 
@@ -255,12 +276,6 @@ public class Reservation {
 		return -1;
 	}
 
-	/*public void ReservationMaker(List<Reservation> ReservationList, int tableNum){
-		Scanner sc = new Scanner(System.in);
-		List<Reservation> reservationitem = mainapp.ReservationList;
-
-
-	}*/
 
 	/**
 	 * Gets the table number for this reservation.
@@ -296,7 +311,7 @@ public class Reservation {
 	
 	/**
 	 * Changes the table number for this reservation.
-	 * @param table This Reservation's table nubmer.
+	 * @param table This Reservation's table number.
 	 */
 	public void setTable(int table) {
 		this.table = table;
