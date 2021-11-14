@@ -1,7 +1,5 @@
 package src;
 
-//this one also, parse using flat file 
-// Honestly do not need set functions but we should discuss this!
 /**
  * Represents a staff in the restaurant.
  * A restaurant can have many staff.
@@ -27,7 +25,7 @@ public class Staff {
 	/**
 	 * Job title of this staff.
 	 */
-	private String JobTitle;  //this is needed but not inside the class diagram 
+	private String JobTitle; 
 	/**
 	 * Availability of this staff to server new customer.
 	 */
@@ -63,15 +61,14 @@ public class Staff {
 	 * @return This Staff's full name.
 	 */
 	public String getName() {
-		//throw new UnsupportedOperationException();
 		return this.Name;
 	}
 
-	/**Gets the gender of this staff.
-	 * @param String This Staff's gender.
+	/**
+	 * Gets the gender of this staff.
+	 * @return String This Staff's gender.
 	 */
 	public String getGender() {
-		//throw new UnsupportedOperationException();
 		return this.Gender;
 	}
 
@@ -83,39 +80,12 @@ public class Staff {
 	public boolean getisAvailable(){
 		return this.isAvailable;
 	}
-	/**
-	 * 
-	 * @param String
-	 */
-	/*protected void setGender(String Gender) { //i dont think we need this 
-		//checking the various type of inputs 
-		switch(Gender){
-			case "Female":
-			case "female":
-			case "F":
-			case "f":
-				this.Gender = "Female";
-				break;
-			case "Male":
-			case "male":
-			case "M" :
-			case "m":
-				this.Gender = "Male";
-				break;
-			default:
-				this.Gender = "Not Specified";
-				break;
-
-		}
-
-	}*/
 
 	/**
 	 * Gets the ID of this staff.
 	 * @return This Staff's employee ID.
 	 */
 	public String getEmployeeID() {
-		// throw new UnsupportedOperationException();
 		return this.EmployeeID;
 	}
 
@@ -125,33 +95,12 @@ public class Staff {
 	 * @return This Staff's contact number.
 	 */
 	public int getContactNumber() {
-		// throw new UnsupportedOperationException();
 		return this.ContactNumber;
 	}
 
-
-	/*protected void setContactNumber(int ContactNumber) { //this one also dont need 
-		// throw new UnsupportedOperationException();
-		//check if the string length is 8 digits or not, and valid (in terms of singapore number)
-		temp = ContactNumber;
-		length = 0; //reinitialize this method may be called twice 
-		while (temp>0){
-			temp /= 10;
-			length++;
-		}
-		if (length == 8){
-			this.ContactNumber = ContactNumber;
-		}else{
-			System.out.println("Not valid contact number");
-			return;
-		}
-
-	}*/
-
 	/**
-	 * Checks is this staff is manage.
-	 * @return If this Staff is manager
-	 * 			Return true if is manager and false if is not.
+	 * Checks is this staff a manage.
+	 * @return True if is manager and false if is not.
 	 */
 	public boolean isManager(){
 		if (this.JobTitle.equals("Manager")){
@@ -163,7 +112,7 @@ public class Staff {
 	
 	/**
 	 * Changes the availability of this staff.
-	 * @param Available This Staff's availability.
+	 * @param available This Staff's availability.
 	 */
 	public void setisAvailable(boolean available){
 		this.isAvailable = available;
