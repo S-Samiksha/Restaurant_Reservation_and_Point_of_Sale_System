@@ -4,13 +4,12 @@ package src;
  //AC stands for ala carte 
 	/**
 	 * Shows the details of different item in the menu.
-	 * A table can order many items.
+	 * An order can have many items.
 	 *
 	 */
 public class MenuItems {
-	//private enum MenuType { MAINCOURSE, DRINKS, DESERT, SETPACKAGE}; whether we wanna use enum 
 	/**
-	 * Main course, drinks, desert or setpackage.
+	 * Main course, drinks, desert or set package. 
 	 */
 	private String Type;
 	/**
@@ -29,19 +28,14 @@ public class MenuItems {
 	 * Clear description of item in menu for customer.
 	 */
 	private String Description;
-	//DO NOT USE NAME TO DO anything
-	//always use ID because ID is unique 
-	 
-	/*no setting functions at all
 
-
-	*/
 
 	
 	/**
-	 * Create a new item in menu.
+	 * Creates a new item in menu.
 	 * 
 	 * @param itemID This item's ID.
+	 * 				Item ID should be unique.
 	 * @param Name This item's name.
 	 * @param Type This item's type.
 	 * @param Price This item's price.
@@ -53,28 +47,27 @@ public class MenuItems {
         this.Description = Description;
         this.Price = Price;
 		this.itemID = itemID;
-		//remember this needs to be parsed through flat file 
 	}
 
 	/**
-	 * Gets the specific item ID in the menu.
-	 * @return this item's ID.
+	 * Gets this item's unique ID in this menu.
+	 * @return This item's ID.
 	 */
 	public String getitemID(){
 		return this.itemID;
 	}
 
 	/**
-	 * Change the ID of the item.
-	 * @param itemID.
-	 * @return
+	 * Changes the ID of this item.
+	 * @param itemID This item's unique ID.
+	 * @return This item's unique ID
 	 */
 	public String setItemID(String itemID){
 		return this.itemID = itemID;
 	}
 
 	/**
-	 * Specific individual price of the item in menu.
+	 * Gets the individual price of this item in this menu.
 	 * @return This item's price.
 	 */
 	public float getPrice(){
@@ -82,8 +75,8 @@ public class MenuItems {
 	}
 
 	/**
-	 * Name of item in menu.
-	 * @return This item's name.
+	 * Gets the name of this item in this menu.
+	 * @return This item's full name.
 	 */
 	public String getName() {
 		return this.Name;
@@ -100,7 +93,7 @@ public class MenuItems {
 	}
 
 	/**
-	 * Gets the type of item in the menu.
+	 * Gets the type of this item in the menu.
 	 * @return This item's type.
 	 */
 	public String getType() {
@@ -108,8 +101,7 @@ public class MenuItems {
 	}
 
 	/**
-	 * Changes the type of item.
-	 * Should not be the same as before.
+	 * Changes the type of this item.
 	 * @param Type This item's type.
 	 */
 	public void setType(String Type) {
@@ -118,8 +110,8 @@ public class MenuItems {
 
 	/**
 	 * Gets the specific description of the item.
-	 * Able to prevent allergies for customer.
-	 * @return This item's description.
+	 * Prevents allergic reaction for customer.
+	 * @return This item's detailed description.
 	 */
 	public String getDescription() {
 		return this.Description;
@@ -129,7 +121,7 @@ public class MenuItems {
 	 * Changes the item's description.
 	 * This might be due to change in ingredient/cooking method.
 	 * @param Description This item's description.
-	 * 						Should include possible allergies.
+	 * 					Includes possible allergies.
 	 */
 	public void setDescription(String Description) {
 		this.Description = Description;
@@ -137,12 +129,11 @@ public class MenuItems {
 
 	/**
 	 * Changes the price of the item.
-	 * Might change customer preference and total revenue.
+	 * Changes customer preference and total revenue.
 	 * @param Price This item's price.
 	 */
 	public void setPrice(float Price) {
 		this.Price = Price;
 	}
 
-	// print menu moved to order	
 }
