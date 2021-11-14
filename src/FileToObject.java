@@ -19,7 +19,7 @@ public class FileToObject {
 	public static void staff(){
 		System.out.println("Staff are taking attendance.....\n"); 
         try {
-            FileReader Staff = new FileReader("data/staff.txt"); 
+         	FileReader Staff = new FileReader("data/staff.txt"); 
 			BufferedReader file = new BufferedReader(Staff); 
 			String line; 
 			String[] staffObject; 
@@ -47,7 +47,8 @@ public class FileToObject {
 	public static void setPackage(){
 		System.out.println("Cooking Set Package Food......\n");
 		try {
-            FileReader setPackage = new FileReader("data/setPackage.txt"); 
+			//String filePath = new File("").getAbsolutePath();
+         	FileReader setPackage = new FileReader("data/setPackage.txt"); 
 			BufferedReader file = new BufferedReader(setPackage); 
 			String line; 
 			String[] SetPackageObject; 
@@ -84,7 +85,8 @@ public class FileToObject {
 	public static void MenuItems(){
 		System.out.println("Cooking Ala Carte Food......\n");
 		try {
-            FileReader MenuItems = new FileReader("data/MenuItems.txt"); 
+			//String filePath = new File("").getAbsolutePath();
+         	FileReader MenuItems = new FileReader("data/MenuItems.txt"); 
 			BufferedReader file = new BufferedReader(MenuItems); 
 			String line; 
 			String[] MenuItemsObject; 
@@ -112,7 +114,8 @@ public class FileToObject {
 	public static void Order(){
 		System.out.println("Loading Order Data......\n");
 		try {
-            FileReader Order = new FileReader("data/order.txt"); 
+			//String filePath = new File("").getAbsolutePath();
+         	FileReader Order = new FileReader("data/order.txt"); 
 			BufferedReader file = new BufferedReader(Order); 
 			String line;
 			String[] OrderObject; 
@@ -155,7 +158,8 @@ public class FileToObject {
 	public static void table(){
 		System.out.println("Cleaning and Sanitizing Table......\n"); 
         try {
-            FileReader Table = new FileReader("data/table.txt"); 
+        	//String filePath = new File("").getAbsolutePath();
+         	FileReader Table = new FileReader("data/table.txt"); 
 			BufferedReader file = new BufferedReader(Table); 
 			String line; 
 			String[] TableObject; 
@@ -183,12 +187,13 @@ public class FileToObject {
 	public static void reservation(){
 		System.out.println("Checking the Reservation Logs......\n"); 
         try {
-        	FileReader fr = new FileReader("data/reservation.txt"); 
+        	//String filePath = new File("").getAbsolutePath();
+         	FileReader fr = new FileReader("data/reservation.txt"); 
 			BufferedReader br = new BufferedReader(fr); 
 			String line;
 			String[] reservationObject; 
 			line = br.readLine();
-			if((line.trim().equals(""))){
+			if((line.trim().equals(""))){ 
 				br.close();
 				return;
 			}
@@ -211,10 +216,11 @@ public class FileToObject {
 
 
 	/**
-	 * Return and update changed item in menu into the original menuItem text file.
+	 * Returns and updates changed item in menu into the original menuItem text file.
 	 */
 	public static void MenuItemStore(){
 		try{
+			//String filePath = new File("").getAbsolutePath();
 			FileWriter fw = new FileWriter("data/MenuItems.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (int j=0; j<mainapp.MenuList.size() ; j++) {
@@ -234,10 +240,11 @@ public class FileToObject {
 	}
 
 	/**
-	 * Return and update changed item into the original set package text file.
+	 * Returns and updates changed item into the original set package text file.
 	 */
 	public static void SPitemsStore(){
 		try{
+			//String filePath = new File("").getAbsolutePath();
 			FileWriter fw = new FileWriter("data/setPackage.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			String menulist = "";
@@ -263,11 +270,14 @@ public class FileToObject {
 		}
 	}
 
+
 	/**
-	 * Return and update changed order into the original order text file.
+	 * Returns and updates changed order into the original order text file.
+	 * @throws IOException Declares the input and output exception and to maintain the flow of the program.
 	 */
 	public static void OrderStore() throws IOException{
 		try{
+			//String filePath = new File("").getAbsolutePath();
 			FileWriter fw = new FileWriter("data/order.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			String customerOrderList = "";
@@ -294,9 +304,11 @@ public class FileToObject {
 
 
 	/**
-	 * Return and update changed table into the original table text file.
+	 * Returns and updates changed table into the original table text file.
+	 * @throws IOException Declares the input and output exception and to maintain the flow of the program.
 	 */
 	public static void TableStore() throws IOException{
+		//String filePath = new File("").getAbsolutePath();
 		FileWriter fw = new FileWriter("data/table.txt");
 		BufferedWriter bw = new BufferedWriter(fw);
 		for (int j = 0; j < mainapp.TableList.size() ; j++) {
@@ -311,10 +323,12 @@ public class FileToObject {
 
 
 	/**
-	 * Return and update changed reservation into the original reservation text file.
+	 * Returns and updates changed reservation into the original reservation text file.
+	 * @throws IOException Declares the input and output exception and to maintain the flow of the program.
 	 */
 	public static void ReservationStore() throws IOException{
-		FileWriter fw = new FileWriter("data/reservation.txt");
+		//String filePath = new File("").getAbsolutePath();
+     	FileWriter fw = new FileWriter("reservation.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (int j=0; j<mainapp.ReservationList.size() ; j++) {
 				Reservation reservation1 = mainapp.ReservationList.get(j);
@@ -328,27 +342,3 @@ public class FileToObject {
 	}		
 						
 	}
-
-
-
-	
-	// write to file
-	
-	// data = ArrayList
-	// try{
-	// 	PrintWriter pr = new PrintWriter("cz2002table.csv");    
-	// 	for (int i=0; i<data.size() ; i++){
-	// 		pr.println(data.get(i));
-	// 	}
-	// 	pr.close();
-	// }
-
-	// catch (Exception e){
-	// 	e.printStackTrace();
-	// 	System.out.println("No such file exists.");
-	// }
-
-
-
-
-
