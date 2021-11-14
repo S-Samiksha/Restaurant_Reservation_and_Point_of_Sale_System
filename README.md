@@ -1,5 +1,4 @@
-# The group 
-
+# The group SSP3 Group 5
 [Sankar Samiksha](https://github.com/s-samiksha) <br>
 [Shreya Ramasubramanian](https://github.com/shreyarms) <br>
 [Bansal Arushi](https://github.com/arushiibansal19) <br>
