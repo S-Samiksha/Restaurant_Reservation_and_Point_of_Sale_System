@@ -1,10 +1,10 @@
 # The group 
 
-[Sankar Samiksha](https://github.com/s-samiksha)
-[Shreya Ramasubramanian](https://github.com/shreyarms)
-[Bansal Arushi](https://github.com/arushiibansal19)
-[Poon Yan Xin Melise](https://github.com/Melisepoon)
-[Xing Kun](https://github.com/Xkpd)
+[Sankar Samiksha](https://github.com/s-samiksha) <br>
+[Shreya Ramasubramanian](https://github.com/shreyarms) <br>
+[Bansal Arushi](https://github.com/arushiibansal19) <br>
+[Poon Yan Xin Melise](https://github.com/Melisepoon) <br>
+[Xing Kun](https://github.com/Xkpd)<br>
 
 
 # File Location 
