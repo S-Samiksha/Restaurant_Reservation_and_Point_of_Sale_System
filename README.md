@@ -11,7 +11,7 @@ All source codes are located in the [src](https://github.com/S-Samiksha/Restaura
 
 All the documentation is available in the [Documentation](https://github.com/S-Samiksha/Restaurant_Reservation_and_Point_of_Sale_System/tree/main/Documentation) folder. 
 
-The video is available at the Youtube [Link] (https://youtu.be/yr4fOC-rus8).
+The video is available at the Youtube [Link](https://youtu.be/yr4fOC-rus8).
 
 The javaDoc is available in the [javadoc](https://github.com/S-Samiksha/Restaurant_Reservation_and_Point_of_Sale_System/tree/main/javadoc) folder. 
 
