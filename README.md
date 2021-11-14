@@ -13,3 +13,5 @@ All the documentation is available in the [Documentation](https://github.com/S-S
 
 The video is available in the [Video](https://github.com/S-Samiksha/Restaurant_Reservation_and_Point_of_Sale_System/tree/main/Video) folder. 
 
+The javaDoc is available in the [javadoc](https://github.com/S-Samiksha/Restaurant_Reservation_and_Point_of_Sale_System/tree/main/javadoc) folder. 
+
