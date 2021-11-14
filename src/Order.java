@@ -2,16 +2,6 @@ package src;
 import java.util.*; 
 import java.sql.Timestamp;
 
-/**
- * Order
- * this one is reliant on menu items and setpackage 
- * in fact it can live without set package aggregation relationship
- * but cannot live without menuitems if not what kind of order is that? so it is a composition relationship update the class diagram 
- * in addition order CANNOT live without staff and table.
- * if you order, but dont have table. the customer will end up having to stand? --> composition relationship
- * You also need a staff --> this is also a must in other words also a composition relationship
- * 
- */
 	/**
 	 * Represents an order made for each table in the restaurant.
 	 * An order must have a item in the menu, a staff and a table.
@@ -24,7 +14,7 @@ public class Order {
 	 */
 	private Timestamp timestamp;
 	/**
-	 * Specific ID of this order.
+	 * Specific ID for this order.
 	 */
 	private int orderID;
 	/**
@@ -40,12 +30,12 @@ public class Order {
 	 */
 	private float totalPrice;
 	/**
-	 * List of item/set packages on this order.
+	 * List of item/set packages for this order.
 	 */
 	public ArrayList<MenuItems> customerOrder;
 
 	/**
-	 * Creates and initialize a new empty order.
+	 * Creates and initializes a new empty order.
 	 */
 	public Order(){
 		this.staffID = new String("");
@@ -63,9 +53,11 @@ public class Order {
 	 * @param tableNumber This Order's assigned table number.
 	 * 						Should not be changed once assigned.
 	 * @param timestamp This Order's start time.
+	 * 					Should not be changed once set.
 	 * @param totalPrice This Order's total price.
-	 * 						This is constantly updated when item/set package is added or removed.
+	 * 					Constantly updates when item/set package is added or removed.
 	 * @param customerOrder This Order's list of item/set package.
+	 * 						Constantly updates when item/set package is added or removed.
 	 */
 	public Order(int orderID,String staffID, int tableNumber, Timestamp timestamp,float totalPrice, ArrayList<MenuItems> customerOrder){
 		this.staffID = staffID;
@@ -77,9 +69,9 @@ public class Order {
 	}
 
 
-	//edit this part according to the  data structure of the menuitems 
+
 	/**
-	 * Prints the item/set package in this order.
+	 * Prints the item and set package in this order.
 	 */
 	public void printOrder() {
 		System.out.println("Your Order:\n");
@@ -127,17 +119,9 @@ public class Order {
 	
 	/**
 	 * Prints the invoice for this order for the customer.
-	 * This should be printed at check out to show customer item ordered and the total price payable.
+	 * Prints at check out to show customer item ordered and the total price payable.
 	 */
 	public void printInvoice(){
-		//shift everything over from mainapp
-		//based on orderID, retrieve price and items fron order.txt
-		//either we do this by a per order basis--> not very good because this means when we create other order this screws up
-		//or we do this by order id, which means when we need to printinvoice then we retrive by order basis based on orderID
-		//^^ method 2 is better i think... but need to think about how to do this--> need to get filetobject up first
-		//then would be able to correctly retrieve from data which is orderID which is menuItem which is price etc
-		//hencce this functions runs differently from other functions in order.java 
-		
 		double totalPrice = 0.0;
         double MemberDiscount= 0.0;
         double GSTamount = 0.0;
@@ -179,7 +163,7 @@ public class Order {
 	}
 	 
 	/**
-	 * Prints the item, price and description in the menu for the customer to order for this order.
+	 * Prints the item, price and description in the menu for the customer for this order.
 	 */
 	public void printMenu(){
 		int i = 0;
@@ -188,7 +172,22 @@ public class Order {
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Ala Carte Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
 		List<MenuItems> menuitems = mainapp.MenuList; 
+		class MenuItemsComparator implements Comparator<MenuItems> {
+			@Override
+			public int compare(MenuItems o1, MenuItems o2) {
+				return o2.getType().compareTo(o1.getType());
+			}
+		}
+		Collections.sort(menuitems, new MenuItemsComparator());
+		String Type = menuitems.get(0).getType();
+		System.out.printf("\n%s\n", Type);
+		System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 		while (i < menuitems.size()){ 
+			if(!Type.equals(menuitems.get(i).getType())){
+				Type = menuitems.get(i).getType();
+				System.out.printf("\n%s\n", Type);
+				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
+			}
             System.out.println();
 			System.out.printf("ID: %s Name: %s Type: %s       Price: %.2f\n",menuitems.get(i).getitemID(), menuitems.get(i).getName(), menuitems.get(i).getType(),menuitems.get(i).getPrice());
             System.out.printf("Description: %s ", menuitems.get(i).getDescription());
@@ -197,10 +196,19 @@ public class Order {
 			i++;
 		}
 		List<SetPackage> setpackages = mainapp.SPList; 
+		Collections.sort(setpackages, new MenuItemsComparator());
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Set Package Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		i = 0;
+		Type = setpackages.get(0).getType();
+		System.out.printf("\n%s\n", Type);
+		System.out.printf("----------------------------------------------------------------------------------------------------------\n");
 		while (i < setpackages.size()){ 
+			if(!Type.equals(setpackages.get(i).getType())){
+				Type = setpackages.get(i).getType();
+				System.out.printf("\n%s\n", Type);
+				System.out.printf("----------------------------------------------------------------------------------------------------------\n");
+			}
             System.out.println();
 			System.out.printf("ID: %s Name: %s Type: %s Price: %.2f\n",setpackages.get(i).getitemID(), setpackages.get(i).getName(), setpackages.get(i).getType(),setpackages.get(i).getPrice());
             System.out.printf("Description: %s ", setpackages.get(i).getDescription());
@@ -213,8 +221,8 @@ public class Order {
 
 	/**
 	 * Adds an item with specific quantity for this order.
-	 * @param ItemID This Order's new item added.
-	 * @param quantity This Order's quantity of the new item added.
+	 * @param ItemID This Order's newly added item ID.
+	 * @param quantity This Order's quantity of the newly added item.
 	 */
 	public void addOrder(String ItemID, int quantity){
 		int ID = Integer.parseInt(ItemID.substring(2).intern());
@@ -223,7 +231,6 @@ public class Order {
 		if (ItemID.substring(0,2).intern() == "AC") {
 			for (int i = 0 ; i < quantity; i++){
 				this.customerOrder.add(menuitems.get(ID-1));
-				//System.out.printf("%d\n",menuitems.get(i-1).getName());
 			}
 		}
 		if (ItemID.substring(0,2).intern() == "SP") {
@@ -236,7 +243,7 @@ public class Order {
 
 	/**
 	 * Removes an item from this order.
-	 * @param orderNumber This Order's ID of the item to be removed.
+	 * @param orderNumber This Order's removed item ID..
 	 */
 	public void removeFromOrder(int orderNumber){
 		if (this.customerOrder.size() == 0) {
@@ -250,7 +257,8 @@ public class Order {
 	
 	/**
 	 * Gets the total price for the order.
-	 * @return
+	 * @return The total price for this order.
+	 * 			Does not include any discount.
 	 */
 	public float getPrice(){
 		float totalPrice = (float)0;
@@ -275,7 +283,6 @@ public class Order {
 	/**
 	 * Gets the order ID for this order.
 	 * @return This Order's order ID
-	 * 			Should not be changed once set.
 	 */
 	public int getOrderID(){
 		return this.orderID;
@@ -289,15 +296,15 @@ public class Order {
 	}
 	 
 	/**
-	 * Gets the time for this order.
-	 * @return
+	 * Gets the start time for this order.
+	 * @return This Order's start time.
 	 */
 	public Timestamp getTimestamp(){
 		return this.timestamp;
 	}
 
 	/**
-	 * Assign an available staff to serve this order.
+	 * Assigns an available staff to serve this order.
 	 */
 	public void setStaff(){
 		List<Staff> staffList = mainapp.StaffList;
