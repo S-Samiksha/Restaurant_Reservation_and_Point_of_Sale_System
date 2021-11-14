@@ -1,33 +1,72 @@
 package src;
-/**
- * mainapp
- * mainapp relies on the order class without it, it cannot live --> composition 
- * mainapp also relies on menuitems and setpackage because you want to show it to customers right!
- */
 import java.util.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
-
+/**
+ * The main function used to combine all classes.
+ * This allows staff to make many reservation, create many order, security access etc.
+ */
 public class mainapp {
 
-
+	/**
+	 * List of items stored in the menu.
+	 */
     protected static List<MenuItems> MenuList = new ArrayList<>(30);
+    /**
+     * List of set packages stored.
+     */
     protected static List<SetPackage> SPList = new ArrayList<>(30); 
+    /**
+     * List of staff in this restaurant.
+     */
     protected static List<Staff> StaffList = new ArrayList<>(30);
+    /**
+     * List of table in this restaurant.
+     */
     protected static List<Table> TableList = new ArrayList<>(30);
+    /**
+     * List of order made on the same day in this restaurant.
+     */
     protected static List<Order> TotalOrders = new ArrayList<>(10000);
+    /**
+     * List of reservation made in this restaurant.
+     */
     protected static List<Reservation> ReservationList = new ArrayList<>(10000);
+    /**
+     * Return value when no table in available.
+     */
     public static int tableNum = -1;
     
-
+    /**
+     * This restaurant closing time. 
+     * Order cannot be made after this time.
+     */
     public static final int MAX_Time = 2200; 
+    /**
+     * This restaurant opening time.
+     * Order cannot be made before this time.
+     */
 	public static final int MIN_Time = 1000;
-    /// change according to number of lines in data.txt
+	/**
+	 * Default latest reservation ID.
+	 * Updates once reservation changes for this restaurant.
+	 */
     public static int ReservationID = 3;
+    /**
+     * Default number of order for this restaurant.
+     * Updates once new order is been made for this restaurant.
+     */
     public static int OrderID = 11;
+    /**
+     * Default case used as False throughout the program.
+     */
     public static boolean exceptionLoop = false;
-    
+    	/**
+    	 * Allows staff to make changes to the order, reservation, view table and access security access.
+    	 * @param args Strings to be places back into the file.
+    	 * @throws IOException Declares the input and output exception and to maintain the flow of the program.
+    	 */
         public static void main(String[] args) throws IOException{
             System.out.println("Restaurant Opening.....\n");
             FileToObject.staff();
