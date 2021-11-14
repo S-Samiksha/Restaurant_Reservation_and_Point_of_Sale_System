@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 
-import java.sql.Timestamp; //import this 
+import java.sql.Timestamp;
 
 /**
  * Only authorized personnel is able to access this class to edit menu, set package and view the sales revenue.
+ * Security access can edit menu item and set packages. 
  */
 public class SecurityAccess{
 
@@ -43,12 +44,15 @@ public class SecurityAccess{
 
     private Scanner sc = new Scanner(System.in);
 
+    /**
+     * Creates a instance in the the function mainapp.
+     */
     public SecurityAccess(){
 
     }
 
     /**
-     * Prints out the option available for the authorized personnel.
+     * Prints out the option available for this authorized personnel.
      */
     public void showOptions(){
         System.out.println("---------------------------------------------");
@@ -319,7 +323,7 @@ public class SecurityAccess{
     }
     
     /**
-     * Prints out the total sales for the specific day or month.
+     * Prints out the total sales for this specific day or month.
      */
     public void totalSales(){
         ArrayList<MenuItems> TotalItems = new ArrayList<>(10000);
@@ -337,12 +341,6 @@ public class SecurityAccess{
             String day = sc.nextLine();
             String start = "2021-"+month+"-"+day+" 00:00:00";
             String end = "2021-"+month+"-"+day+" 23:59:00";
-            //System.out.println(start);
-            //ask the user for time
-            //end = "2021-"+month+"-"+day+"-" +temp[0]+ temp[1] +"-" +temp[2]+temp[3] 
-            //1450 temp 
-            //Timestamp.valueOf(start))
-           
 
             for(int i=0; i< mainapp.TotalOrders.size(); i++){
                 if (mainapp.TotalOrders.get(i).getDateTime().after(Timestamp.valueOf(start)) && mainapp.TotalOrders.get(i).getDateTime().before(Timestamp.valueOf(end))){
@@ -376,8 +374,6 @@ public class SecurityAccess{
         }
 
 
-
-        //System.out.println(TotalItems.size());
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("                      Sales Revenue                    ");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -388,13 +384,11 @@ public class SecurityAccess{
             temp = mainapp.MenuList.get(i).getitemID();
             
             for (int j=0; j<TotalItems.size();j++){
-                //System.out.println(TotalItems.get(i).getitemID());
                 if (TotalItems.get(j).getitemID().equals(temp)){
                     count++;
                 }
             }
             totalrevenue += (float)count * mainapp.MenuList.get(i).getPrice();
-            //System.out.println(count);
             System.out.printf("%s     %-20s          %d         SGD$%.2f", mainapp.MenuList.get(i).getitemID(), mainapp.MenuList.get(i).getName(), count, (float)count*mainapp.MenuList.get(i).getPrice());
             System.out.println();
             
