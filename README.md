@@ -1,3 +1,5 @@
+https://github.com/S-Samiksha/Restaurant_Reservation_and_Point_of_Sale_System
+
 # The group SSP3 Group 5
 [Sankar Samiksha](https://github.com/s-samiksha) <br>
 [Shreya Ramasubramanian](https://github.com/shreyarms) <br>
